@@ -22,8 +22,9 @@ bool js_cocos2dx_sqlite_SQLiteStatement_valueCount(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_sqlite_SQLiteStatement_restartSelect(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_sqlite_SQLiteStatement_bindNull(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_sqlite_SQLiteStatement_valueName(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_sqlite_SQLiteStatement_valueString(JSContext *cx, uint32_t argc, JS::Value *vp);
+bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, JS::Value *vp);
+bool js_cocos2dx_sqlite_SQLiteStatement_valueDouble(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_sqlite_SQLiteStatement_SQLiteStatement(JSContext *cx, uint32_t argc, JS::Value *vp);
 
 extern JSClass  *jsb_SQLiteWrapper_class;

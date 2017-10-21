@@ -39,6 +39,8 @@
 #include "scripting/js-bindings/manual/platform/ios/JavaScriptObjCBridge.h"
 #endif
 
+#include "scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp"
+
 USING_NS_CC;
 int js_module_register()
 {
@@ -81,6 +83,9 @@ int js_module_register()
     sc->addRegisterCallback(register_jsb_socketio);
     // Downloader
     sc->addRegisterCallback(register_all_cocos2dx_network);
+    
+    // sqlite
+    sc->addRegisterCallback(register_all_cocos2dx_sqlite);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && !defined(CC_TARGET_OS_TVOS)
     sc->addRegisterCallback(register_all_cocos2dx_experimental_video);

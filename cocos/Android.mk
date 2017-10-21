@@ -231,6 +231,9 @@ storage/local-storage/LocalStorage-android.cpp \
 ../external/sources/Box2D/Dynamics/b2World.cpp \
 ../external/sources/Box2D/Dynamics/b2WorldCallbacks.cpp \
 ../external/sources/Box2D/Rope/b2Rope.cpp \
+../thirdParty/sqlite/SQLiteWrapper.cpp \
+../thirdParty/sqlite/sqlite3/sqlite3.c \
+
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \

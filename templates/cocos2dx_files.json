@@ -4693,6 +4693,10 @@
         "tools/simulator/libsimulator/proj.win32/stdafx.h", 
         "tools/simulator/libsimulator/proj.win32/targetver.h", 
         "utils/update-version.js"
+        "thirdParty/sqlite/SQLiteWrapper.h",
+        "thirdParty/sqlite/SQLiteWrapper.cpp",
+        "thirdParty/sqlite/sqlite3/sqlite3.h",
+        "thirdParty/sqlite/sqlite3/sqlite3.c",
     ], 
     "js": [
         "cocos/scripting/js-bindings/auto/api/jsb_box2d_auto_api.js", 
@@ -4839,6 +4843,8 @@
         "cocos/scripting/js-bindings/jswrapper/v8/util.cc", 
         "cocos/scripting/js-bindings/jswrapper/v8/util.h", 
         "cocos/scripting/js-bindings/jswrapper/v8/v8_inspector_protocol_json.h", 
+        "cocos/scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.cpp",
+        "cocos/scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp",
         "cocos/scripting/js-bindings/manual/BaseJSAction.cpp", 
         "cocos/scripting/js-bindings/manual/BaseJSAction.h", 
         "cocos/scripting/js-bindings/manual/JavaScriptJavaBridge.cpp", 

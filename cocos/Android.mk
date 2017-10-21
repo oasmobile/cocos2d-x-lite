@@ -228,6 +228,9 @@ storage/local-storage/LocalStorage-android.cpp \
 ../external/sources/Box2D/Rope/b2Rope.cpp \
 ../external/sources/Box2D/b2ObjectDestroyNotifier.cpp \
 ../external/sources/xxtea/xxtea.cpp \
+../thirdParty/sqlite/SQLiteWrapper.cpp \
+../thirdParty/sqlite/sqlite3/sqlite3.c \
+
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \

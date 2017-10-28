@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017303D31FA206DF004AFBA1 /* libbase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303CB1FA206DE004AFBA1 /* libbase64.h */; };
+		017303D41FA206DF004AFBA1 /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 017303CC1FA206DE004AFBA1 /* libbase64.c */; };
+		017303D51FA206DF004AFBA1 /* Crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017303CD1FA206DE004AFBA1 /* Crypto.cpp */; };
+		017303D71FA206DF004AFBA1 /* Crypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303CF1FA206DE004AFBA1 /* Crypto.h */; };
+		017303DB1FA2E363004AFBA1 /* libbase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303CB1FA206DE004AFBA1 /* libbase64.h */; };
+		017303DC1FA2E365004AFBA1 /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 017303CC1FA206DE004AFBA1 /* libbase64.c */; };
+		017303DD1FA2E367004AFBA1 /* Crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017303CD1FA206DE004AFBA1 /* Crypto.cpp */; };
+		017303DF1FA2E36B004AFBA1 /* Crypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303CF1FA206DE004AFBA1 /* Crypto.h */; };
+		017303ED1FA3599E004AFBA1 /* xxtea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017303EB1FA3599D004AFBA1 /* xxtea.cpp */; };
+		017303EE1FA3599E004AFBA1 /* xxtea.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303EC1FA3599D004AFBA1 /* xxtea.h */; };
+		017303F91FA36E14004AFBA1 /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 017303F51FA36E0F004AFBA1 /* md5.h */; };
+		017303FA1FA36E16004AFBA1 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 017303F61FA36E0F004AFBA1 /* md5.c */; };
 		01A2F7271F9B2A28007B322E /* SQLiteWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 01A2F7221F9B2A27007B322E /* SQLiteWrapper.h */; };
 		01A2F7281F9B2A28007B322E /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01A2F7231F9B2A27007B322E /* SQLiteWrapper.cpp */; };
 		01A2F7291F9B2A28007B322E /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 01A2F7251F9B2A27007B322E /* sqlite3.c */; };
@@ -2031,6 +2043,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		017303CB1FA206DE004AFBA1 /* libbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libbase64.h; sourceTree = "<group>"; };
+		017303CC1FA206DE004AFBA1 /* libbase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libbase64.c; sourceTree = "<group>"; };
+		017303CD1FA206DE004AFBA1 /* Crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Crypto.cpp; sourceTree = "<group>"; };
+		017303CF1FA206DE004AFBA1 /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
+		017303EB1FA3599D004AFBA1 /* xxtea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xxtea.cpp; sourceTree = "<group>"; };
+		017303EC1FA3599D004AFBA1 /* xxtea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xxtea.h; sourceTree = "<group>"; };
+		017303F51FA36E0F004AFBA1 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		017303F61FA36E0F004AFBA1 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
 		01A2F7221F9B2A27007B322E /* SQLiteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteWrapper.h; sourceTree = "<group>"; };
 		01A2F7231F9B2A27007B322E /* SQLiteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SQLiteWrapper.cpp; sourceTree = "<group>"; };
 		01A2F7251F9B2A27007B322E /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
@@ -3180,9 +3200,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		017303C51FA206DD004AFBA1 /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				017303F41FA36E0F004AFBA1 /* md5 */,
+				017303CA1FA206DE004AFBA1 /* base64 */,
+				017303CD1FA206DE004AFBA1 /* Crypto.cpp */,
+				017303CF1FA206DE004AFBA1 /* Crypto.h */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
+		017303CA1FA206DE004AFBA1 /* base64 */ = {
+			isa = PBXGroup;
+			children = (
+				017303CB1FA206DE004AFBA1 /* libbase64.h */,
+				017303CC1FA206DE004AFBA1 /* libbase64.c */,
+			);
+			path = base64;
+			sourceTree = "<group>";
+		};
+		017303EA1FA3599D004AFBA1 /* xxtea */ = {
+			isa = PBXGroup;
+			children = (
+				017303EB1FA3599D004AFBA1 /* xxtea.cpp */,
+				017303EC1FA3599D004AFBA1 /* xxtea.h */,
+			);
+			name = xxtea;
+			path = ../external/sources/xxtea;
+			sourceTree = "<group>";
+		};
+		017303F41FA36E0F004AFBA1 /* md5 */ = {
+			isa = PBXGroup;
+			children = (
+				017303F51FA36E0F004AFBA1 /* md5.h */,
+				017303F61FA36E0F004AFBA1 /* md5.c */,
+			);
+			path = md5;
+			sourceTree = "<group>";
+		};
 		01A2F7201F9B2A27007B322E /* thirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				017303C51FA206DD004AFBA1 /* crypto */,
 				01A2F7211F9B2A27007B322E /* sqlite */,
 			);
 			name = thirdParty;
@@ -3718,6 +3778,7 @@
 		1A57033E180BD0490088DEC7 /* external */ = {
 			isa = PBXGroup;
 			children = (
+				017303EA1FA3599D004AFBA1 /* xxtea */,
 				1A2F3ABA1F0C9A0D005E6149 /* SocketRocket */,
 				4DED476A1DFFA4AF0070C5C4 /* Box2D */,
 				BAEA45511E279D5C00FA219F /* tinydir */,
@@ -5170,6 +5231,7 @@
 				15AE18DD19AAD35000C27E9E /* CocoLoader.h in Headers */,
 				50ABBD3E1925AB0000A911A9 /* CCGeometry.h in Headers */,
 				50ABBE631925AB6F00A911A9 /* CCEventListenerAcceleration.h in Headers */,
+				017303D71FA206DF004AFBA1 /* Crypto.h in Headers */,
 				ED30579B1BEC77B70083C3ED /* ConvertUTF.h in Headers */,
 				50ABBED31925AB6F00A911A9 /* uthash.h in Headers */,
 				15AE196D19AAD35700C27E9E /* CCActionTimeline.h in Headers */,
@@ -5543,6 +5605,7 @@
 				4DED48661DFFA4AF0070C5C4 /* b2Joint.h in Headers */,
 				50ABBE7B1925AB6F00A911A9 /* CCEventMouse.h in Headers */,
 				BAFF7D681D5C1CF80051B92F /* Bone.h in Headers */,
+				017303D31FA206DF004AFBA1 /* libbase64.h in Headers */,
 				503DD8F91926B0DB00CD74DD /* CCIMEDispatcher.h in Headers */,
 				15AE1B6619AADA9900C27E9E /* UIImageView.h in Headers */,
 				15AE1BB419AADFEF00C27E9E /* HttpResponse.h in Headers */,
@@ -5579,6 +5642,7 @@
 				15AE18A919AAD33D00C27E9E /* CCSpriteLoader.h in Headers */,
 				BAFF7DCE1D5C1CF80051B92F /* spine.h in Headers */,
 				50693C601B6BF2AE005C5820 /* CCDownloader.h in Headers */,
+				017303EE1FA3599E004AFBA1 /* xxtea.h in Headers */,
 				50ABBEC91925AB6F00A911A9 /* firePngData.h in Headers */,
 				FAC8F25D1D339EB70061CEDD /* CCTMXLayer.h in Headers */,
 				BAFF7CF61D59E3840051B92F /* CocosStudioExtension.h in Headers */,
@@ -6137,6 +6201,7 @@
 				BAFF7DDB1D5C1CF80051B92F /* VertexAttachment.h in Headers */,
 				1A12775A18DFCC4F0005F345 /* CCTweenFunction.h in Headers */,
 				15AE1BF419AAE01E00C27E9E /* CCControlSaturationBrightnessPicker.h in Headers */,
+				017303DF1FA2E36B004AFBA1 /* Crypto.h in Headers */,
 				50643BD519BFAECF00EF68ED /* CCGL.h in Headers */,
 				B276EF601988D1D500CD400F /* CCVertexIndexData.h in Headers */,
 				50ABBD5F1925AB0000A911A9 /* Vec3.h in Headers */,
@@ -6151,6 +6216,7 @@
 				1A9DCA2A180E6955007A3AD4 /* CCGLBufferedNode.h in Headers */,
 				464AD6E8197EBB1400E502D8 /* pvr.h in Headers */,
 				BAFF7C991D59E0DA0051B92F /* CCBatchNode.h in Headers */,
+				017303DB1FA2E363004AFBA1 /* libbase64.h in Headers */,
 				5034CA36191D591100CE6051 /* ccShader_PositionTexture.frag in Headers */,
 				B24AA98C195A675C007B4522 /* CCFastTMXTiledMap.h in Headers */,
 				BAFF7D951D5C1CF80051B92F /* PathAttachment.h in Headers */,
@@ -6195,6 +6261,7 @@
 				503DD8F11926736A00CD74DD /* OpenGL_Internal-ios.h in Headers */,
 				BA68D7A11D62F59000B7A3F9 /* CCMeshCommand.h in Headers */,
 				38ACD1FF1A27111900C3093D /* WidgetCallBackHandlerProtocol.h in Headers */,
+				017303F91FA36E14004AFBA1 /* md5.h in Headers */,
 				50ABBDAA1925AB4100A911A9 /* CCRenderCommand.h in Headers */,
 				15AE1BE919AAE01E00C27E9E /* CCControl.h in Headers */,
 				BAFF7DCD1D5C1CF80051B92F /* spine-cocos2dx.h in Headers */,
@@ -6384,6 +6451,7 @@
 				FAC8F25C1D339EB70061CEDD /* CCTMXLayer.cpp in Sources */,
 				BAFF7C7A1D59E0DA0051B92F /* CCActionManagerEx.cpp in Sources */,
 				15AE188419AAD33D00C27E9E /* CCBSequence.cpp in Sources */,
+				017303D41FA206DF004AFBA1 /* libbase64.c in Sources */,
 				50ABBEBF1925AB6F00A911A9 /* CCValue.cpp in Sources */,
 				4DED48681DFFA4AF0070C5C4 /* b2MotorJoint.cpp in Sources */,
 				BA68D7911D62F4A500B7A3F9 /* sweep_context.cc in Sources */,
@@ -6404,6 +6472,7 @@
 				50ABBE651925AB6F00A911A9 /* CCEventListenerCustom.cpp in Sources */,
 				15AE189B19AAD33D00C27E9E /* CCNode+CCBRelativePositioning.cpp in Sources */,
 				50ABBE391925AB6F00A911A9 /* CCData.cpp in Sources */,
+				017303D51FA206DF004AFBA1 /* Crypto.cpp in Sources */,
 				4DC06BE71E8A68D400CA08B1 /* CCPhysicsWorldManifoldWrapper.cpp in Sources */,
 				1A57010E180BC8EE0088DEC7 /* CCDrawingPrimitives.cpp in Sources */,
 				50ABBED71925AB6F00A911A9 /* ZipUtils.cpp in Sources */,
@@ -6741,6 +6810,7 @@
 				A60A9D5F1C200DE10070800A /* CCPhysicsDebugNode.cpp in Sources */,
 				15AE1B5719AADA9900C27E9E /* UISlider.cpp in Sources */,
 				BAFF7C961D59E0DA0051B92F /* CCBatchNode.cpp in Sources */,
+				017303ED1FA3599E004AFBA1 /* xxtea.cpp in Sources */,
 				1ABA68AE1888D700007D1BB4 /* CCFontCharMap.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6923,6 +6993,7 @@
 				1A57019E180BCB590088DEC7 /* CCFont.cpp in Sources */,
 				503DD8E21926736A00CD74DD /* CCCommon-ios.mm in Sources */,
 				4DED48711DFFA4AF0070C5C4 /* b2PrismaticJoint.cpp in Sources */,
+				017303FA1FA36E16004AFBA1 /* md5.c in Sources */,
 				4DED48851DFFA4AF0070C5C4 /* b2WheelJoint.cpp in Sources */,
 				292DB14A19B4574100A80320 /* UIEditBoxImpl-ios.mm in Sources */,
 				1A5701A2180BCB590088DEC7 /* CCFontAtlas.cpp in Sources */,
@@ -7006,6 +7077,7 @@
 				1A570209180BCBDF0088DEC7 /* CCMotionStreak.cpp in Sources */,
 				1A2F3B381F0C9A0D005E6149 /* SRSecurityPolicy.m in Sources */,
 				BAFF7D5B1D5C1CF80051B92F /* Attachment.c in Sources */,
+				017303DC1FA2E365004AFBA1 /* libbase64.c in Sources */,
 				BAFF7D871D5C1CF80051B92F /* IkConstraintData.c in Sources */,
 				1A570211180BCBF40088DEC7 /* CCProgressTimer.cpp in Sources */,
 				503DD8ED1926736A00CD74DD /* CCGLViewImpl-ios.mm in Sources */,
@@ -7047,6 +7119,7 @@
 				1A57027F180BCC900088DEC7 /* CCSprite.cpp in Sources */,
 				15AE1B8819AADA9A00C27E9E /* UICheckBox.cpp in Sources */,
 				15AE18B519AAD33D00C27E9E /* CCBSequence.cpp in Sources */,
+				017303DD1FA2E367004AFBA1 /* Crypto.cpp in Sources */,
 				1A570283180BCC900088DEC7 /* CCSpriteBatchNode.cpp in Sources */,
 				1A570287180BCC900088DEC7 /* CCSpriteFrame.cpp in Sources */,
 				BAFF7CF51D59E3840051B92F /* CocosStudioExtension.cpp in Sources */,

@@ -15,6 +15,7 @@ LOCAL_SRC_FILES := ../auto/jsb_cocos2dx_extension_auto.cpp \
                    ../auto/jsb_cocos2dx_auto.cpp \
                    ../auto/jsb_cocos2dx_audioengine_auto.cpp \
                    ../auto/jsb_cocos2dx_sqlite_auto.cpp \
+                   ../auto/jsb_cocos2dx_crypto_auto.cpp \
                    ../auto/jsb_cocos2dx_ui_auto.cpp \
                    ../auto/jsb_cocos2dx_network_auto.cpp \
                    ../auto/jsb_creator_auto.cpp \

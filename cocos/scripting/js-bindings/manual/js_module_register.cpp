@@ -40,6 +40,7 @@
 #endif
 
 #include "scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp"
+#include "scripting/js-bindings/auto/jsb_cocos2dx_crypto_auto.hpp"
 
 USING_NS_CC;
 int js_module_register()
@@ -86,6 +87,9 @@ int js_module_register()
     
     // sqlite
     sc->addRegisterCallback(register_all_cocos2dx_sqlite);
+    
+    // crypto
+    sc->addRegisterCallback(register_all_cocos2dx_crypto);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && !defined(CC_TARGET_OS_TVOS)
     sc->addRegisterCallback(register_all_cocos2dx_experimental_video);

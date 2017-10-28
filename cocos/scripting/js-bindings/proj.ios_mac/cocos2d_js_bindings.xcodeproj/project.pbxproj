@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017303E21FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 017303E01FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp */; };
+		017303E31FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017303E11FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp */; };
+		017303E41FA2EDC8004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017303E11FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp */; };
+		017303E51FA2EDCC004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 017303E01FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp */; };
 		01A2F7321F9B2B02007B322E /* jsb_cocos2dx_sqlite_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01A2F7301F9B2B01007B322E /* jsb_cocos2dx_sqlite_auto.cpp */; };
 		01A2F7331F9B2B02007B322E /* jsb_cocos2dx_sqlite_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 01A2F7311F9B2B02007B322E /* jsb_cocos2dx_sqlite_auto.hpp */; };
 		01A2F7341F9B2B05007B322E /* jsb_cocos2dx_sqlite_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01A2F7301F9B2B01007B322E /* jsb_cocos2dx_sqlite_auto.cpp */; };
@@ -165,6 +169,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		017303E01FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_crypto_auto.hpp; sourceTree = "<group>"; };
+		017303E11FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_crypto_auto.cpp; sourceTree = "<group>"; };
 		01A2F7301F9B2B01007B322E /* jsb_cocos2dx_sqlite_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_sqlite_auto.cpp; sourceTree = "<group>"; };
 		01A2F7311F9B2B02007B322E /* jsb_cocos2dx_sqlite_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_sqlite_auto.hpp; sourceTree = "<group>"; };
 		0541A74D1973876100E45470 /* JavaScriptObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScriptObjCBridge.h; sourceTree = "<group>"; };
@@ -312,6 +318,8 @@
 		1A119E2E18BDF19200352BAA /* auto */ = {
 			isa = PBXGroup;
 			children = (
+				017303E11FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp */,
+				017303E01FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp */,
 				01A2F7301F9B2B01007B322E /* jsb_cocos2dx_sqlite_auto.cpp */,
 				01A2F7311F9B2B02007B322E /* jsb_cocos2dx_sqlite_auto.hpp */,
 				4D9BB1F61DFAB8B300B58565 /* jsb_box2d_auto.cpp */,
@@ -488,6 +496,7 @@
 				1A119EBD18BDF19200352BAA /* cocos2d_specifics.hpp in Headers */,
 				83A5661B18DA878400FC31A0 /* jsb_socketio.h in Headers */,
 				1A1D3B7A18C44FD000922D3C /* jsb_event_dispatcher_manual.h in Headers */,
+				017303E21FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp in Headers */,
 				1A119EF518BDF19200352BAA /* js_bindings_system_registration.h in Headers */,
 				BA4F598D1E28DE4A003F5096 /* js_network_manual.h in Headers */,
 				4B22F4AB1B159A7A0044C14E /* jsb_cocos2dx_experimental_webView_manual.h in Headers */,
@@ -550,6 +559,7 @@
 				4B22F4AC1B159A7A0044C14E /* jsb_cocos2dx_experimental_webView_manual.h in Headers */,
 				4BE089E51ADF965E00D65D4B /* jsb_cocos2dx_experimental_webView_auto.hpp in Headers */,
 				1A119E9E18BDF19200352BAA /* jsb_cocos2dx_spine_auto.hpp in Headers */,
+				017303E51FA2EDCC004AFBA1 /* jsb_cocos2dx_crypto_auto.hpp in Headers */,
 				1A119EEC18BDF19200352BAA /* jsb_opengl_registration.h in Headers */,
 				1A119F0418BDF19200352BAA /* spidermonkey_specifics.h in Headers */,
 				1A119EE818BDF19200352BAA /* jsb_opengl_manual.h in Headers */,
@@ -673,6 +683,7 @@
 				1A119EDB18BDF19200352BAA /* js_manual_conversions.cpp in Sources */,
 				BA4F59841E28DCD3003F5096 /* jsb_cocos2dx_network_auto.cpp in Sources */,
 				83A5661918DA878400FC31A0 /* jsb_socketio.cpp in Sources */,
+				017303E31FA2EDC5004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp in Sources */,
 				1A119EE118BDF19200352BAA /* jsb_opengl_functions.cpp in Sources */,
 				1A119EFF18BDF19200352BAA /* ScriptingCore.cpp in Sources */,
 				1A1D3B7818C44FD000922D3C /* jsb_event_dispatcher_manual.cpp in Sources */,
@@ -699,6 +710,7 @@
 				1AB5E62C18D05BC80088DAA4 /* jsb_cocos2dx_ui_auto.cpp in Sources */,
 				BA4F59851E28DCD3003F5096 /* jsb_cocos2dx_network_auto.cpp in Sources */,
 				1A119E9C18BDF19200352BAA /* jsb_cocos2dx_spine_auto.cpp in Sources */,
+				017303E41FA2EDC8004AFBA1 /* jsb_cocos2dx_crypto_auto.cpp in Sources */,
 				4BE089E41ADF965E00D65D4B /* jsb_cocos2dx_experimental_webView_auto.cpp in Sources */,
 				1A119EF418BDF19200352BAA /* js_bindings_system_registration.cpp in Sources */,
 				B38AD56E1B1D38700057DD7F /* jsb_cocos2dx_experimental_video_auto.cpp in Sources */,

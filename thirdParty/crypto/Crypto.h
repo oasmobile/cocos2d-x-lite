@@ -46,8 +46,8 @@ public:
     
     static const char* MD5File(const char* path);
     
-
-    static const std::string MD5String(void* input, int inputLength);
+//    static std::string Crypto::md5_string(const std::string &inputStr, bool rawOutput/* = false*/);
+//    static const std::string MD5String(void* input, int inputLength);
     
     static char* bin2hex(unsigned char* bin, int binLength);
 

@@ -85,16 +85,6 @@ const char* Crypto::MD5File(const char* path)
     return ch;
 }
 
-const string Crypto::MD5String(void* input, int inputLength)
-{
-    unsigned char buffer[MD5_BUFFER_LENGTH];
-    MD5(static_cast<void*>(input), inputLength, buffer);
-
-    char* hex = bin2hex(buffer, MD5_BUFFER_LENGTH);
-    string ret(hex);
-    delete[] hex;
-    return ret;
-}
 
 char* Crypto::bin2hex(unsigned char* bin, int binLength)
 {

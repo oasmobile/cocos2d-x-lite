@@ -47,6 +47,7 @@ LOCAL_SRC_FILES := \
 					../auto/jsb_creator_camera_auto.cpp \
 					../auto/jsb_creator_graphics_auto.cpp \
 					../auto/jsb_creator_physics_auto.cpp \
+					../auto/jsb_cocos2dx_crypto_auto.cpp \
 					../manual/BaseJSAction.cpp \
 					../manual/JavaScriptJavaBridge.cpp \
 					../manual/ScriptingCore.cpp \

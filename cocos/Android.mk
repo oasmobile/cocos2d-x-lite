@@ -230,6 +230,8 @@ storage/local-storage/LocalStorage-android.cpp \
 ../external/sources/xxtea/xxtea.cpp \
 ../thirdParty/sqlite/SQLiteWrapper.cpp \
 ../thirdParty/sqlite/sqlite3/sqlite3.c \
+../thirdParty/crypto/Crypto.cpp \
+../thirdParty/crypto/base64/libbase64.c \
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \

@@ -1,24 +1,18 @@
+#pragma once
 #include "base/ccConfig.h"
-#ifndef __cocos2dx_crypto_h__
-#define __cocos2dx_crypto_h__
 
-#include "jsapi.h"
-#include "jsfriendapi.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
-extern JSClass  *jsb_Crypto_class;
-extern JS::PersistentRootedObject *jsb_Crypto_prototype;
+extern se::Object* __jsb_Crypto_proto;
+extern se::Class* __jsb_Crypto_class;
 
-bool js_cocos2dx_crypto_Crypto_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
-void js_cocos2dx_crypto_Crypto_finalize(JSContext *cx, JSObject *obj);
-void js_register_cocos2dx_crypto_Crypto(JSContext *cx, JS::HandleObject global);
-void register_all_cocos2dx_crypto(JSContext* cx, JS::HandleObject obj);
-bool js_cocos2dx_crypto_Crypto_encodeBase64Len(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_MD5String(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_decodeBase64Len(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_MD5File(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_decodeBase64(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_bin2hex(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_encodeBase64(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_crypto_Crypto_MD5(JSContext *cx, uint32_t argc, JS::Value *vp);
+bool js_register_Crypto(se::Object* obj);
+bool register_all_cocos2dx_crypto(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_encodeBase64Len);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_decodeBase64Len);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_MD5File);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_decodeBase64);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_bin2hex);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_encodeBase64);
+SE_DECLARE_FUNC(js_cocos2dx_crypto_Crypto_MD5);
 
-#endif // __cocos2dx_crypto_h__

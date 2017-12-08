@@ -23,20 +23,6 @@ int
 },
 
 /**
- * @method MD5String
- * @param {void} arg0
- * @param {int} arg1
- * @return {String}
- */
-MD5String : function (
-void, 
-int 
-)
-{
-    return ;
-},
-
-/**
  * @method decodeBase64Len
  * @param {char} arg0
  * @return {int}

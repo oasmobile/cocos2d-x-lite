@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01E182A21FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 01E1829E1FDAB0C6002588AD /* jsb_cocos2dx_sqlite_auto.hpp */; };
+		01E182A31FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 01E1829F1FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp */; };
+		01E182A41FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E182A01FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp */; };
+		01E182A51FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E182A11FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp */; };
+		01E182A61FDAB0FB002588AD /* jsb_cocos2dx_crypto_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E182A11FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp */; };
+		01E182A71FDAB0FF002588AD /* jsb_cocos2dx_crypto_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 01E1829F1FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp */; };
+		01E182A81FDAB101002588AD /* jsb_cocos2dx_sqlite_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E182A01FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp */; };
+		01E182A91FDAB103002588AD /* jsb_cocos2dx_sqlite_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 01E1829E1FDAB0C6002588AD /* jsb_cocos2dx_sqlite_auto.hpp */; };
 		1A119E8318BDF19200352BAA /* jsb_cocos2dx_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E2F18BDF19200352BAA /* jsb_cocos2dx_auto.cpp */; };
 		1A119E8418BDF19200352BAA /* jsb_cocos2dx_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E2F18BDF19200352BAA /* jsb_cocos2dx_auto.cpp */; };
 		1A119E8518BDF19200352BAA /* jsb_cocos2dx_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A119E3018BDF19200352BAA /* jsb_cocos2dx_auto.hpp */; };
@@ -292,6 +300,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01E1829E1FDAB0C6002588AD /* jsb_cocos2dx_sqlite_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_sqlite_auto.hpp; sourceTree = "<group>"; };
+		01E1829F1FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_crypto_auto.hpp; sourceTree = "<group>"; };
+		01E182A01FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_sqlite_auto.cpp; sourceTree = "<group>"; };
+		01E182A11FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_crypto_auto.cpp; sourceTree = "<group>"; };
 		1A119E2F18BDF19200352BAA /* jsb_cocos2dx_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_auto.cpp; sourceTree = "<group>"; };
 		1A119E3018BDF19200352BAA /* jsb_cocos2dx_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_auto.hpp; sourceTree = "<group>"; };
 		1A119E3518BDF19200352BAA /* jsb_cocos2dx_extension_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_extension_auto.cpp; sourceTree = "<group>"; };
@@ -490,6 +502,10 @@
 		1A119E2E18BDF19200352BAA /* auto */ = {
 			isa = PBXGroup;
 			children = (
+				01E182A11FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp */,
+				01E1829F1FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp */,
+				01E182A01FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp */,
+				01E1829E1FDAB0C6002588AD /* jsb_cocos2dx_sqlite_auto.hpp */,
 				4D672A811F8E0EE30073B9A4 /* jsb_creator_camera_auto.cpp */,
 				4D672A821F8E0EE30073B9A4 /* jsb_creator_camera_auto.hpp */,
 				4D672A831F8E0EE30073B9A4 /* jsb_creator_graphics_auto.cpp */,
@@ -739,6 +755,7 @@
 				1AFD36FC1EF116190097DBB1 /* jsb_xmlhttprequest.hpp in Headers */,
 				1AFD36921EF115100097DBB1 /* ObjectWrap.h in Headers */,
 				1AFD36741EF115100097DBB1 /* Object.hpp in Headers */,
+				01E182A31FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.hpp in Headers */,
 				1AFD36381EF115100097DBB1 /* Class.hpp in Headers */,
 				1AD53AD51FB1B2BF000F476C /* jsb_opengl_manual.hpp in Headers */,
 				1A7759E81F3411050012A210 /* util-inl.h in Headers */,
@@ -781,6 +798,7 @@
 				1AFD37001EF116190097DBB1 /* ScriptingCore.h in Headers */,
 				1A159D521F13216F00558E38 /* jsb_socketio.hpp in Headers */,
 				1A7759CF1F340FB10012A210 /* inspector_io.h in Headers */,
+				01E182A21FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.hpp in Headers */,
 				4D3EB2651F8F7358007DA644 /* jsb_creator_manual.hpp in Headers */,
 				1AFD36CC1EF116190097DBB1 /* jsb_cocos2dx_extension_manual.hpp in Headers */,
 				1AFD36681EF115100097DBB1 /* SeApi.h in Headers */,
@@ -825,6 +843,7 @@
 				1AFD36931EF115100097DBB1 /* ObjectWrap.h in Headers */,
 				1AFD36D11EF116190097DBB1 /* jsb_cocos2dx_manual.hpp in Headers */,
 				1AFD36711EF115100097DBB1 /* HelperMacros.h in Headers */,
+				01E182A91FDAB103002588AD /* jsb_cocos2dx_sqlite_auto.hpp in Headers */,
 				1AFD36611EF115100097DBB1 /* Utils.hpp in Headers */,
 				1AD53AE31FB2B1EB000F476C /* jsb_opengl_node.hpp in Headers */,
 				1AFD36451EF115100097DBB1 /* SeApi.h in Headers */,
@@ -862,6 +881,7 @@
 				1AFD36691EF115100097DBB1 /* SeApi.h in Headers */,
 				1AFD367F1EF115100097DBB1 /* Utils.hpp in Headers */,
 				4DFA4C131CBCC49000E3B736 /* jsb_creator_auto.hpp in Headers */,
+				01E182A71FDAB0FF002588AD /* jsb_cocos2dx_crypto_auto.hpp in Headers */,
 				1AFD36391EF115100097DBB1 /* Class.hpp in Headers */,
 				1AFD36F51EF116190097DBB1 /* jsb_spine_manual.hpp in Headers */,
 				BAF638DF1B5F5DC900CDB43A /* jsb_cocos2dx_audioengine_auto.hpp in Headers */,
@@ -981,10 +1001,12 @@
 				1A8FB50E1F99F04600BED3CF /* PlatformUtils.mm in Sources */,
 				1AFD36861EF115100097DBB1 /* Class.cpp in Sources */,
 				1A119E9B18BDF19200352BAA /* jsb_cocos2dx_spine_auto.cpp in Sources */,
+				01E182A41FDAB0C7002588AD /* jsb_cocos2dx_sqlite_auto.cpp in Sources */,
 				1AFD363C1EF115100097DBB1 /* Object.cpp in Sources */,
 				4D3EB2641F8F7358007DA644 /* jsb_creator_manual.cpp in Sources */,
 				BAF638DC1B5F5DC900CDB43A /* jsb_cocos2dx_audioengine_auto.cpp in Sources */,
 				1A6B8FB31F3BF7E800BC83DC /* SHA1.cpp in Sources */,
+				01E182A51FDAB0C7002588AD /* jsb_cocos2dx_crypto_auto.cpp in Sources */,
 				4D9BB1F81DFAB8B300B58565 /* jsb_box2d_auto.cpp in Sources */,
 				1AFD36F21EF116190097DBB1 /* jsb_spine_manual.cpp in Sources */,
 				1AFD36721EF115100097DBB1 /* Object.cpp in Sources */,
@@ -1060,6 +1082,7 @@
 				1A119E9C18BDF19200352BAA /* jsb_cocos2dx_spine_auto.cpp in Sources */,
 				1A5F22971F0E306C0008BF09 /* jsb_box2d_manual.cpp in Sources */,
 				1AFD36C71EF116190097DBB1 /* jsb_classtype.cpp in Sources */,
+				01E182A61FDAB0FB002588AD /* jsb_cocos2dx_crypto_auto.cpp in Sources */,
 				1AFD36951EF115100097DBB1 /* ScriptEngine.cpp in Sources */,
 				4BE089E41ADF965E00D65D4B /* jsb_cocos2dx_experimental_webView_auto.cpp in Sources */,
 				1A81B4211F137BFE008C38F8 /* JavaScriptObjCBridge.mm in Sources */,
@@ -1070,6 +1093,7 @@
 				1A6293F11F44128300A07B77 /* BaseJSAction.cpp in Sources */,
 				1AFD369F1EF115100097DBB1 /* Value.cpp in Sources */,
 				1AD53AE01FB2B1E4000F476C /* jsb_opengl_functions.cpp in Sources */,
+				01E182A81FDAB101002588AD /* jsb_cocos2dx_sqlite_auto.cpp in Sources */,
 				1AF82D441F2EE1C40002C5A0 /* HandleObject.cpp in Sources */,
 				1AFD365F1EF115100097DBB1 /* Utils.cpp in Sources */,
 				1AFD36F31EF116190097DBB1 /* jsb_spine_manual.cpp in Sources */,
@@ -1138,7 +1162,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../../../cocos $(SRCROOT)/../../../../cocos/base $(SRCROOT)/../../../../cocos/3d $(SRCROOT)/../../../../cocos/2d $(SRCROOT)/../../../../cocos/physics3d $(SRCROOT)/../../../../cocos/navmesh $(SRCROOT)/../../../../cocos/platform $(SRCROOT)/../../../../cocos/audio/include $(SRCROOT)/../../../../cocos/editor-support $(SRCROOT)/../../../../cocos/editor-support/cocosbuilder $(SRCROOT)/../../../../cocos/editor-support/cocostudio $(SRCROOT)/../../../../cocos/editor-support/spine $(SRCROOT)/../../../../cocos/editor-support/creator $(SRCROOT)/../../../../cocos/ui $(SRCROOT)/../../../../cocos/storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external $(SRCROOT)/../auto $(SRCROOT)/../manual";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../../../cocos $(SRCROOT)/../../../../cocos/base $(SRCROOT)/../../../../cocos/3d $(SRCROOT)/../../../../cocos/2d $(SRCROOT)/../../../../cocos/physics3d $(SRCROOT)/../../../../cocos/navmesh $(SRCROOT)/../../../../cocos/platform $(SRCROOT)/../../../../cocos/audio/include $(SRCROOT)/../../../../cocos/editor-support $(SRCROOT)/../../../../cocos/editor-support/cocosbuilder $(SRCROOT)/../../../../cocos/editor-support/cocostudio $(SRCROOT)/../../../../cocos/editor-support/spine $(SRCROOT)/../../../../cocos/editor-support/creator $(SRCROOT)/../../../../cocos/ui $(SRCROOT)/../../../../cocos/storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external $(SRCROOT)/../auto $(SRCROOT)/../manual $(SRCROOT)/../../../../thirdParty";
 			};
 			name = Debug;
 		};
@@ -1182,7 +1206,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../../../cocos $(SRCROOT)/../../../../cocos/base $(SRCROOT)/../../../../cocos/3d $(SRCROOT)/../../../../cocos/2d $(SRCROOT)/../../../../cocos/physics3d $(SRCROOT)/../../../../cocos/navmesh $(SRCROOT)/../../../../cocos/platform $(SRCROOT)/../../../../cocos/audio/include $(SRCROOT)/../../../../cocos/editor-support $(SRCROOT)/../../../../cocos/editor-support/cocosbuilder $(SRCROOT)/../../../../cocos/editor-support/cocostudio $(SRCROOT)/../../../../cocos/editor-support/spine $(SRCROOT)/../../../../cocos/editor-support/creator $(SRCROOT)/../../../../cocos/ui $(SRCROOT)/../../../../cocos/storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external $(SRCROOT)/../auto $(SRCROOT)/../manual";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../.. $(SRCROOT)/../../../../cocos $(SRCROOT)/../../../../cocos/base $(SRCROOT)/../../../../cocos/3d $(SRCROOT)/../../../../cocos/2d $(SRCROOT)/../../../../cocos/physics3d $(SRCROOT)/../../../../cocos/navmesh $(SRCROOT)/../../../../cocos/platform $(SRCROOT)/../../../../cocos/audio/include $(SRCROOT)/../../../../cocos/editor-support $(SRCROOT)/../../../../cocos/editor-support/cocosbuilder $(SRCROOT)/../../../../cocos/editor-support/cocostudio $(SRCROOT)/../../../../cocos/editor-support/spine $(SRCROOT)/../../../../cocos/editor-support/creator $(SRCROOT)/../../../../cocos/ui $(SRCROOT)/../../../../cocos/storage $(SRCROOT)/../../../../extensions $(SRCROOT)/../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../external $(SRCROOT)/../auto $(SRCROOT)/../manual $(SRCROOT)/../../../../thirdParty";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

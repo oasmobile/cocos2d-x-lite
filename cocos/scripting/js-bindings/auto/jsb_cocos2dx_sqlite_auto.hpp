@@ -1,50 +1,43 @@
+#pragma once
 #include "base/ccConfig.h"
-#ifndef __cocos2dx_sqlite_h__
-#define __cocos2dx_sqlite_h__
 
-#include "jsapi.h"
-#include "jsfriendapi.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
-extern JSClass  *jsb_SQLiteStatement_class;
-extern JS::PersistentRootedObject *jsb_SQLiteStatement_prototype;
+extern se::Object* __jsb_SQLiteStatement_proto;
+extern se::Class* __jsb_SQLiteStatement_class;
 
-bool js_cocos2dx_sqlite_SQLiteStatement_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
-void js_cocos2dx_sqlite_SQLiteStatement_finalize(JSContext *cx, JSObject *obj);
-void js_register_cocos2dx_sqlite_SQLiteStatement(JSContext *cx, JS::HandleObject global);
-void register_all_cocos2dx_sqlite(JSContext* cx, JS::HandleObject obj);
-bool js_cocos2dx_sqlite_SQLiteStatement_reset(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_execute(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_dataCount(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_dataType(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_bind(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_nextRow(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueCount(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_restartSelect(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_bindNull(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueName(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueString(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_valueDouble(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteStatement_SQLiteStatement(JSContext *cx, uint32_t argc, JS::Value *vp);
+bool js_register_SQLiteStatement(se::Object* obj);
+bool register_all_cocos2dx_sqlite(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_reset);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_execute);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataCount);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataType);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bind);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_nextRow);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueCount);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_restartSelect);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bindNull);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueName);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueString);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueInt);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueDouble);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_SQLiteStatement);
 
-extern JSClass  *jsb_SQLiteWrapper_class;
-extern JS::PersistentRootedObject *jsb_SQLiteWrapper_prototype;
+extern se::Object* __jsb_SQLiteWrapper_proto;
+extern se::Class* __jsb_SQLiteWrapper_class;
 
-bool js_cocos2dx_sqlite_SQLiteWrapper_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
-void js_cocos2dx_sqlite_SQLiteWrapper_finalize(JSContext *cx, JSObject *obj);
-void js_register_cocos2dx_sqlite_SQLiteWrapper(JSContext *cx, JS::HandleObject global);
-void register_all_cocos2dx_sqlite(JSContext* cx, JS::HandleObject obj);
-bool js_cocos2dx_sqlite_SQLiteWrapper_begin(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_rollback(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_exec(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_directStatement(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_commit(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_getPath(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_init(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_close(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_lastError(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_open(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_create(JSContext *cx, uint32_t argc, JS::Value *vp);
-bool js_cocos2dx_sqlite_SQLiteWrapper_SQLiteWrapper(JSContext *cx, uint32_t argc, JS::Value *vp);
+bool js_register_SQLiteWrapper(se::Object* obj);
+bool register_all_cocos2dx_sqlite(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_begin);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_rollback);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_exec);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_directStatement);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_commit);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_getPath);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_init);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_close);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_lastError);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_open);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_create);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_SQLiteWrapper);
 
-#endif // __cocos2dx_sqlite_h__

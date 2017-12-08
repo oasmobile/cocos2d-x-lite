@@ -1,726 +1,632 @@
 #include "scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp"
-#include "scripting/js-bindings/manual/cocos2d_specifics.hpp"
+#include "scripting/js-bindings/manual/jsb_conversions.hpp"
+#include "scripting/js-bindings/manual/jsb_global.h"
 #include "sqlite/SQLiteWrapper.h"
 
-JSClass  *jsb_SQLiteStatement_class;
-JS::PersistentRootedObject *jsb_SQLiteStatement_prototype;
+se::Object* __jsb_SQLiteStatement_proto = nullptr;
+se::Class* __jsb_SQLiteStatement_class = nullptr;
 
-bool js_cocos2dx_sqlite_SQLiteStatement_reset(JSContext *cx, uint32_t argc, JS::Value *vp)
+static bool js_cocos2dx_sqlite_SQLiteStatement_reset(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_reset : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_reset : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->reset();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_reset : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->reset();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_reset : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_reset : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_execute(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_reset)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_execute(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_execute : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_execute : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->execute();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_execute : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->execute();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_execute : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_execute : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_dataCount(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_execute)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_dataCount(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_dataCount : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_dataCount : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        int ret = cobj->dataCount();
-        JS::RootedValue jsret(cx);
-        jsret = JS::Int32Value(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_dataCount : error parsing return value");
-        args.rval().set(jsret);
+        int result = cobj->dataCount();
+        ok &= int32_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_dataCount : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_dataCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_dataType(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataCount)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_dataType(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : Error processing arguments");
-        int ret = (int)cobj->dataType(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::Int32Value(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : Error processing arguments");
+        unsigned int result = (unsigned int)cobj->dataType(arg0);
+        ok &= uint32_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_dataType : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_dataType : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_bind(JSContext *cx, uint32_t argc, JS::Value *vp)
-{
-    bool ok = true;
-    SQLiteStatement* cobj = nullptr;
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataType)
 
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx);
-    obj.set(args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    cobj = (SQLiteStatement *)(proxy ? proxy->ptr : nullptr);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : Invalid Native Object");
+static bool js_cocos2dx_sqlite_SQLiteStatement_bind(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2( cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
     do {
-        ok = true;
         if (argc == 2) {
             int arg0 = 0;
-            ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
+            ok &= seval_to_int32(args[0], (int32_t*)&arg0);
             if (!ok) { ok = true; break; }
             double arg1 = 0;
-            ok &= jsval_to_double(cx, args.get(1), &arg1);
+            ok &= seval_to_double(args[1], &arg1);
             if (!ok) { ok = true; break; }
-            bool ret = cobj->bind(arg0, arg1);
-            JS::RootedValue jsret(cx, JS::NullHandleValue);
-            jsret = JS::BooleanValue(ret);
-            JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : error parsing return value");
-            args.rval().set(jsret);
+            bool result = cobj->bind(arg0, arg1);
+            ok &= boolean_to_seval(result, &s.rval());
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : Error processing arguments");
             return true;
         }
-    } while(0);
+    } while(false);
 
     do {
-        ok = true;
         if (argc == 2) {
             int arg0 = 0;
-            ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
+            ok &= seval_to_int32(args[0], (int32_t*)&arg0);
             if (!ok) { ok = true; break; }
             std::string arg1;
-            ok &= jsval_to_std_string(cx, args.get(1), &arg1);
+            ok &= seval_to_std_string(args[1], &arg1);
             if (!ok) { ok = true; break; }
-            bool ret = cobj->bind(arg0, arg1);
-            JS::RootedValue jsret(cx, JS::NullHandleValue);
-            jsret = JS::BooleanValue(ret);
-            JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : error parsing return value");
-            args.rval().set(jsret);
+            bool result = cobj->bind(arg0, arg1);
+            ok &= boolean_to_seval(result, &s.rval());
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : Error processing arguments");
             return true;
         }
-    } while(0);
+    } while(false);
 
     do {
-        ok = true;
         if (argc == 2) {
             int arg0 = 0;
-            ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
+            ok &= seval_to_int32(args[0], (int32_t*)&arg0);
             if (!ok) { ok = true; break; }
             int arg1 = 0;
-            ok &= jsval_to_int32(cx, args.get(1), (int32_t *)&arg1);
+            ok &= seval_to_int32(args[1], (int32_t*)&arg1);
             if (!ok) { ok = true; break; }
-            bool ret = cobj->bind(arg0, arg1);
-            JS::RootedValue jsret(cx, JS::NullHandleValue);
-            jsret = JS::BooleanValue(ret);
-            JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : error parsing return value");
-            args.rval().set(jsret);
+            bool result = cobj->bind(arg0, arg1);
+            ok &= boolean_to_seval(result, &s.rval());
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_bind : Error processing arguments");
             return true;
         }
-    } while(0);
+    } while(false);
 
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_bind : arguments error");
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_nextRow(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bind)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_nextRow(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_nextRow : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_nextRow : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->nextRow();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_nextRow : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->nextRow();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_nextRow : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_nextRow : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueCount(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_nextRow)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_valueCount(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueCount : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_valueCount : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        int ret = cobj->valueCount();
-        JS::RootedValue jsret(cx);
-        jsret = JS::Int32Value(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueCount : error parsing return value");
-        args.rval().set(jsret);
+        int result = cobj->valueCount();
+        ok &= int32_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueCount : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_restartSelect(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueCount)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_restartSelect(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_restartSelect : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_restartSelect : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->restartSelect();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_restartSelect : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->restartSelect();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_restartSelect : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_restartSelect : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_bindNull(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_restartSelect)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_bindNull(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : Error processing arguments");
-        bool ret = cobj->bindNull(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : Error processing arguments");
+        bool result = cobj->bindNull(arg0);
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_bindNull : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueName(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bindNull)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_valueName(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : Error processing arguments");
-        std::string ret = cobj->valueName(arg0);
-        JS::RootedValue jsret(cx);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : Error processing arguments");
+        std::string result = cobj->valueName(arg0);
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueName : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueString(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueName)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_valueString(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Error processing arguments");
-        std::string ret = cobj->valueString(arg0);
-        JS::RootedValue jsret(cx);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Error processing arguments");
+        std::string result = cobj->valueString(arg0);
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueString : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueString)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : Error processing arguments");
-        int ret = cobj->valueInt(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::Int32Value(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : Error processing arguments");
+        int result = cobj->valueInt(arg0);
+        ok &= int32_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueDouble(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueInt)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_valueDouble(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Invalid Native Object");
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
-        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Error processing arguments");
-        double ret = cobj->valueDouble(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::DoubleValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Error processing arguments");
+        double result = cobj->valueDouble(arg0);
+        ok &= double_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueDouble)
+
+SE_DECLARE_FINALIZE_FUNC(js_SQLiteStatement_finalize)
+
+static bool js_cocos2dx_sqlite_SQLiteStatement_constructor(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
     SQLiteStatement* cobj = new (std::nothrow) SQLiteStatement();
+    s.thisObject()->setPrivateData(cobj);
+    return true;
+}
+SE_BIND_CTOR(js_cocos2dx_sqlite_SQLiteStatement_constructor, __jsb_SQLiteStatement_class, js_SQLiteStatement_finalize)
 
-    // create the js object and link the native object with the javascript object
-    JS::RootedObject jsobj(cx);
-    JS::RootedObject proto(cx, jsb_SQLiteStatement_prototype->get());
-    jsb_ref_create_jsobject(cx, cobj, jsb_SQLiteStatement_class, proto, &jsobj, "SQLiteStatement");
-    JS::RootedValue retVal(cx, JS::ObjectOrNullValue(jsobj));
-    args.rval().set(retVal);
-    if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok) 
-    {
-        JS::HandleValueArray argsv(args);
-        ScriptingCore::getInstance()->executeFunctionWithOwner(retVal, "_ctor", argsv);
-    }
+
+
+
+static bool js_SQLiteStatement_finalize(se::State& s)
+{
+    CCLOGINFO("jsbindings: finalizing JS object %p (SQLiteStatement)", s.nativeThisObject());
+    SQLiteStatement* cobj = (SQLiteStatement*)s.nativeThisObject();
+    if (cobj->getReferenceCount() == 1)
+        cobj->autorelease();
+    else
+        cobj->release();
+    return true;
+}
+SE_BIND_FINALIZE_FUNC(js_SQLiteStatement_finalize)
+
+bool js_register_cocos2dx_sqlite_SQLiteStatement(se::Object* obj)
+{
+    auto cls = se::Class::create("SQLiteStatement", obj, nullptr, _SE(js_cocos2dx_sqlite_SQLiteStatement_constructor));
+
+    cls->defineFunction("reset", _SE(js_cocos2dx_sqlite_SQLiteStatement_reset));
+    cls->defineFunction("execute", _SE(js_cocos2dx_sqlite_SQLiteStatement_execute));
+    cls->defineFunction("dataCount", _SE(js_cocos2dx_sqlite_SQLiteStatement_dataCount));
+    cls->defineFunction("dataType", _SE(js_cocos2dx_sqlite_SQLiteStatement_dataType));
+    cls->defineFunction("bind", _SE(js_cocos2dx_sqlite_SQLiteStatement_bind));
+    cls->defineFunction("nextRow", _SE(js_cocos2dx_sqlite_SQLiteStatement_nextRow));
+    cls->defineFunction("valueCount", _SE(js_cocos2dx_sqlite_SQLiteStatement_valueCount));
+    cls->defineFunction("restartSelect", _SE(js_cocos2dx_sqlite_SQLiteStatement_restartSelect));
+    cls->defineFunction("bindNull", _SE(js_cocos2dx_sqlite_SQLiteStatement_bindNull));
+    cls->defineFunction("valueName", _SE(js_cocos2dx_sqlite_SQLiteStatement_valueName));
+    cls->defineFunction("valueString", _SE(js_cocos2dx_sqlite_SQLiteStatement_valueString));
+    cls->defineFunction("valueInt", _SE(js_cocos2dx_sqlite_SQLiteStatement_valueInt));
+    cls->defineFunction("valueDouble", _SE(js_cocos2dx_sqlite_SQLiteStatement_valueDouble));
+    cls->defineFinalizeFunction(_SE(js_SQLiteStatement_finalize));
+    cls->install();
+    JSBClassType::registerClass<SQLiteStatement>(cls);
+
+    __jsb_SQLiteStatement_proto = cls->getProto();
+    __jsb_SQLiteStatement_class = cls;
+
+    se::ScriptEngine::getInstance()->clearException();
     return true;
 }
 
+se::Object* __jsb_SQLiteWrapper_proto = nullptr;
+se::Class* __jsb_SQLiteWrapper_class = nullptr;
 
-void js_register_cocos2dx_sqlite_SQLiteStatement(JSContext *cx, JS::HandleObject global) {
-    static const JSClassOps SQLiteStatement_classOps = {
-        nullptr, nullptr, nullptr, nullptr,
-        nullptr, nullptr, nullptr,
-        nullptr,
-        nullptr, nullptr, nullptr, nullptr
-    };
-    static JSClass SQLiteStatement_class = {
-        "SQLiteStatement",
-        JSCLASS_HAS_PRIVATE,
-        &SQLiteStatement_classOps
-    };
-    jsb_SQLiteStatement_class = &SQLiteStatement_class;
-
-    static JSFunctionSpec funcs[] = {
-        JS_FN("reset", js_cocos2dx_sqlite_SQLiteStatement_reset, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("execute", js_cocos2dx_sqlite_SQLiteStatement_execute, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("dataCount", js_cocos2dx_sqlite_SQLiteStatement_dataCount, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("dataType", js_cocos2dx_sqlite_SQLiteStatement_dataType, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("bind", js_cocos2dx_sqlite_SQLiteStatement_bind, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("nextRow", js_cocos2dx_sqlite_SQLiteStatement_nextRow, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueCount", js_cocos2dx_sqlite_SQLiteStatement_valueCount, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("restartSelect", js_cocos2dx_sqlite_SQLiteStatement_restartSelect, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("bindNull", js_cocos2dx_sqlite_SQLiteStatement_bindNull, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueName", js_cocos2dx_sqlite_SQLiteStatement_valueName, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueString", js_cocos2dx_sqlite_SQLiteStatement_valueString, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueInt", js_cocos2dx_sqlite_SQLiteStatement_valueInt, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueDouble", js_cocos2dx_sqlite_SQLiteStatement_valueDouble, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FS_END
-    };
-
-    JS::RootedObject parent_proto(cx, nullptr);
-    JS::RootedObject proto(cx, JS_InitClass(
-        cx, global,
-        parent_proto,
-        jsb_SQLiteStatement_class,
-        js_cocos2dx_sqlite_SQLiteStatement_constructor, 0,
-        nullptr,
-        funcs,
-        nullptr,
-        nullptr));
-
-    // add the proto and JSClass to the type->js info hash table
-    js_type_class_t *typeClass = jsb_register_class<SQLiteStatement>(cx, jsb_SQLiteStatement_class, proto);
-    jsb_SQLiteStatement_prototype = typeClass->proto;
-    JS::RootedValue className(cx);
-    std_string_to_jsval(cx, "SQLiteStatement", &className);
-    JS_SetProperty(cx, proto, "_className", className);
-    JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
-    JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
-}
-
-JSClass  *jsb_SQLiteWrapper_class;
-JS::PersistentRootedObject *jsb_SQLiteWrapper_prototype;
-
-bool js_cocos2dx_sqlite_SQLiteWrapper_begin(JSContext *cx, uint32_t argc, JS::Value *vp)
+static bool js_cocos2dx_sqlite_SQLiteWrapper_begin(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_begin : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_begin : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->begin();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_begin : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->begin();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_begin : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_begin : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_rollback(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_begin)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_rollback(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_rollback : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_rollback : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->rollback();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_rollback : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->rollback();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_rollback : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_rollback : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_exec(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_rollback)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_exec(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : Error processing arguments");
-        SQLiteStatement* ret = cobj->exec(arg0);
-        JS::RootedValue jsret(cx);
-        if (ret) {
-            JS::RootedObject jsretObj(cx);
-            js_get_or_create_jsobject<SQLiteStatement>(cx, (SQLiteStatement*)ret, &jsretObj);
-            jsret = JS::ObjectOrNullValue(jsretObj);
-        } else {
-            jsret = JS::NullHandleValue;
-        };
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_std_string(args[0], &arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : Error processing arguments");
+        SQLiteStatement* result = cobj->exec(arg0);
+        ok &= native_ptr_to_seval<SQLiteStatement>((SQLiteStatement*)result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_exec : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_exec : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_directStatement(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_exec)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_directStatement(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : Error processing arguments");
-        bool ret = cobj->directStatement(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_std_string(args[0], &arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : Error processing arguments");
+        bool result = cobj->directStatement(arg0);
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_directStatement : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_commit(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_directStatement)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_commit(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_commit : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_commit : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->commit();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_commit : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->commit();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_commit : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_commit : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_getPath(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_commit)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_getPath(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        ok &= jsval_to_std_string(cx, args.get(1), &arg1);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : Error processing arguments");
-        std::string ret = cobj->getPath(arg0, arg1);
-        JS::RootedValue jsret(cx);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_std_string(args[0], &arg0);
+        ok &= seval_to_std_string(args[1], &arg1);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : Error processing arguments");
+        std::string result = cobj->getPath(arg0, arg1);
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_getPath : wrong number of arguments: %d, was expecting %d", argc, 2);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_init(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_getPath)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_init(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_init : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_init : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        bool ret = cobj->init();
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_init : error parsing return value");
-        args.rval().set(jsret);
+        bool result = cobj->init();
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_init : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_init : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_close(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_init)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_close(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_close : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_close : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
     if (argc == 0) {
         cobj->close();
-        args.rval().setUndefined();
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_close : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_lastError(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_close)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_lastError(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_lastError : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_lastError : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-        std::string ret = cobj->lastError();
-        JS::RootedValue jsret(cx);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_lastError : error parsing return value");
-        args.rval().set(jsret);
+        std::string result = cobj->lastError();
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_lastError : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_lastError : wrong number of arguments: %d, was expecting %d", argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_open(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_lastError)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_open(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
-    SQLiteWrapper* cobj = (SQLiteWrapper *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : Invalid Native Object");
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : Error processing arguments");
-        bool ret = cobj->open(arg0);
-        JS::RootedValue jsret(cx);
-        jsret = JS::BooleanValue(ret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : error parsing return value");
-        args.rval().set(jsret);
+        ok &= seval_to_std_string(args[0], &arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : Error processing arguments");
+        bool result = cobj->open(arg0);
+        ok &= boolean_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_sqlite_SQLiteWrapper_open : Error processing arguments");
         return true;
     }
-
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_open : wrong number of arguments: %d, was expecting %d", argc, 1);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteWrapper_create(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_open)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_create(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
-
-        auto ret = SQLiteWrapper::create();
-        JS::RootedObject jsret(cx);
-        JS::RootedObject proto(cx, jsb_SQLiteWrapper_prototype->get());
-        jsb_ref_autoreleased_create_jsobject(cx, ret, jsb_SQLiteWrapper_class, proto, &jsret, "SQLiteWrapper");
-        args.rval().set(JS::ObjectOrNullValue(jsret));
+        auto result = SQLiteWrapper::create();
+        result->retain();
+        auto obj = se::Object::createObjectWithClass(__jsb_SQLiteWrapper_class);
+        obj->setPrivateData(result);
+        s.rval().setObject(obj);
         return true;
     }
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteWrapper_create : wrong number of arguments");
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
     return false;
 }
+SE_BIND_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_create)
 
-bool js_cocos2dx_sqlite_SQLiteWrapper_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
+SE_DECLARE_FINALIZE_FUNC(js_SQLiteWrapper_finalize)
+
+static bool js_cocos2dx_sqlite_SQLiteWrapper_constructor(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
     SQLiteWrapper* cobj = new (std::nothrow) SQLiteWrapper();
+    s.thisObject()->setPrivateData(cobj);
+    return true;
+}
+SE_BIND_CTOR(js_cocos2dx_sqlite_SQLiteWrapper_constructor, __jsb_SQLiteWrapper_class, js_SQLiteWrapper_finalize)
 
-    // create the js object and link the native object with the javascript object
-    JS::RootedObject jsobj(cx);
-    JS::RootedObject proto(cx, jsb_SQLiteWrapper_prototype->get());
-    jsb_ref_create_jsobject(cx, cobj, jsb_SQLiteWrapper_class, proto, &jsobj, "SQLiteWrapper");
-    JS::RootedValue retVal(cx, JS::ObjectOrNullValue(jsobj));
-    args.rval().set(retVal);
-    if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok) 
-    {
-        JS::HandleValueArray argsv(args);
-        ScriptingCore::getInstance()->executeFunctionWithOwner(retVal, "_ctor", argsv);
-    }
+
+
+
+static bool js_SQLiteWrapper_finalize(se::State& s)
+{
+    CCLOGINFO("jsbindings: finalizing JS object %p (SQLiteWrapper)", s.nativeThisObject());
+    SQLiteWrapper* cobj = (SQLiteWrapper*)s.nativeThisObject();
+    if (cobj->getReferenceCount() == 1)
+        cobj->autorelease();
+    else
+        cobj->release();
+    return true;
+}
+SE_BIND_FINALIZE_FUNC(js_SQLiteWrapper_finalize)
+
+bool js_register_cocos2dx_sqlite_SQLiteWrapper(se::Object* obj)
+{
+    auto cls = se::Class::create("SQLiteWrapper", obj, nullptr, _SE(js_cocos2dx_sqlite_SQLiteWrapper_constructor));
+
+    cls->defineFunction("begin", _SE(js_cocos2dx_sqlite_SQLiteWrapper_begin));
+    cls->defineFunction("rollback", _SE(js_cocos2dx_sqlite_SQLiteWrapper_rollback));
+    cls->defineFunction("exec", _SE(js_cocos2dx_sqlite_SQLiteWrapper_exec));
+    cls->defineFunction("directStatement", _SE(js_cocos2dx_sqlite_SQLiteWrapper_directStatement));
+    cls->defineFunction("commit", _SE(js_cocos2dx_sqlite_SQLiteWrapper_commit));
+    cls->defineFunction("getPath", _SE(js_cocos2dx_sqlite_SQLiteWrapper_getPath));
+    cls->defineFunction("init", _SE(js_cocos2dx_sqlite_SQLiteWrapper_init));
+    cls->defineFunction("close", _SE(js_cocos2dx_sqlite_SQLiteWrapper_close));
+    cls->defineFunction("lastError", _SE(js_cocos2dx_sqlite_SQLiteWrapper_lastError));
+    cls->defineFunction("open", _SE(js_cocos2dx_sqlite_SQLiteWrapper_open));
+    cls->defineStaticFunction("create", _SE(js_cocos2dx_sqlite_SQLiteWrapper_create));
+    cls->defineFinalizeFunction(_SE(js_SQLiteWrapper_finalize));
+    cls->install();
+    JSBClassType::registerClass<SQLiteWrapper>(cls);
+
+    __jsb_SQLiteWrapper_proto = cls->getProto();
+    __jsb_SQLiteWrapper_class = cls;
+
+    se::ScriptEngine::getInstance()->clearException();
     return true;
 }
 
-
-void js_register_cocos2dx_sqlite_SQLiteWrapper(JSContext *cx, JS::HandleObject global) {
-    static const JSClassOps SQLiteWrapper_classOps = {
-        nullptr, nullptr, nullptr, nullptr,
-        nullptr, nullptr, nullptr,
-        nullptr,
-        nullptr, nullptr, nullptr, nullptr
-    };
-    static JSClass SQLiteWrapper_class = {
-        "SQLiteWrapper",
-        JSCLASS_HAS_PRIVATE,
-        &SQLiteWrapper_classOps
-    };
-    jsb_SQLiteWrapper_class = &SQLiteWrapper_class;
-
-    static JSFunctionSpec funcs[] = {
-        JS_FN("begin", js_cocos2dx_sqlite_SQLiteWrapper_begin, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("rollback", js_cocos2dx_sqlite_SQLiteWrapper_rollback, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("exec", js_cocos2dx_sqlite_SQLiteWrapper_exec, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("directStatement", js_cocos2dx_sqlite_SQLiteWrapper_directStatement, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("commit", js_cocos2dx_sqlite_SQLiteWrapper_commit, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("getPath", js_cocos2dx_sqlite_SQLiteWrapper_getPath, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("init", js_cocos2dx_sqlite_SQLiteWrapper_init, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("close", js_cocos2dx_sqlite_SQLiteWrapper_close, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("lastError", js_cocos2dx_sqlite_SQLiteWrapper_lastError, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("open", js_cocos2dx_sqlite_SQLiteWrapper_open, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FS_END
-    };
-
-    static JSFunctionSpec st_funcs[] = {
-        JS_FN("create", js_cocos2dx_sqlite_SQLiteWrapper_create, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FS_END
-    };
-
-    JS::RootedObject parent_proto(cx, nullptr);
-    JS::RootedObject proto(cx, JS_InitClass(
-        cx, global,
-        parent_proto,
-        jsb_SQLiteWrapper_class,
-        js_cocos2dx_sqlite_SQLiteWrapper_constructor, 0,
-        nullptr,
-        funcs,
-        nullptr,
-        st_funcs));
-
-    // add the proto and JSClass to the type->js info hash table
-    js_type_class_t *typeClass = jsb_register_class<SQLiteWrapper>(cx, jsb_SQLiteWrapper_class, proto);
-    jsb_SQLiteWrapper_prototype = typeClass->proto;
-    JS::RootedValue className(cx);
-    std_string_to_jsval(cx, "SQLiteWrapper", &className);
-    JS_SetProperty(cx, proto, "_className", className);
-    JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
-    JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
-}
-
-void register_all_cocos2dx_sqlite(JSContext* cx, JS::HandleObject obj) {
+bool register_all_cocos2dx_sqlite(se::Object* obj)
+{
     // Get the ns
-    JS::RootedObject ns(cx);
-    get_or_create_js_obj(cx, obj, "jsb", &ns);
+    se::Value nsVal;
+    if (!obj->getProperty("jsb", &nsVal))
+    {
+        se::HandleObject jsobj(se::Object::createPlainObject());
+        nsVal.setObject(jsobj);
+        obj->setProperty("jsb", nsVal);
+    }
+    se::Object* ns = nsVal.toObject();
 
-    js_register_cocos2dx_sqlite_SQLiteWrapper(cx, ns);
-    js_register_cocos2dx_sqlite_SQLiteStatement(cx, ns);
+    js_register_cocos2dx_sqlite_SQLiteWrapper(ns);
+    js_register_cocos2dx_sqlite_SQLiteStatement(ns);
+    return true;
 }
 

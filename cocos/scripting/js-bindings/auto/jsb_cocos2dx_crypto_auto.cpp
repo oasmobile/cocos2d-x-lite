@@ -27,28 +27,28 @@ bool js_cocos2dx_crypto_Crypto_encodeBase64Len(JSContext *cx, uint32_t argc, JS:
     return false;
 }
 
-bool js_cocos2dx_crypto_Crypto_MD5String(JSContext *cx, uint32_t argc, JS::Value *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true; CC_UNUSED_PARAM(ok);
-    if (argc == 2) {
-        void* arg0 = nullptr;
-        int arg1 = 0;
-        #pragma warning NO CONVERSION TO NATIVE FOR void*
-		ok = false;
-        ok &= jsval_to_int32(cx, args.get(1), (int32_t *)&arg1);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_crypto_Crypto_MD5String : Error processing arguments");
-
-        const std::string ret = Crypto::MD5String(arg0, arg1);
-        JS::RootedValue jsret(cx, JS::NullHandleValue);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_crypto_Crypto_MD5String : error parsing return value");
-        args.rval().set(jsret);
-        return true;
-    }
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_crypto_Crypto_MD5String : wrong number of arguments");
-    return false;
-}
+//bool js_cocos2dx_crypto_Crypto_MD5String(JSContext *cx, uint32_t argc, JS::Value *vp)
+//{
+//    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+//    bool ok = true; CC_UNUSED_PARAM(ok);
+//    if (argc == 2) {
+//        void* arg0 = nullptr;
+//        int arg1 = 0;
+//        #pragma warning NO CONVERSION TO NATIVE FOR void*
+//        ok = false;
+//        ok &= jsval_to_int32(cx, args.get(1), (int32_t *)&arg1);
+//        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_crypto_Crypto_MD5String : Error processing arguments");
+//
+//        const std::string ret = Crypto::MD5String(arg0, arg1);
+//        JS::RootedValue jsret(cx, JS::NullHandleValue);
+//        ok &= std_string_to_jsval(cx, ret, &jsret);
+//        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_crypto_Crypto_MD5String : error parsing return value");
+//        args.rval().set(jsret);
+//        return true;
+//    }
+//    JS_ReportErrorUTF8(cx, "js_cocos2dx_crypto_Crypto_MD5String : wrong number of arguments");
+//    return false;
+//}
 
 bool js_cocos2dx_crypto_Crypto_decodeBase64Len(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
@@ -198,7 +198,7 @@ void js_register_cocos2dx_crypto_Crypto(JSContext *cx, JS::HandleObject global) 
 
     static JSFunctionSpec st_funcs[] = {
         JS_FN("encodeBase64Len", js_cocos2dx_crypto_Crypto_encodeBase64Len, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("MD5String", js_cocos2dx_crypto_Crypto_MD5String, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+//        JS_FN("MD5String", js_cocos2dx_crypto_Crypto_MD5String, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("decodeBase64Len", js_cocos2dx_crypto_Crypto_decodeBase64Len, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("MD5File", js_cocos2dx_crypto_Crypto_MD5File, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("decodeBase64", js_cocos2dx_crypto_Crypto_decodeBase64, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),

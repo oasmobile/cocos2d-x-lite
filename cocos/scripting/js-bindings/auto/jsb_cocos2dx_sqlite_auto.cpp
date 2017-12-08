@@ -1,6 +1,6 @@
 #include "scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp"
 #include "scripting/js-bindings/manual/cocos2d_specifics.hpp"
-#include "SQLiteWrapper.h"
+#include "sqlite/SQLiteWrapper.h"
 
 JSClass  *jsb_SQLiteStatement_class;
 JS::PersistentRootedObject *jsb_SQLiteStatement_prototype;
@@ -262,6 +262,29 @@ bool js_cocos2dx_sqlite_SQLiteStatement_valueName(JSContext *cx, uint32_t argc, 
     JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
+bool js_cocos2dx_sqlite_SQLiteStatement_valueString(JSContext *cx, uint32_t argc, JS::Value *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    bool ok = true; CC_UNUSED_PARAM(ok);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
+    SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Invalid Native Object");
+    if (argc == 1) {
+        int arg0 = 0;
+        ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Error processing arguments");
+        std::string ret = cobj->valueString(arg0);
+        JS::RootedValue jsret(cx);
+        ok &= std_string_to_jsval(cx, ret, &jsret);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : error parsing return value");
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueString : wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
 bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -285,27 +308,27 @@ bool js_cocos2dx_sqlite_SQLiteStatement_valueInt(JSContext *cx, uint32_t argc, J
     JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueInt : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_sqlite_SQLiteStatement_valueString(JSContext *cx, uint32_t argc, JS::Value *vp)
+bool js_cocos2dx_sqlite_SQLiteStatement_valueDouble(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true; CC_UNUSED_PARAM(ok);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
     js_proxy_t *proxy = jsb_get_js_proxy(cx, obj);
     SQLiteStatement* cobj = (SQLiteStatement *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Invalid Native Object");
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Invalid Native Object");
     if (argc == 1) {
         int arg0 = 0;
         ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : Error processing arguments");
-        std::string ret = cobj->valueString(arg0);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : Error processing arguments");
+        double ret = cobj->valueDouble(arg0);
         JS::RootedValue jsret(cx);
-        ok &= std_string_to_jsval(cx, ret, &jsret);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueString : error parsing return value");
+        jsret = JS::DoubleValue(ret);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : error parsing return value");
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueString : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_sqlite_SQLiteStatement_valueDouble : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_sqlite_SQLiteStatement_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -354,8 +377,9 @@ void js_register_cocos2dx_sqlite_SQLiteStatement(JSContext *cx, JS::HandleObject
         JS_FN("restartSelect", js_cocos2dx_sqlite_SQLiteStatement_restartSelect, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("bindNull", js_cocos2dx_sqlite_SQLiteStatement_bindNull, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("valueName", js_cocos2dx_sqlite_SQLiteStatement_valueName, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("valueInt", js_cocos2dx_sqlite_SQLiteStatement_valueInt, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("valueString", js_cocos2dx_sqlite_SQLiteStatement_valueString, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("valueInt", js_cocos2dx_sqlite_SQLiteStatement_valueInt, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("valueDouble", js_cocos2dx_sqlite_SQLiteStatement_valueDouble, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FS_END
     };
 

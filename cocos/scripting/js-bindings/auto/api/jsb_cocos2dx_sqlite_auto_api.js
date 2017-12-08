@@ -119,6 +119,18 @@ int
 },
 
 /**
+ * @method valueString
+ * @param {int} arg0
+ * @return {String}
+ */
+valueString : function (
+int 
+)
+{
+    return ;
+},
+
+/**
  * @method valueInt
  * @param {int} arg0
  * @return {int}
@@ -131,15 +143,15 @@ int
 },
 
 /**
- * @method valueString
+ * @method valueDouble
  * @param {int} arg0
- * @return {String}
+ * @return {double}
  */
-valueString : function (
+valueDouble : function (
 int 
 )
 {
-    return ;
+    return 0;
 },
 
 /**

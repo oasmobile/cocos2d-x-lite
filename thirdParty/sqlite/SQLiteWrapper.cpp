@@ -129,6 +129,10 @@ int SQLiteStatement::valueInt(int pos_zero_indexed) {
     return sqlite3_column_int(stmt_, pos_zero_indexed);
 }
 
+double SQLiteStatement::valueDouble(int pos_zero_indexed) {
+    return sqlite3_column_double(stmt_, pos_zero_indexed);
+}
+
 std::string SQLiteStatement::valueString(int pos_zero_indexed) {
     
     if(sqlite3_column_text(stmt_, pos_zero_indexed) == NULL){
@@ -235,7 +239,6 @@ std::string SQLiteWrapper::getPath(const std::string& db_file, const std::string
 }
 
 bool SQLiteWrapper::open(const std::string& db_file) {
-    CCLOG("db_file====%s", db_file.c_str());
 	if (sqlite3_open(db_file.c_str(), &db_) != SQLITE_OK) {
 		return false;
 	}

@@ -32,6 +32,7 @@ public:
 	int valueCount();
 	std::string valueName(int pos_zero_indexed);
     int valueInt (int pos_zero_indexed);
+    double valueDouble (int pos_zero_indexed);
     std::string valueString(int pos_zero_indexed);
         
     bool bind(int pos_zero_indexed, const std::string& value);

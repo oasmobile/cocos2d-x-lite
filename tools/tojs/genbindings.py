@@ -184,6 +184,7 @@ def main():
                     'box2d.ini' : ('box2d', 'jsb_box2d_auto'),
                     'anysdk-common.ini': ('protocols', 'jsb_anysdk_protocols_auto'),
                     'anysdk-appstore.ini': ('protocols', 'jsb_anysdk_protocols_auto'),
+                    'cocos2dx_crypto.ini' : ('cocos2dx_crypto', 'jsb_cocos2dx_crypto_auto'),
                     }
         target = 'spidermonkey'
         generator_py = '%s/generator.py' % cxx_generator_root

@@ -22,6 +22,7 @@
 		1AFFCD851F7A5DCF00628F2C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD841F7A5DCD00628F2C /* Images.xcassets */; };
 		1AFFCD861F7A5DCF00628F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD821F7A5DCC00628F2C /* LaunchScreen.storyboard */; };
 		1AFFCD871F7A5DCF00628F2C /* LaunchScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD831F7A5DCD00628F2C /* LaunchScreenBackground.png */; };
+		1FB273962020955500C573F2 /* libCriware IOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6747FD361FF3D1E40011E999 /* libCriware IOS.a */; };
 		294D7D7C1D0D667B002CE7B7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D7D7B1D0D667B002CE7B7 /* CoreText.framework */; };
 		4D3EB2581F8F4A6C007DA644 /* jsb_module_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3EB2571F8F4A6C007DA644 /* jsb_module_register.cpp */; };
 		4D3EB26B1F8F77C9007DA644 /* jsb_module_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3EB2571F8F4A6C007DA644 /* jsb_module_register.cpp */; };
@@ -257,6 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FB273962020955500C573F2 /* libCriware IOS.a in Frameworks */,
 				1AC62C111F4D1E7400F43CB1 /* JavaScriptCore.framework in Frameworks */,
 				1A499EA91F0CD97F004E6AEC /* libicucore.A.tbd in Frameworks */,
 				AB45A1031D34F7E100033ACB /* GameController.framework in Frameworks */,

@@ -7,6 +7,9 @@
 #include "cocos/scripting/js-bindings/manual/jsb_global.h"
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
+#include "external/criware/Classes/cricocos2d_initializer.h"
+#include "external/criware/Classes/crijsb_register.h"
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
 #include "SDKManager.h"
 #include "jsb_anysdk_protocols_auto.hpp"
@@ -18,6 +21,7 @@ USING_NS_CC;
 
 AppDelegate::AppDelegate()
 {
+    CRICOCOS2D::criWare_Initialize();
 }
 
 AppDelegate::~AppDelegate()
@@ -26,6 +30,7 @@ AppDelegate::~AppDelegate()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
     SDKManager::getInstance()->purge();
 #endif
+    CRICOCOS2D::criWare_Finalize();
 }
 
 void AppDelegate::initGLContextAttrs()
@@ -52,6 +57,8 @@ bool AppDelegate::applicationDidFinishLaunching()
         director->setOpenGLView(glview);
     }
     
+    CRICOCOS2D::criWare_EnableAssetsAccess();
+    
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
@@ -74,6 +81,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     });
 
     jsb_register_all_modules();
+    se->addRegisterCallback(criJsb_Register);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
     se->addRegisterCallback(register_all_anysdk_framework);
@@ -93,6 +101,8 @@ void AppDelegate::applicationDidEnterBackground()
     auto director = Director::getInstance();
     director->stopAnimation();
     director->getEventDispatcher()->dispatchCustomEvent("game_on_hide");
+
+    CRICOCOS2D::criWare_Suspend();
 }
 
 // this function will be called when the app is active again
@@ -101,4 +111,6 @@ void AppDelegate::applicationWillEnterForeground()
     auto director = Director::getInstance();
     director->startAnimation();
     director->getEventDispatcher()->dispatchCustomEvent("game_on_show");
+
+    CRICOCOS2D::criWare_Resume();
 }

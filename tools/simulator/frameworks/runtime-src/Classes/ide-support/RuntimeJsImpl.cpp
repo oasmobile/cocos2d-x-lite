@@ -22,6 +22,8 @@
 #include "scripting/js-bindings/manual/jsb_module_register.hpp"
 #include "scripting/js-bindings/manual/jsb_global.h"
 
+#include "external/criware/Classes/crijsb_register.h"
+
 static bool reloadScript(const string& file)
 {
     auto director = cocos2d::Director::getInstance();
@@ -168,6 +170,7 @@ bool RuntimeJsImpl::initJsEnv()
     });
 
     jsb_register_all_modules();
+    se->addRegisterCallback(criJsb_Register);
     
     se->addRegisterCallback(register_FileUtils);
     se->start();

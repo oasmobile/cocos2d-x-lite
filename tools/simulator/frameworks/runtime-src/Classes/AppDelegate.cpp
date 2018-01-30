@@ -18,6 +18,8 @@
 #include "base/CCDirector.h"
 #include "base/CCEventDispatcher.h"
 
+#include "external/criware/Classes/cricocos2d_initializer.h"
+
 #include "ide-support/CodeIDESupport.h"
 #include "runtime/Runtime.h"
 #include "ide-support/RuntimeJsImpl.h"
@@ -27,12 +29,14 @@ using namespace std;
 
 AppDelegate::AppDelegate()
 {
+	CRICOCOS2D::criWare_Initialize();
 }
 
 AppDelegate::~AppDelegate()
 {
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     RuntimeEngine::getInstance()->end();
+    CRICOCOS2D::criWare_Finalize();
 }
 
 //if you want a different context,just modify the value of glContextAttrs
@@ -68,6 +72,8 @@ void AppDelegate::applicationDidEnterBackground()
     auto director = Director::getInstance();
     director->stopAnimation();
     director->getEventDispatcher()->dispatchCustomEvent("game_on_hide");
+
+    CRICOCOS2D::criWare_Suspend();
 }
 
 // this function will be called when the app is active again
@@ -76,4 +82,6 @@ void AppDelegate::applicationWillEnterForeground()
     auto director = Director::getInstance();
     director->startAnimation();
     director->getEventDispatcher()->dispatchCustomEvent("game_on_show");
+
+    CRICOCOS2D::criWare_Resume();
 }

@@ -826,7 +826,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_ENTITLEMENTS = mac/Simulator.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = ../../../../../simulator/mac;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -864,7 +864,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_ENTITLEMENTS = mac/Simulator.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = ../../../../../simulator/mac;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -141,13 +141,13 @@ gulp.task('gen-simulator', function(cb) {
     var cocosConsoleBin;
     if (process.platform === 'darwin') {
         cocosConsoleBin = Path.join(cocosConsoleRoot, 'cocos');
-        if (fs.existsSync('./simulator.xcodeproj')) {
+        /*if (fs.existsSync('./simulator.xcodeproj')) {
             // copy mac xcode project with signing info
             fs.copySync('./simulator.xcodeproj', './tools/simulator/frameworks/runtime-src/proj.ios_mac/simulator.xcodeproj');
         }
         else {
             return cb('Failed to generate simulator, xcode project not signed. Run "gulp sign-simulator" please.');
-        }
+        }//*/
     }
     else {
         cocosConsoleBin = Path.join(cocosConsoleRoot, 'cocos.bat');

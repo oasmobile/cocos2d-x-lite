@@ -3,6 +3,7 @@ criware
 	templates
 	tools/simulator
 
+custom
 
 .gitignore
 download-deps.py

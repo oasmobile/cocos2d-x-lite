@@ -17,6 +17,7 @@
 // js
 #include "scripting/js-bindings/manual/ScriptingCore.h"
 #include "js_module_register.h"
+#include "external/criware/Classes/crijsb_register.h"
 
 static const char *RUNTIME_JS_BOOT_SCRIPT = "script/jsb_boot.js";
 
@@ -171,6 +172,7 @@ bool RuntimeJsImpl::initJsEnv()
     js_module_register();
     
     ScriptingCore::getInstance()->addRegisterCallback(register_FileUtils);
+    ScriptingCore::getInstance()->addRegisterCallback(criJsb_Register);
     ScriptingCore::getInstance()->start();
     _hasStarted = true;
     

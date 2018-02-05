@@ -1,0 +1,558 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		460194B61F861FE300ABB78B /* cricocos2d_initializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9DC1F84D09C00A2E98A /* cricocos2d_initializer.cpp */; };
+		460194B71F861FE300ABB78B /* crijsb_atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9E21F84D09C00A2E98A /* crijsb_atom.cpp */; };
+		460194B81F861FE300ABB78B /* crijsb_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9DB1F84D09B00A2E98A /* crijsb_register.cpp */; };
+		460194B91F861FE300ABB78B /* crijsb_utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9E01F84D09C00A2E98A /* crijsb_utility.cpp */; };
+		460194BC1F86209C00ABB78B /* cricocos2d_initializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9DC1F84D09C00A2E98A /* cricocos2d_initializer.cpp */; };
+		460194BD1F86209C00ABB78B /* crijsb_atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9E21F84D09C00A2E98A /* crijsb_atom.cpp */; };
+		460194BE1F86209C00ABB78B /* crijsb_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9DB1F84D09B00A2E98A /* crijsb_register.cpp */; };
+		460194BF1F86209C00ABB78B /* crijsb_utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E4B9E01F84D09C00A2E98A /* crijsb_utility.cpp */; };
+		46DDB6F71F87427100CE0944 /* libcri_file_system_macosxD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6F31F87427100CE0944 /* libcri_file_system_macosxD.a */; };
+		46DDB6F81F87427100CE0944 /* libcri_atom_monitor_macosxD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6F41F87427100CE0944 /* libcri_atom_monitor_macosxD.a */; };
+		46DDB6F91F87427100CE0944 /* libcri_base_macosxD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6F51F87427100CE0944 /* libcri_base_macosxD.a */; };
+		46DDB6FA1F87427100CE0944 /* libcri_atom_macosxD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6F61F87427100CE0944 /* libcri_atom_macosxD.a */; };
+		46DDB6FF1F87428500CE0944 /* libcri_atom_iosD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6FB1F87428500CE0944 /* libcri_atom_iosD.a */; };
+		46DDB7001F87428500CE0944 /* libcri_file_system_iosD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6FC1F87428500CE0944 /* libcri_file_system_iosD.a */; };
+		46DDB7011F87428500CE0944 /* libcri_atom_monitor_iosD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6FD1F87428500CE0944 /* libcri_atom_monitor_iosD.a */; };
+		46DDB7021F87428500CE0944 /* libcri_base_iosD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DDB6FE1F87428500CE0944 /* libcri_base_iosD.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46E4B9C61F84D06D00A2E98A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		46DDB6F31F87427100CE0944 /* libcri_file_system_macosxD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_file_system_macosxD.a; path = ../cri/macosx/libs/libcri_file_system_macosxD.a; sourceTree = "<group>"; };
+		46DDB6F41F87427100CE0944 /* libcri_atom_monitor_macosxD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_atom_monitor_macosxD.a; path = ../cri/macosx/libs/libcri_atom_monitor_macosxD.a; sourceTree = "<group>"; };
+		46DDB6F51F87427100CE0944 /* libcri_base_macosxD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_base_macosxD.a; path = ../cri/macosx/libs/libcri_base_macosxD.a; sourceTree = "<group>"; };
+		46DDB6F61F87427100CE0944 /* libcri_atom_macosxD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_atom_macosxD.a; path = ../cri/macosx/libs/libcri_atom_macosxD.a; sourceTree = "<group>"; };
+		46DDB6FB1F87428500CE0944 /* libcri_atom_iosD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_atom_iosD.a; path = ../cri/ios/libs/libcri_atom_iosD.a; sourceTree = "<group>"; };
+		46DDB6FC1F87428500CE0944 /* libcri_file_system_iosD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_file_system_iosD.a; path = ../cri/ios/libs/libcri_file_system_iosD.a; sourceTree = "<group>"; };
+		46DDB6FD1F87428500CE0944 /* libcri_atom_monitor_iosD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_atom_monitor_iosD.a; path = ../cri/ios/libs/libcri_atom_monitor_iosD.a; sourceTree = "<group>"; };
+		46DDB6FE1F87428500CE0944 /* libcri_base_iosD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcri_base_iosD.a; path = ../cri/ios/libs/libcri_base_iosD.a; sourceTree = "<group>"; };
+		46E4B9C81F84D06D00A2E98A /* libCriwareD iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCriwareD iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46E4B9D61F84D08600A2E98A /* libCriwareD Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCriwareD Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46E4B9DA1F84D09B00A2E98A /* crijsb_utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = crijsb_utility.h; path = ../Classes/crijsb_utility.h; sourceTree = "<group>"; };
+		46E4B9DB1F84D09B00A2E98A /* crijsb_register.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = crijsb_register.cpp; path = ../Classes/crijsb_register.cpp; sourceTree = "<group>"; };
+		46E4B9DC1F84D09C00A2E98A /* cricocos2d_initializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cricocos2d_initializer.cpp; path = ../Classes/cricocos2d_initializer.cpp; sourceTree = "<group>"; };
+		46E4B9DD1F84D09C00A2E98A /* crijsb_atom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = crijsb_atom.h; path = ../Classes/crijsb_atom.h; sourceTree = "<group>"; };
+		46E4B9DE1F84D09C00A2E98A /* cricocos2d_initializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cricocos2d_initializer.h; path = ../Classes/cricocos2d_initializer.h; sourceTree = "<group>"; };
+		46E4B9DF1F84D09C00A2E98A /* crijsb_register.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = crijsb_register.h; path = ../Classes/crijsb_register.h; sourceTree = "<group>"; };
+		46E4B9E01F84D09C00A2E98A /* crijsb_utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = crijsb_utility.cpp; path = ../Classes/crijsb_utility.cpp; sourceTree = "<group>"; };
+		46E4B9E11F84D09C00A2E98A /* crijsb_binding_templates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = crijsb_binding_templates.h; path = ../Classes/crijsb_binding_templates.h; sourceTree = "<group>"; };
+		46E4B9E21F84D09C00A2E98A /* crijsb_atom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = crijsb_atom.cpp; path = ../Classes/crijsb_atom.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		46E4B9C51F84D06D00A2E98A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46DDB6FF1F87428500CE0944 /* libcri_atom_iosD.a in Frameworks */,
+				46DDB7001F87428500CE0944 /* libcri_file_system_iosD.a in Frameworks */,
+				46DDB7011F87428500CE0944 /* libcri_atom_monitor_iosD.a in Frameworks */,
+				46DDB7021F87428500CE0944 /* libcri_base_iosD.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E4B9D31F84D08600A2E98A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46DDB6F71F87427100CE0944 /* libcri_file_system_macosxD.a in Frameworks */,
+				46DDB6F81F87427100CE0944 /* libcri_atom_monitor_macosxD.a in Frameworks */,
+				46DDB6F91F87427100CE0944 /* libcri_base_macosxD.a in Frameworks */,
+				46DDB6FA1F87427100CE0944 /* libcri_atom_macosxD.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		46DDB6F21F87427100CE0944 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46DDB6FB1F87428500CE0944 /* libcri_atom_iosD.a */,
+				46DDB6FD1F87428500CE0944 /* libcri_atom_monitor_iosD.a */,
+				46DDB6FE1F87428500CE0944 /* libcri_base_iosD.a */,
+				46DDB6FC1F87428500CE0944 /* libcri_file_system_iosD.a */,
+				46DDB6F61F87427100CE0944 /* libcri_atom_macosxD.a */,
+				46DDB6F41F87427100CE0944 /* libcri_atom_monitor_macosxD.a */,
+				46DDB6F51F87427100CE0944 /* libcri_base_macosxD.a */,
+				46DDB6F31F87427100CE0944 /* libcri_file_system_macosxD.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46E4B9B71F84CFF800A2E98A = {
+			isa = PBXGroup;
+			children = (
+				46E4B9DC1F84D09C00A2E98A /* cricocos2d_initializer.cpp */,
+				46E4B9DE1F84D09C00A2E98A /* cricocos2d_initializer.h */,
+				46E4B9E21F84D09C00A2E98A /* crijsb_atom.cpp */,
+				46E4B9DD1F84D09C00A2E98A /* crijsb_atom.h */,
+				46E4B9E11F84D09C00A2E98A /* crijsb_binding_templates.h */,
+				46E4B9DB1F84D09B00A2E98A /* crijsb_register.cpp */,
+				46E4B9DF1F84D09C00A2E98A /* crijsb_register.h */,
+				46E4B9E01F84D09C00A2E98A /* crijsb_utility.cpp */,
+				46E4B9DA1F84D09B00A2E98A /* crijsb_utility.h */,
+				46E4B9C91F84D06D00A2E98A /* Products */,
+				46DDB6F21F87427100CE0944 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		46E4B9C91F84D06D00A2E98A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46E4B9C81F84D06D00A2E98A /* libCriwareD iOS.a */,
+				46E4B9D61F84D08600A2E98A /* libCriwareD Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		46E4B9D41F84D08600A2E98A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		46E4B9C71F84D06D00A2E98A /* Criware IOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46E4B9D11F84D06D00A2E98A /* Build configuration list for PBXNativeTarget "Criware IOS" */;
+			buildPhases = (
+				46E4B9C41F84D06D00A2E98A /* Sources */,
+				46E4B9C51F84D06D00A2E98A /* Frameworks */,
+				46E4B9C61F84D06D00A2E98A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Criware IOS";
+			productName = "Criware IOS";
+			productReference = 46E4B9C81F84D06D00A2E98A /* libCriwareD iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		46E4B9D51F84D08600A2E98A /* Criware MAC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46E4B9D71F84D08600A2E98A /* Build configuration list for PBXNativeTarget "Criware MAC" */;
+			buildPhases = (
+				46E4B9D21F84D08600A2E98A /* Sources */,
+				46E4B9D31F84D08600A2E98A /* Frameworks */,
+				46E4B9D41F84D08600A2E98A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Criware MAC";
+			productName = "Criware MAC";
+			productReference = 46E4B9D61F84D08600A2E98A /* libCriwareD Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46E4B9B81F84CFF800A2E98A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				TargetAttributes = {
+					46E4B9C71F84D06D00A2E98A = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					46E4B9D51F84D08600A2E98A = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 46E4B9BB1F84CFF800A2E98A /* Build configuration list for PBXProject "libCriwareD" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 46E4B9B71F84CFF800A2E98A;
+			productRefGroup = 46E4B9C91F84D06D00A2E98A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				46E4B9C71F84D06D00A2E98A /* Criware IOS */,
+				46E4B9D51F84D08600A2E98A /* Criware MAC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		46E4B9C41F84D06D00A2E98A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460194BC1F86209C00ABB78B /* cricocos2d_initializer.cpp in Sources */,
+				460194BD1F86209C00ABB78B /* crijsb_atom.cpp in Sources */,
+				460194BE1F86209C00ABB78B /* crijsb_register.cpp in Sources */,
+				460194BF1F86209C00ABB78B /* crijsb_utility.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46E4B9D21F84D08600A2E98A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				460194B61F861FE300ABB78B /* cricocos2d_initializer.cpp in Sources */,
+				460194B71F861FE300ABB78B /* crijsb_atom.cpp in Sources */,
+				460194B81F861FE300ABB78B /* crijsb_register.cpp in Sources */,
+				460194B91F861FE300ABB78B /* crijsb_utility.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		46E4B9BC1F84CFF800A2E98A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		46E4B9BD1F84CFF800A2E98A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		46E4B9CF1F84D06D00A2E98A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 24UK89WELY;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"COCOS2D_DEBUG=1",
+					USE_FILE32API,
+					COCOS2D_JAVASCRIPT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cri/ios/include",
+					"$(SRCROOT)/../../../cocos",
+					"$(SRCROOT)/../../../external/ios/include/",
+					"$(SRCROOT)/../../../external/ios/include/spidermonkey",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/manual",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/auto",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../cri/ios/libs";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "CriwareD iOS";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		46E4B9D01F84D06D00A2E98A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 24UK89WELY;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_FILE32API,
+					COCOS2D_JAVASCRIPT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cri/ios/include",
+					"$(SRCROOT)/../../../cocos",
+					"$(SRCROOT)/../../../external/ios/include/",
+					"$(SRCROOT)/../../../external/ios/include/spidermonkey",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/manual",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/auto",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../cri/ios/libs";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "CriwareD iOS";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		46E4B9D81F84D08600A2E98A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 24UK89WELY;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"COCOS2D_DEBUG=1",
+					USE_FILE32API,
+					COCOS2D_JAVASCRIPT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cri/macosx/include",
+					"$(SRCROOT)/../../../cocos",
+					"$(SRCROOT)/../../../external/mac/include/",
+					"$(SRCROOT)/../../../external/mac/include/spidermonkey",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/manual",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/auto",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../cri/macosx/libs";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "CriwareD Mac";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		46E4B9D91F84D08600A2E98A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 24UK89WELY;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_FILE32API,
+					COCOS2D_JAVASCRIPT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cri/macosx/include",
+					"$(SRCROOT)/../../../cocos",
+					"$(SRCROOT)/../../../external/mac/include/",
+					"$(SRCROOT)/../../../external/mac/include/spidermonkey",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/manual",
+					"$(SRCROOT)/../../../cocos/scripting/js-bindings/auto",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../cri/macosx/libs";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "CriwareD Mac";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		46E4B9BB1F84CFF800A2E98A /* Build configuration list for PBXProject "libCriwareD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46E4B9BC1F84CFF800A2E98A /* Debug */,
+				46E4B9BD1F84CFF800A2E98A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46E4B9D11F84D06D00A2E98A /* Build configuration list for PBXNativeTarget "Criware IOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46E4B9CF1F84D06D00A2E98A /* Debug */,
+				46E4B9D01F84D06D00A2E98A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46E4B9D71F84D08600A2E98A /* Build configuration list for PBXNativeTarget "Criware MAC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46E4B9D81F84D08600A2E98A /* Debug */,
+				46E4B9D91F84D08600A2E98A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46E4B9B81F84CFF800A2E98A /* Project object */;
+}

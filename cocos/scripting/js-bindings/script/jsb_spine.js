@@ -61,11 +61,11 @@ sp.SkeletonAnimation.prototype.setAnimationListener = function (target, callback
         }
     });
 
-    this.setDisposeListener(function (trackEntry) {
-        if (this._target && this._callback) {
-            this._callback.call(this._target, this, trackEntry, sp.ANIMATION_EVENT_TYPE.DISPOSE, null, 0);
-        }
-    });
+//    this.setDisposeListener(function (trackEntry) {
+//        if (this._target && this._callback) {
+//            this._callback.call(this._target, this, trackEntry, sp.ANIMATION_EVENT_TYPE.DISPOSE, null, 0);
+//        }
+//    });
 
     this.setCompleteListener(function (trackEntry, loopCount) {
         if (this._target && this._callback) {

@@ -45,7 +45,15 @@ TransformConstraint.c \
 TransformConstraintData.c \
 VertexAttachment.c \
 extension.c \
-spine-cocos2dx.cpp
+spine-cocos2dx.cpp \
+Array.c \
+ClippingAttachment.c \
+Color.c \
+PointAttachment.c \
+SkeletonClipping.c \
+SkeletonTwoColorBatch.cpp \
+Triangulator.c \
+VertexEffect.c
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/.. \
 						   $(LOCAL_PATH)/../..

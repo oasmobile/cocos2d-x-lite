@@ -22,8 +22,10 @@
 		1AFFCD851F7A5DCF00628F2C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD841F7A5DCD00628F2C /* Images.xcassets */; };
 		1AFFCD861F7A5DCF00628F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD821F7A5DCC00628F2C /* LaunchScreen.storyboard */; };
 		1AFFCD871F7A5DCF00628F2C /* LaunchScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFFCD831F7A5DCD00628F2C /* LaunchScreenBackground.png */; };
-		1FB273962020955500C573F2 /* libCriware IOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6747FD361FF3D1E40011E999 /* libCriware IOS.a */; };
 		294D7D7C1D0D667B002CE7B7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D7D7B1D0D667B002CE7B7 /* CoreText.framework */; };
+		460BF63820296A5B00351D27 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460BF63720296A5B00351D27 /* AudioUnit.framework */; };
+		46403D65202972BC0064156B /* libCriware IOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46403D60202972A60064156B /* libCriware IOS.a */; };
+		46403D68202972CF0064156B /* libCriware MAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46403D62202972A60064156B /* libCriware MAC.a */; };
 		4D3EB2581F8F4A6C007DA644 /* jsb_module_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3EB2571F8F4A6C007DA644 /* jsb_module_register.cpp */; };
 		4D3EB26B1F8F77C9007DA644 /* jsb_module_register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3EB2571F8F4A6C007DA644 /* jsb_module_register.cpp */; };
 		4D697BDE1CBD303100A5AF29 /* libjs_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D697BDC1CBD303100A5AF29 /* libjs_static.a */; };
@@ -44,8 +46,6 @@
 		509D4AE717EBB81800697056 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AE617EBB81800697056 /* OpenGL.framework */; };
 		509D4AE917EBB82000697056 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AE817EBB82000697056 /* AppKit.framework */; };
 		509D4AEB17EBB82600697056 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AEA17EBB82600697056 /* IOKit.framework */; };
-		6747FD3B1FF3D1F90011E999 /* libCriware MAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6747FD381FF3D1E40011E999 /* libCriware MAC.a */; };
-		6747FD3D1FF3D2020011E999 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6747FD3C1FF3D2020011E999 /* AudioUnit.framework */; };
 		A92275421517C094001B78AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275411517C094001B78AA /* QuartzCore.framework */; };
 		A92275441517C094001B78AA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275431517C094001B78AA /* OpenGLES.framework */; };
 		A92275461517C094001B78AA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275451517C094001B78AA /* OpenAL.framework */; };
@@ -107,23 +107,30 @@
 			remoteGlobalIDString = A07A4D641783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
 		};
-		6747FD351FF3D1E40011E999 /* PBXContainerItemProxy */ = {
+		46403D5F202972A60064156B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */;
+			containerPortal = 46403D5A202972A60064156B /* libCriware.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 46E4B9C81F84D06D00A2E98A;
 			remoteInfo = "Criware IOS";
 		};
-		6747FD371FF3D1E40011E999 /* PBXContainerItemProxy */ = {
+		46403D61202972A60064156B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */;
+			containerPortal = 46403D5A202972A60064156B /* libCriware.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 46E4B9D61F84D08600A2E98A;
 			remoteInfo = "Criware MAC";
 		};
-		6747FD391FF3D1F00011E999 /* PBXContainerItemProxy */ = {
+		46403D63202972B60064156B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */;
+			containerPortal = 46403D5A202972A60064156B /* libCriware.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 46E4B9C71F84D06D00A2E98A;
+			remoteInfo = "Criware IOS";
+		};
+		46403D66202972C50064156B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46403D5A202972A60064156B /* libCriware.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 46E4B9D51F84D08600A2E98A;
 			remoteInfo = "Criware MAC";
@@ -173,6 +180,9 @@
 		1AFFCD831F7A5DCD00628F2C /* LaunchScreenBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreenBackground.png; path = ios/LaunchScreenBackground.png; sourceTree = "<group>"; };
 		1AFFCD841F7A5DCD00628F2C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ios/Images.xcassets; sourceTree = "<group>"; };
 		294D7D7B1D0D667B002CE7B7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		460BF63720296A5B00351D27 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		46403D582029720A0064156B /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk/System/Library/Frameworks/AudioUnit.framework; sourceTree = DEVELOPER_DIR; };
+		46403D5A202972A60064156B /* libCriware.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libCriware.xcodeproj; path = "../../cocos2d-x/external/criware/proj.ios_mac/libCriware.xcodeproj"; sourceTree = "<group>"; };
 		4D3EB2571F8F4A6C007DA644 /* jsb_module_register.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_module_register.cpp; sourceTree = "<group>"; };
 		4D697BD91CBD301C00A5AF29 /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = "../../cocos2d-x/external/ios/libs/libjs_static.a"; sourceTree = "<group>"; };
 		4D697BDC1CBD303100A5AF29 /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = "../../cocos2d-x/external/mac/libs/libjs_static.a"; sourceTree = "<group>"; };
@@ -191,8 +201,6 @@
 		509D4AE617EBB81800697056 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		509D4AE817EBB82000697056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		509D4AEA17EBB82600697056 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libCriware.xcodeproj; path = "../../cocos2d-x/external/criware/proj.ios_mac/libCriware.xcodeproj"; sourceTree = "<group>"; };
-		6747FD3C1FF3D2020011E999 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A922753D1517C094001B78AA /* HelloJavascript-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloJavascript-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A92275411517C094001B78AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A92275431517C094001B78AA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -229,8 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6747FD3D1FF3D2020011E999 /* AudioUnit.framework in Frameworks */,
-				6747FD3B1FF3D1F90011E999 /* libCriware MAC.a in Frameworks */,
+				46403D68202972CF0064156B /* libCriware MAC.a in Frameworks */,
+				460BF63820296A5B00351D27 /* AudioUnit.framework in Frameworks */,
 				1AC62C131F4D1E7F00F43CB1 /* JavaScriptCore.framework in Frameworks */,
 				1A499EB31F0CDCE9004E6AEC /* libicucore.A.tbd in Frameworks */,
 				1A499EB11F0CDCDD004E6AEC /* CFNetwork.framework in Frameworks */,
@@ -258,7 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FB273962020955500C573F2 /* libCriware IOS.a in Frameworks */,
+				46403D65202972BC0064156B /* libCriware IOS.a in Frameworks */,
 				1AC62C111F4D1E7400F43CB1 /* JavaScriptCore.framework in Frameworks */,
 				1A499EA91F0CD97F004E6AEC /* libicucore.A.tbd in Frameworks */,
 				AB45A1031D34F7E100033ACB /* GameController.framework in Frameworks */,
@@ -309,6 +317,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		46403D5B202972A60064156B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46403D60202972A60064156B /* libCriware IOS.a */,
+				46403D62202972A60064156B /* libCriware MAC.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		509D4ACA17EBB2BE00697056 /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,19 +337,10 @@
 			path = mac;
 			sourceTree = "<group>";
 		};
-		6747FD311FF3D1E40011E999 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6747FD361FF3D1E40011E999 /* libCriware IOS.a */,
-				6747FD381FF3D1E40011E999 /* libCriware MAC.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A92275321517C094001B78AA = {
 			isa = PBXGroup;
 			children = (
-				6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */,
+				46403D5A202972A60064156B /* libCriware.xcodeproj */,
 				C037820118BF76AF00FE4F13 /* cocos2d_js_bindings.xcodeproj */,
 				1AC6FB34180E9ACB004C840B /* cocos2d_libs.xcodeproj */,
 				BAF426FA19484B3E002B22EF /* script */,
@@ -357,7 +365,8 @@
 		A92275401517C094001B78AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6747FD3C1FF3D2020011E999 /* AudioUnit.framework */,
+				460BF63720296A5B00351D27 /* AudioUnit.framework */,
+				46403D582029720A0064156B /* AudioUnit.framework */,
 				1AC62C121F4D1E7F00F43CB1 /* JavaScriptCore.framework */,
 				1AC62C101F4D1E7400F43CB1 /* JavaScriptCore.framework */,
 				1A499EB21F0CDCE9004E6AEC /* libicucore.A.tbd */,
@@ -448,7 +457,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6747FD3A1FF3D1F00011E999 /* PBXTargetDependency */,
+				46403D67202972C50064156B /* PBXTargetDependency */,
 				C037820E18BF77D100FE4F13 /* PBXTargetDependency */,
 				1A676820180E9BF70076BC67 /* PBXTargetDependency */,
 			);
@@ -468,6 +477,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				46403D64202972B60064156B /* PBXTargetDependency */,
 				C037820B18BF77BC00FE4F13 /* PBXTargetDependency */,
 				1A67682F180E9C110076BC67 /* PBXTargetDependency */,
 			);
@@ -509,8 +519,8 @@
 					ProjectRef = 1AC6FB34180E9ACB004C840B /* cocos2d_libs.xcodeproj */;
 				},
 				{
-					ProductGroup = 6747FD311FF3D1E40011E999 /* Products */;
-					ProjectRef = 6747FD301FF3D1E40011E999 /* libCriware.xcodeproj */;
+					ProductGroup = 46403D5B202972A60064156B /* Products */;
+					ProjectRef = 46403D5A202972A60064156B /* libCriware.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -536,18 +546,18 @@
 			remoteRef = 1AC6FB55180E9ACB004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6747FD361FF3D1E40011E999 /* libCriware IOS.a */ = {
+		46403D60202972A60064156B /* libCriware IOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCriware IOS.a";
-			remoteRef = 6747FD351FF3D1E40011E999 /* PBXContainerItemProxy */;
+			remoteRef = 46403D5F202972A60064156B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6747FD381FF3D1E40011E999 /* libCriware MAC.a */ = {
+		46403D62202972A60064156B /* libCriware MAC.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCriware MAC.a";
-			remoteRef = 6747FD371FF3D1E40011E999 /* PBXContainerItemProxy */;
+			remoteRef = 46403D61202972A60064156B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C037820718BF76AF00FE4F13 /* libjscocos2d Mac.a */ = {
@@ -633,10 +643,15 @@
 			name = "cocos2dx iOS";
 			targetProxy = 1A67682E180E9C110076BC67 /* PBXContainerItemProxy */;
 		};
-		6747FD3A1FF3D1F00011E999 /* PBXTargetDependency */ = {
+		46403D64202972B60064156B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Criware IOS";
+			targetProxy = 46403D63202972B60064156B /* PBXContainerItemProxy */;
+		};
+		46403D67202972C50064156B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Criware MAC";
-			targetProxy = 6747FD391FF3D1F00011E999 /* PBXContainerItemProxy */;
+			targetProxy = 46403D66202972C50064156B /* PBXContainerItemProxy */;
 		};
 		C037820B18BF77BC00FE4F13 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

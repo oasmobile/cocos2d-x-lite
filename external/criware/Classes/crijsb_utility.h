@@ -23,16 +23,10 @@
 } \
 	SE_BIND_FUNC(funcname);
 
-#define CRIJSB_DEFINE_FINALIZER(funcname,funcptr) \
-    static bool funcname(se::State& s){ \
-	return cribt::call_with_context(CriJsbContext(s), funcptr); \
-} \
+#define CRIJSB_DEFINE_FINALIZER(funcname) \
     SE_BIND_FINALIZE_FUNC(funcname); 
 
-#define CRIJSB_DEFINE_CTOR(funcname,funcptr,cls,finalizeCb) \
-    static bool funcname(se::State& s){ \
-	return cribt::call_with_context(CriJsbContext(s), funcptr); \
-} \
+#define CRIJSB_DEFINE_CTOR(funcname,cls,finalizeCb) \
     SE_BIND_CTOR(funcname,cls,finalizeCb); 
 
 #define CRIJSB_DEFINE_PROP_GET(funcname,getter) \

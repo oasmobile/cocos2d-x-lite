@@ -1,0 +1,43 @@
+#pragma once
+#include "base/ccConfig.h"
+
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
+
+extern se::Object* __jsb_SQLiteStatement_proto;
+extern se::Class* __jsb_SQLiteStatement_class;
+
+bool js_register_SQLiteStatement(se::Object* obj);
+bool register_all_cocos2dx_sqlite(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_reset);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_execute);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataCount);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_dataType);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bind);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_nextRow);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueCount);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_restartSelect);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_bindNull);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueName);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueString);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueInt);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_valueDouble);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteStatement_SQLiteStatement);
+
+extern se::Object* __jsb_SQLiteWrapper_proto;
+extern se::Class* __jsb_SQLiteWrapper_class;
+
+bool js_register_SQLiteWrapper(se::Object* obj);
+bool register_all_cocos2dx_sqlite(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_begin);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_rollback);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_exec);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_directStatement);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_commit);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_getPath);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_init);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_close);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_lastError);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_open);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_create);
+SE_DECLARE_FUNC(js_cocos2dx_sqlite_SQLiteWrapper_SQLiteWrapper);
+

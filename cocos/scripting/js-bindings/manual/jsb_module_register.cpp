@@ -37,6 +37,9 @@
 #include "cocos/scripting/js-bindings/manual/jsb_websocket.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_socketio.hpp"
 
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_crypto_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_sqlite_auto.hpp"
+
 #if USE_VIDEO
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_experimental_video_auto.hpp"
 #endif
@@ -126,6 +129,9 @@ bool jsb_register_all_modules()
     se->addRegisterCallback(jsb_register_Node_manual);
     se->addRegisterCallback(register_all_cocos2dx_manual);
     se->addRegisterCallback(JSB_register_opengl);
+
+    se->addRegisterCallback(register_all_cocos2dx_crypto);
+    se->addRegisterCallback(register_all_cocos2dx_sqlite);
 
 #if USE_AUDIO
     se->addRegisterCallback(register_all_cocos2dx_audioengine);

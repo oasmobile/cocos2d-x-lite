@@ -228,6 +228,11 @@ storage/local-storage/LocalStorage-android.cpp \
 ../external/sources/Box2D/Rope/b2Rope.cpp \
 ../external/sources/Box2D/b2ObjectDestroyNotifier.cpp \
 ../external/sources/xxtea/xxtea.cpp \
+../thirdParty/sqlite/SQLiteWrapper.cpp \
+../thirdParty/sqlite/sqlite3/sqlite3.c \
+../thirdParty/crypto/Crypto.cpp \
+../thirdParty/crypto/base64/libbase64.c \
+
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
@@ -261,6 +266,7 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cpufeatures
 
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS := -DUSE_FILE32API -fexceptions
+LOCAL_CFLAGS += -DSQLITE_DISABLE_LFS
 
 # Issues #9968
 #ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)

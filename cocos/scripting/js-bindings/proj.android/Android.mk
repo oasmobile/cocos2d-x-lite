@@ -42,10 +42,12 @@ LOCAL_SRC_FILES := \
 					../auto/jsb_cocos2dx_network_auto.cpp \
 					../auto/jsb_cocos2dx_spine_auto.cpp \
 					../auto/jsb_cocos2dx_ui_auto.cpp \
+					../auto/jsb_cocos2dx_sqlite_auto.cpp \
 					../auto/jsb_creator_auto.cpp \
 					../auto/jsb_creator_camera_auto.cpp \
 					../auto/jsb_creator_graphics_auto.cpp \
 					../auto/jsb_creator_physics_auto.cpp \
+					../auto/jsb_cocos2dx_crypto_auto.cpp \
 					../manual/BaseJSAction.cpp \
 					../manual/JavaScriptJavaBridge.cpp \
 					../manual/ScriptingCore.cpp \
@@ -84,6 +86,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../manual \
                     $(LOCAL_PATH)/../../../audio/include \
                     $(LOCAL_PATH)/../../../storage \
                     $(LOCAL_PATH)/../../../../extensions \
+                    $(LOCAL_PATH)/../../../../thirdParty \
                     $(LOCAL_PATH)/../../../editor-support/spine \
                     $(LOCAL_PATH)/../../../editor-support/cocosbuilder \
                     $(LOCAL_PATH)/../../../editor-support/cocostudio \

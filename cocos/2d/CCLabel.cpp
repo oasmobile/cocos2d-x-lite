@@ -1503,14 +1503,15 @@ void Label::updateContent()
             float startY = spriteSize.height / 2 - _lineHeight * (_numberOfLines - 1) / 2 - _systemFontSize / 2;
             if (_numberOfLines > 0) {
                 // atlas font
-                _underlineNode->setLineWidth(_systemFontSize / 8);
+//                _underlineNode->setLineWidth(_systemFontSize / 8);
+                _underlineNode->setLineWidth(1);
                 for (int i=0; i<_numberOfLines; ++i)
                 {
                     if (_strikethroughEnabled)
                         startY += _systemFontSize / 2;
                     // FIXME: Might not work with different vertical alignments
-                    _underlineNode->drawLine(Vec2(0, startY - 1),
-                                             Vec2(spriteSize.width, startY - 1), _textColorF);
+                    _underlineNode->drawLine(Vec2(0, startY - 1 + 7),
+                                             Vec2(spriteSize.width, startY - 1 + 7), _textColorF);
                 }
             }
 
@@ -1519,7 +1520,8 @@ void Label::updateContent()
         else if(_numberOfLines)
         {
             const float charheight = (_textDesiredHeight / _numberOfLines);
-            _underlineNode->setLineWidth(charheight/6);
+//            _underlineNode->setLineWidth(charheight/6);
+            _underlineNode->setLineWidth(1);
 
             // atlas font
             for (int i=0; i<_numberOfLines; ++i)
@@ -1528,7 +1530,7 @@ void Label::updateContent()
                 if (_strikethroughEnabled)
                     offsety += charheight / 2;
                 // FIXME: Might not work with different vertical alignments
-                float y = (_numberOfLines - i - 1) * charheight + offsety;
+                float y = (_numberOfLines - i - 1) * charheight + offsety + 7;
                 _underlineNode->drawLine(Vec2(_linesOffsetX[i],y), Vec2(_linesWidth[i] + _linesOffsetX[i],y), _textColorF);
             }
         }

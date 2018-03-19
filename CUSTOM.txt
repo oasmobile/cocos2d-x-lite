@@ -4,6 +4,7 @@ criware
 	tools/simulator
 
 custom
+	cocos/2d/CCLabel.cpp
 
 .gitignore
 download-deps.py

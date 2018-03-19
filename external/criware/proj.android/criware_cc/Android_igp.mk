@@ -22,12 +22,12 @@ LOCAL_EXPORT_CFLAGS := -DCOCOS2D_JAVASCRIPT
 
 LOCAL_STATIC_LIBRARIES :
 LOCAL_STATIC_LIBRARIES += spidermonkey_static
-ifeq ($(USE_CRI_ATOM_MONITOR), true)
+#ifeq ($(USE_CRI_ATOM_MONITOR), true)
 LOCAL_STATIC_LIBRARIES += cri_atom_monitor
-else
+#else
 # You can use CRI Filesystem funcitons without CRI Atom library.
-LOCAL_STATIC_LIBRARIES += cri_atom
-endif
+#LOCAL_STATIC_LIBRARIES += cri_atom
+#endif
 LOCAL_STATIC_LIBRARIES += cri_file_system
 LOCAL_STATIC_LIBRARIES += cri_base
 LOCAL_C_INCLUDES	   += $(LOCAL_PATH)/../../../../cocos/
@@ -41,8 +41,8 @@ include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,criware/cri/android/ndk-modules/cri_base)
 $(call import-module,criware/cri/android/ndk-modules/cri_file_system)
-ifeq ($(USE_CRI_ATOM_MONITOR), true)
+#ifeq ($(USE_CRI_ATOM_MONITOR), true)
 $(call import-module,criware/cri/android/ndk-modules/cri_atom_monitor)
-else
-$(call import-module,criware/cri/android/ndk-modules/cri_atom)
-endif
+#else
+#$(call import-module,criware/cri/android/ndk-modules/cri_atom)
+#endif

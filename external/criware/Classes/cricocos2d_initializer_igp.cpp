@@ -33,9 +33,9 @@
 #define criAtomEx_Initialize_XXX		criAtomEx_Initialize_ANDROID
 #define criAtomEx_Finalize_XXX			criAtomEx_Finalize_ANDROID
 #endif
-#if defined(CRI_ATOM_MONITOR)
+//#if defined(CRI_ATOM_MONITOR)
 #include "cri_atom_ex_monitor.h"
-#endif
+//#endif
 #include "cricocos2d_initializer.h"
 
 typedef struct CriJSBConfig
@@ -84,7 +84,7 @@ static void crijsb_SetDefaultConfig(CriJSBConfig* config)
 	config->num_hca_mx_memory_voices = 0;
 	config->num_hca_mx_streaming_voices = 0;
 	config->output_sampling_rate = CRIATOM_DEFAULT_OUTPUT_SAMPLING_RATE;
-	config->uses_in_game_preview = CRI_FALSE;
+	config->uses_in_game_preview = CRI_TRUE;
 	config->server_frequency = 60.0f;
 	config->max_parameter_blocks = 1024;
 	config->categories_per_playback = 4;
@@ -152,13 +152,13 @@ void CRICOCOS2D::criWare_Initialize()
 	config.atom_ex.categories_per_playback = crijsb_cx.config.categories_per_playback;
 	criAtomEx_Initialize_XXX(&config, NULL, 0);
 	
-#if defined(CRI_ATOM_MONITOR)
+//#if defined(CRI_ATOM_MONITOR)
 	if (crijsb_cx.config.uses_in_game_preview != CRI_FALSE) {
 		/* In-game preview initialize */
 		criAtomExMonitor_Initialize(NULL, NULL, 0);
 		criAtomMeter_AttachLoudnessMeter(NULL, NULL, 0);
 }
-#endif
+//#endif
 
 	/* PerformanceMonitor initialize */
 	criAtom_AttachPerformanceMonitor();
@@ -250,14 +250,14 @@ void CRICOCOS2D::criWare_Finalize()
 	/* Detach PerformanceMonitor */
 	criAtom_DetachPerformanceMonitor();
 
-#if defined(CRI_ATOM_MONITOR)
+//#if defined(CRI_ATOM_MONITOR)
 	if (crijsb_cx.config.uses_in_game_preview != CRI_FALSE) {
 		/* Detach LoudnessMeter */
 		criAtomMeter_DetachLoudnessMeter();
 		/* In-game preview finalize */
 		criAtomExMonitor_Finalize();
 	}
-#endif
+//#endif
 	
 	criAtomEx_Finalize_XXX();
 	criFs_Finalize();	

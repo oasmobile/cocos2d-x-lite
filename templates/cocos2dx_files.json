@@ -4817,6 +4817,8 @@
         "thirdParty/sqlite/sqlite3/sqlite3.c",
         "thirdParty/crypto/Crypto.h",
         "thirdParty/crypto/Crypto.cpp",
+        "thirdParty/crypto/des56.h",
+        "thirdParty/crypto/des56.c",
         "thirdParty/crypto/base64/libbase64.h",
         "thirdParty/crypto/base64/libbase64.c",
         "thirdParty/crypto/md5/md5.h",

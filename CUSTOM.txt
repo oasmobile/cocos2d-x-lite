@@ -15,8 +15,10 @@ gulpfile.js
 
 ====================================================================================================
 CRIWARE IGP(IN GAME PREVIEW)
-external/criware/Classes/cricocos2d_initializer.cpp
-1.CRI_ATOM_MONITOR
-2.static void crijsb_SetDefaultConfig(CriJSBConfig* config)
-config->uses_in_game_preview = CRI_TRUE;
+	external/criware/Classes/cricocos2d_initializer.cpp
+	1.CRI_ATOM_MONITOR
+	2.static void crijsb_SetDefaultConfig(CriJSBConfig* config)
+	  config->uses_in_game_preview = CRI_TRUE;
 
+	脚本
+	custom/criware_in_game_preview.sh

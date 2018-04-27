@@ -290,7 +290,7 @@ static bool js_register_spine_TrackEntry(se::Object* obj)
             // Otherwise, it may trigger 'assertion' in se::Object::setPrivateData later
             // since native obj is already released and the new native object may be assigned with
             // the same address.
-            se::NativePtrToObjectMap::erase(iter);
+            // se::NativePtrToObjectMap::erase(iter);
         }
         else
         {
@@ -308,6 +308,7 @@ static bool js_register_spine_TrackEntry(se::Object* obj)
 
             // The native <-> JS mapping was cleared in the callback above.
             // seObj->clearPrivateData isn't needed since the JS object will be garbage collected after unroot and decRef.
+            seObj->clearPrivateData();
             seObj->unroot();
             seObj->decRef();
         };

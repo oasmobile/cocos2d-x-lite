@@ -748,6 +748,13 @@ void SkeletonRenderer::setSlotsToSetupPose () {
 spBone* SkeletonRenderer::findBone (const std::string& boneName) const {
 	return spSkeleton_findBone(_skeleton, boneName.c_str());
 }
+    
+spBone* SkeletonRenderer::setBonePosition(const std::string& boneName, float x, float y) {
+    spBone* bone = findBone(boneName);
+    bone->x = x;
+    bone->y = y;
+    return bone;
+}
 
 spSlot* SkeletonRenderer::findSlot (const std::string& slotName) const {
 	return spSkeleton_findSlot(_skeleton, slotName.c_str());

@@ -75,6 +75,8 @@ public:
 	void setBonesToSetupPose ();
 	void setSlotsToSetupPose ();
 
+    /* Returns 0 if the bone was not found. */
+    spBone* setBonePosition (const std::string& boneName, float x, float y);
 	/* Returns 0 if the bone was not found. */
 	spBone* findBone (const std::string& boneName) const;
 	/* Returns 0 if the slot was not found. */
@@ -126,7 +128,7 @@ CC_CONSTRUCTOR_ACCESS:
 	void initWithBinaryFile (const std::string& skeletonDataFile, spAtlas* atlas, float scale = 1);
 	void initWithBinaryFile (const std::string& skeletonDataFile, const std::string& atlasFile, float scale = 1);
 
-	virtual void initialize ();
+virtual void initialize ();
 	
 protected:
 	void setSkeletonData (spSkeletonData* skeletonData, bool ownsSkeletonData);

@@ -346,6 +346,11 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
         [self openConsoleWindow];
         CCLOG("%s\n",Configuration::getInstance()->getInfo().c_str());
     }
+    else
+    {
+//        freopen(_project.getDebugLogFilePath().c_str(), "wt", stdout);
+        freopen(_project.getDebugLogFilePath().c_str(), "wt", stderr);
+    }
 #endif
     float frameScale = _project.getFrameScale();
 

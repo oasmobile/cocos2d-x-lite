@@ -199,6 +199,13 @@ public:
     static const char* SHADER_NAME_LABEL_OUTLINE;
     static const char* SHADER_NAME_LABEL_DISTANCEFIELD_NORMAL;
     static const char* SHADER_NAME_LABEL_DISTANCEFIELD_GLOW;
+    
+    // yif etc
+    static const char* SHADER_NAME_POSITION_TEXTURE_ETC1;
+    static const char* SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1;
+    static const char* SHADER_NAME_POSITION_GRAYSCALE_ETC1;
+    static const char* SHADER_NAME_SPRITE_DISTORTION_ETC1;
+    static const char* SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1;
 
     /**
      Built in shader for camera clear

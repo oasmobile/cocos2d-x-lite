@@ -68,7 +68,7 @@ public:
      @param mv ModelView matrix for the command.
      @param flags to indicate that the command is using 3D rendering or not.
      */
-    void init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles, const Mat4& mv, uint32_t flags);
+    void init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles, const Mat4& mv, uint32_t flags, GLuint alphaTextureId = 0);
 
     void init(float globalOrder, Texture2D* textureID, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles, const Mat4& mv, uint32_t flags);
     /**Apply the texture, shaders, programs, blend functions to GPU pipeline.*/
@@ -102,6 +102,8 @@ protected:
     uint32_t _materialID;
     /**OpenGL handle for texture.*/
     GLuint _textureID;
+    //yif etc1
+    GLuint _alphaTextureId;
     /**GLprogramstate for the command. encapsulate shaders and uniforms.*/
     GLProgramState* _glProgramState;
     /**The GLProgram used by GLProgramState*/

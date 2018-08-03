@@ -93,13 +93,13 @@ void SkeletonRenderer::initialize () {
 
 	_blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
 	setOpacityModifyRGB(true);
-
-	setupGLProgramState(false);
 }
 	
 void SkeletonRenderer::setupGLProgramState (bool twoColorTintEnabled) {
 	if (twoColorTintEnabled) {
-		setGLProgramState(SkeletonTwoColorBatch::getInstance()->getTwoColorTintProgramState());
+		//setGLProgramState(SkeletonTwoColorBatch::getInstance()->getTwoColorTintProgramState());
+        //yif 目前先不支持 这种获取方式现在无法拿到是否要用etc的信息
+        CCLOGERROR("SkeletonRenderer does not support twoColorTint !");
 		return;
 	}
 	
@@ -127,7 +127,14 @@ void SkeletonRenderer::setupGLProgramState (bool twoColorTintEnabled) {
 		}
 	}
 //    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, texture));
+    if (texture && texture->getAlphaTextureName())
+    {
+    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+    }
+    else
+    {
     setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+    }
 }
 
 void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsSkeletonData) {
@@ -136,21 +143,21 @@ void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsS
 }
 
 SkeletonRenderer::SkeletonRenderer ()
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), firstEnter(true) {
 }
 
 SkeletonRenderer::SkeletonRenderer (spSkeletonData *skeletonData, bool ownsSkeletonData)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), firstEnter(true) {
 	initWithData(skeletonData, ownsSkeletonData);
 }
 
 SkeletonRenderer::SkeletonRenderer (const std::string& skeletonDataFile, spAtlas* atlas, float scale)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), firstEnter(true) {
 	initWithJsonFile(skeletonDataFile, atlas, scale);
 }
 
 SkeletonRenderer::SkeletonRenderer (const std::string& skeletonDataFile, const std::string& atlasFile, float scale)
-	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr) {
+	: _atlas(nullptr), _attachmentLoader(nullptr), _debugSlots(false), _debugBones(false), _debugMeshes(false), _timeScale(1), _effect(nullptr), firstEnter(true) {
 	initWithJsonFile(skeletonDataFile, atlasFile, scale);
 }
 
@@ -239,7 +246,14 @@ void SkeletonRenderer::update (float deltaTime) {
 }
 
 void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t transformFlags) {
-	SkeletonBatch* batch = SkeletonBatch::getInstance();
+    
+    if (firstEnter)
+    {
+        firstEnter = false;
+        setupGLProgramState(false);
+    }
+    
+    SkeletonBatch* batch = SkeletonBatch::getInstance();
 	SkeletonTwoColorBatch* twoColorBatch = SkeletonTwoColorBatch::getInstance();
 	bool isTwoColorTint = this->isTwoColorTint();
 	
@@ -822,8 +836,9 @@ bool SkeletonRenderer::getDebugMeshesEnabled () const {
 }
 
 void SkeletonRenderer::onEnter () {
+    
 #if CC_ENABLE_SCRIPT_BINDING
-	if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnEnter)) return;
+//    if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnEnter)) return;
 #endif
 	Node::onEnter();
 	scheduleUpdate();
@@ -831,7 +846,7 @@ void SkeletonRenderer::onEnter () {
 
 void SkeletonRenderer::onExit () {
 #if CC_ENABLE_SCRIPT_BINDING
-	if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnExit)) return;
+//    if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnExit)) return;
 #endif
 	Node::onExit();
 	unscheduleUpdate();

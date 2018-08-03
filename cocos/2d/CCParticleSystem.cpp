@@ -55,6 +55,8 @@ THE SOFTWARE.
 #include "base/ccUTF8.h"
 #include "renderer/CCTextureCache.h"
 #include "platform/CCFileUtils.h"
+#include "renderer/CCGLProgram.h"
+#include "renderer/CCGLProgramState.h"
 
 using namespace std;
 
@@ -1033,6 +1035,14 @@ void ParticleSystem::setTexture(Texture2D* var)
         CC_SAFE_RETAIN(var);
         CC_SAFE_RELEASE(_texture);
         _texture = var;
+        if (_texture && _texture->getAlphaTextureName())
+        {
+            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+        }
+        else
+        {
+            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+        }
         updateBlendFunc();
     }
 }

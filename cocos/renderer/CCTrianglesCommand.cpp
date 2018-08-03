@@ -43,7 +43,7 @@ TrianglesCommand::TrianglesCommand()
     _type = RenderCommand::Type::TRIANGLES_COMMAND;
 }
 
-void TrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles,const Mat4& mv, uint32_t flags)
+void TrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles,const Mat4& mv, uint32_t flags, GLuint alphaTextureId)
 {
     CCASSERT(glProgramState, "Invalid GLProgramState");
     CCASSERT(glProgramState->getVertexAttribsFlags() == 0, "No custom attributes are supported in QuadCommand");
@@ -58,7 +58,7 @@ void TrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState*
         CCLOGERROR("Resize indexCount from %zd to %zd, size must be multiple times of 3", count, _triangles.indexCount);
     }
     _mv = mv;
-    
+    _alphaTextureID =alphaTextureId;
     if( _textureID != textureID || _blendType.src != blendType.src || _blendType.dst != blendType.dst ||
        _glProgramState != glProgramState ||
        _glProgram != glProgramState->getGLProgram())
@@ -103,6 +103,10 @@ void TrianglesCommand::useMaterial() const
     //Set texture
     GL::bindTexture2D(_textureID);
 
+    if (_alphaTextureID > 0)
+    {
+        GL::bindTexture2DN(1, _alphaTextureID);
+    }
     //set blend mode
     GL::blendFunc(_blendType.src, _blendType.dst);
 

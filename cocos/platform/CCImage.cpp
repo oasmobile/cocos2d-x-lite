@@ -344,6 +344,7 @@ Image::Image()
 , _renderFormat(Texture2D::PixelFormat::NONE)
 , _numberOfMipmaps(0)
 , _hasPremultipliedAlpha(true)
+, _alphaImage(0)
 {
 
 }

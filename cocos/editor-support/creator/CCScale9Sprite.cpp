@@ -30,6 +30,7 @@
 #include "renderer/CCRenderer.h"
 #include "renderer/CCGLProgramCache.h"
 #include "renderer/ccShaders.h"
+#include "renderer/CCGLProgram.h"
 
 namespace creator {
     using namespace cocos2d;
@@ -894,7 +895,8 @@ _distortionTiling(cocos2d::Vec2::ONE),
 _fillStart(0),
 _fillRange(0),
 _needRebuildRenderCommand(true),
-_insideBounds(true)
+_insideBounds(true),
+_useEtc(false)
 {
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
@@ -932,6 +934,17 @@ bool Scale9SpriteV2::setSpriteFrame(cocos2d::SpriteFrame* spriteFrame)
     {
         this->setContentSize(cocos2d::Size::ZERO);
          return true;
+    }
+    
+    if (spriteFrame->getTexture() && spriteFrame->getTexture()->getAlphaTextureName() > 0)
+    {
+        _useEtc = true;
+        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+    }
+    else
+    {
+        _useEtc = false;
+        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
     }
 
     CC_SAFE_RETAIN(spriteFrame);
@@ -972,14 +985,38 @@ void Scale9SpriteV2::setState(State state) {
     this->_brightState = state;
     
     if(State::DISTORTION == state) {
-        auto glProgramState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_SPRITE_DISTORTION);
+        GLProgramState* glProgramState = 0;
+        if (_useEtc)
+        {
+            glProgramState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_SPRITE_DISTORTION_ETC1);
+        }
+        else
+        {
+            glProgramState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_SPRITE_DISTORTION);
+        }
         glProgramState->setUniformVec2("u_offset", this->_distortionOffset);
         glProgramState->setUniformVec2("u_offset_tiling", this->_distortionTiling);
         this->setGLProgramState(glProgramState);
     } else if (State::GRAY == state) {
-        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE));
+        if (_useEtc)
+        {
+            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE_ETC1));
+        }
+        else
+        {
+            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE));
+        }
+        
     } else {
-        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+        if (_useEtc)
+        {
+            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+        }
+        else
+        {
+            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+        }
+        
     }
     
 
@@ -1166,7 +1203,7 @@ void Scale9SpriteV2::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &tran
             triangles.vertCount = (int)this->_verts.size();
             triangles.indexCount = (int)this->_indices.size();
             auto texture = this->_spriteFrame->getTexture();
-            this->_renderCommand.init(_globalZOrder, texture->getName(), _glProgramState, _blendFunc, triangles, transform, 0);
+            this->_renderCommand.init(_globalZOrder, texture->getName(), _glProgramState, _blendFunc, triangles, transform, 0, texture->getAlphaTextureName());
             renderer->addCommand(&this->_renderCommand);
         }
     }

@@ -56,7 +56,7 @@ namespace spine {
 		
 		~TwoColorTrianglesCommand();
 	
-		void init(float globalOrder, GLuint textureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags);
+		void init(float globalOrder, GLuint textureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags, GLuint alphaTextureId = 0);
 		
 		void useMaterial() const;
 		

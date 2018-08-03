@@ -94,6 +94,13 @@ extern CC_DLL const GLchar * cc3D_Terrain_vert;
 extern CC_DLL const GLchar * cc3D_Terrain_frag;
 extern CC_DLL const GLchar * ccCameraClearVert;
 extern CC_DLL const GLchar * ccCameraClearFrag;
+
+//yif etc
+extern CC_DLL const GLchar * ccPositionTexture_etc1_frag;
+extern CC_DLL const GLchar * ccPositionTextureColor_noMVP_etc1_frag;
+extern CC_DLL const GLchar * ccPositionTexture_GrayScale_etc1_frag;
+extern CC_DLL const GLchar * ccSprite_Distortion_etc1_frag;
+extern CC_DLL const GLchar * ccPositionTextureColor_etc1_frag;
 NS_CC_END
 /**
  end of support group

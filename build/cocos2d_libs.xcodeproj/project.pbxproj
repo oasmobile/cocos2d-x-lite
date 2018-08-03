@@ -1633,6 +1633,8 @@
 		01E5ACB320288B6500B46C2D /* PointAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointAttachment.h; sourceTree = "<group>"; };
 		01E5ACB420288B6500B46C2D /* Triangulator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Triangulator.c; sourceTree = "<group>"; };
 		01E5ACB520288B6600B46C2D /* ClippingAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClippingAttachment.h; sourceTree = "<group>"; };
+		0D93F29621131D2100144A8D /* ccShader_PositionTexture_Etc1.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_PositionTexture_Etc1.frag; sourceTree = "<group>"; };
+		0D93F29721131D2200144A8D /* ccShader_PositionTextureColor_noMVP_Etc1.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_PositionTextureColor_noMVP_Etc1.frag; sourceTree = "<group>"; };
 		1551A33F158F2AB200E66CFE /* libcocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1551A342158F2AB200E66CFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15EFA20F198A2BB5000C57D3 /* CCProtectedNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProtectedNode.cpp; sourceTree = "<group>"; };
@@ -3682,6 +3684,8 @@
 		5034CA5D191D591900CE6051 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				0D93F29621131D2100144A8D /* ccShader_PositionTexture_Etc1.frag */,
+				0D93F29721131D2200144A8D /* ccShader_PositionTextureColor_noMVP_Etc1.frag */,
 				29D57CFF1D7FEC1C001735C5 /* ccShader_SpriteDistortion.frag */,
 				29D57CFC1D7FE03C001735C5 /* ccShader_UI_Gray.frag */,
 				B241A6E21AFB0BE700C5623C /* ccShader_CameraClear.frag */,

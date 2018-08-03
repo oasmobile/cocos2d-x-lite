@@ -56,6 +56,7 @@ namespace ui {
         ,_sliceSpriteDirty(false)
         ,_renderingType(RenderingType::SLICE)
         ,_insideBounds(true)
+        ,_useEtc(false)
     {
         this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 #if CC_SPRITE_DEBUG_DRAW
@@ -88,7 +89,14 @@ namespace ui {
             Texture2D* texture = spriteFrame->getTexture();
             CCASSERT(texture != nullptr, "Texture2D must be not null");
             if(texture == nullptr) break;
-
+            if (texture->getAlphaTextureName() > 0)
+            {
+                _useEtc = true;
+            }
+            else
+            {
+                _useEtc = false;
+            }
             Sprite *sprite = Sprite::createWithSpriteFrame(spriteFrame);
             CCASSERT(sprite != nullptr, "Sprite must be not null");
             if(sprite == nullptr) break;
@@ -119,7 +127,7 @@ namespace ui {
             CCASSERT(spriteFrameCache != nullptr,
                      "SpriteFrameCache::getInstance() must be non-NULL");
             if(spriteFrameCache == nullptr) break;
-
+            
             SpriteFrame *frame = spriteFrameCache->getSpriteFrameByName(spriteFrameName);
             CCASSERT(frame != nullptr, StringUtils::format("CCSpriteFrame: %s must be non-NULL ", spriteFrameName.c_str()).c_str());
             if (frame == nullptr) break;
@@ -168,6 +176,14 @@ namespace ui {
                 return ret;
             }
 
+            if (texture->getAlphaTextureName() > 0)
+            {
+                _useEtc = true;
+            }
+            else
+            {
+                _useEtc = false;
+            }
             Rect actualCapInsets = capInsets;
             if (texture->isContain9PatchInfo())
             {
@@ -571,12 +587,27 @@ namespace ui {
         {
         case State::NORMAL:
         {
-            glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP);
+            if (_useEtc)
+            {
+                glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1);
+            }
+            else
+            {
+                glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP);
+            }
         }
         break;
         case State::GRAY:
         {
-            glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+            if (_useEtc)
+            {
+                glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE_ETC1);
+            }
+            else
+            {
+                glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+            }
+            
         }
         default:
             break;

@@ -952,7 +952,14 @@ GLProgramState* Widget::getNormalGLProgramState()const
     {
         virtualTexture = scale9sp->getSprite() != nullptr ? scale9sp->getSprite()->getTexture() : nullptr;
     }
-    glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP);
+    if (virtualTexture && virtualTexture->getAlphaTextureName() > 0)
+    {
+        glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1);
+    }
+    else
+    {
+        glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP);
+    }
     return glState;
 }
 
@@ -969,7 +976,15 @@ GLProgramState* Widget::getGrayGLProgramState()const
     {
         virtualTexture = scale9sp->getSprite() != nullptr ? scale9sp->getSprite()->getTexture() : nullptr;
     }
-    glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+    if (virtualTexture && virtualTexture->getAlphaTextureName() > 0)
+    {
+        glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE_ETC1);
+    }
+    else
+    {
+        glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_GRAYSCALE);
+    }
+    
     return glState;
 }
 

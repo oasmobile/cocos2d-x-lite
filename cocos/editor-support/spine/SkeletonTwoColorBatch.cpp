@@ -47,10 +47,11 @@ TwoColorTrianglesCommand::TwoColorTrianglesCommand() :_materialID(0), _textureID
 	func = [this]() { draw(); };
 }
 
-void TwoColorTrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, BlendFunc blendType, const TwoColorTriangles& triangles, const Mat4& mv, uint32_t flags) {
+void TwoColorTrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState* glProgramState, BlendFunc blendType, const TwoColorTriangles& triangles, const Mat4& mv, uint32_t flags, GLuint alphaTextureId) {
 	CCASSERT(glProgramState, "Invalid GLProgramState");
 	CCASSERT(glProgramState->getVertexAttribsFlags() == 0, "No custom attributes are supported in QuadCommand");
 
+    _alphaTextureID = alphaTextureId;
 	RenderCommand::init(globalOrder, mv, flags);
 
 	_triangles = triangles;
@@ -147,6 +148,24 @@ void main() {
 	gl_FragColor.rgb = ((texColor.a - 1.0) * v_dark.a + 1.0 - texColor.rgb) * v_dark.rgb + texColor.rgb * v_light.rgb;
 }
 );
+    
+const char* TWO_COLOR_TINT_ETC1_FRAGMENT_SHADER = STRINGIFY(
+\n#ifdef GL_ES\n
+precision lowp float;
+\n#endif\n
+
+varying vec4 v_light;
+varying vec4 v_dark;
+varying vec2 v_texCoord;
+
+void main() {
+    vec4 texColor = texture2D(CC_Texture0, v_texCoord);
+    vec4 alphaColor = texture2D(CC_Texture1, v_texCoord);
+    float alpha = alphaColor.r * v_light.a;
+    gl_FragColor.a = alpha;
+    gl_FragColor.rgb = ((alphaColor.r - 1.0) * v_dark.a + 1.0 - texColor.rgb) * v_dark.rgb + texColor.rgb * v_light.rgb;
+}
+);
 
 
 static SkeletonTwoColorBatch* instance = nullptr;
@@ -177,8 +196,17 @@ SkeletonTwoColorBatch::SkeletonTwoColorBatch () {
 	Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_AFTER_DRAW_RESET_POSITION, [this](EventCustom* eventCustom){
 		this->update(0);
 	});;
+    
+//    if (_alphaTextureID > 0)
+//    {
+//        _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_ETC1_FRAGMENT_SHADER);
+//    }
+//    else
+    {
+        _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_FRAGMENT_SHADER);
+    }
 	
-	_twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_FRAGMENT_SHADER);
+	
 	_twoColorTintShaderState = GLProgramState::getOrCreateWithGLProgram(_twoColorTintShader);
 	_twoColorTintShaderState->retain();
 	

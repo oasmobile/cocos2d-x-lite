@@ -685,6 +685,7 @@ namespace ui {
 #endif //CC_SPRITE_DEBUG_DRAW
         bool _insideBounds;   /// whether or not the sprite was inside bounds the previous frame
         TrianglesCommand _trianglesCommand;     ///
+        bool _useEtc;
     };
 
 }}  //end of namespace

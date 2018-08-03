@@ -149,6 +149,7 @@ protected:
 	bool _debugMeshes;
 	spSkeletonClipping* _clipper;
 	spVertexEffect* _effect;
+    bool firstEnter;
 };
 
 }

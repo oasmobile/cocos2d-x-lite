@@ -380,6 +380,7 @@ public:
 
     std::string getPath()const { return _filePath; }
 
+    //yif no use
     void setAlphaTexture(Texture2D* alphaTexture);
 
     GLuint getAlphaTextureName() const;
@@ -494,6 +495,9 @@ private:
     static void convertRGBA8888ToRGB5A1(const unsigned char* data, ssize_t dataLen, unsigned char* outData);
 
 protected:
+    //yif etc
+    int initAlphaTexture(Image* image);
+    
     /** pixel format of the texture */
     Texture2D::PixelFormat _pixelFormat;
 
@@ -505,6 +509,9 @@ protected:
 
     /** texture name */
     GLuint _name;
+    
+    //yif etc alpha texture name
+    GLuint _alphaName;
 
     /** texture max S */
     GLfloat _maxS;
@@ -535,7 +542,8 @@ protected:
     bool _valid;
     std::string _filePath;
 
-    Texture2D* _alphaTexture;
+    // yif no use
+    //Texture2D* _alphaTexture;
 };
 
 

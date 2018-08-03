@@ -62,6 +62,11 @@ public:
      * @js ctor
      */
     Image();
+    /**
+     * @js NA
+     * @lua NA
+     */
+    virtual ~Image();
 
     /** Supported formats for Image */
     enum class Format
@@ -147,6 +152,17 @@ public:
      @param    isToRGB        whether the image is saved as RGB format.
      */
     bool saveToFile(const std::string &filename, bool isToRGB = true);
+    
+    //yif etc
+    void setAlphaImage(Image* img)
+    {
+        _alphaImage = img;
+    }
+    //yif etc
+    Image* getAlphaImage()
+    {
+        return _alphaImage;
+    }
 
 protected:
     bool initWithJpgData(const unsigned char *  data, ssize_t dataLen);
@@ -198,12 +214,6 @@ protected:
     Image(Image&&) = delete;
     Image& operator=(Image&&) = delete;
 
-    /**
-     * @js NA
-     * @lua NA
-     */
-    virtual ~Image();
-
     Format detectFormat(const unsigned char * data, ssize_t dataLen);
     bool isPng(const unsigned char * data, ssize_t dataLen);
     bool isJpg(const unsigned char * data, ssize_t dataLen);
@@ -211,6 +221,9 @@ protected:
     bool isWebp(const unsigned char * data, ssize_t dataLen);
     bool isPvr(const unsigned char * data, ssize_t dataLen);
     bool isEtc(const unsigned char * data, ssize_t dataLen);
+    
+    //yif etc
+    Image* _alphaImage;
 };
 
 // end of platform group

@@ -81,4 +81,11 @@ NS_CC_BEGIN
 #include "renderer/ccShader_CameraClear.vert"
 #include "renderer/ccShader_CameraClear.frag"
 
+// yif etc
+#include "renderer/ccShader_PositionTexture_Etc1.frag"
+#include "renderer/ccShader_PositionTextureColor_Etc1.frag"
+#include "renderer/ccShader_PositionTextureColor_noMVP_Etc1.frag"
+#include "renderer/ccShader_SpriteDistortion_Etc1.frag"
+#include "renderer/ccShader_UI_Gray_Etc1.frag"
+
 NS_CC_END

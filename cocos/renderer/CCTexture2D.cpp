@@ -47,6 +47,7 @@ THE SOFTWARE.
 #include "renderer/ccGLStateCache.h"
 #include "renderer/CCGLProgramCache.h"
 #include "base/CCNinePatchImageParser.h"
+#include "CCFileUtils.h"
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     #include "renderer/CCTextureCache.h"
@@ -437,6 +438,7 @@ Texture2D::Texture2D()
 , _pixelsWide(0)
 , _pixelsHigh(0)
 , _name(0)
+, _alphaName(0)
 , _maxS(0.0)
 , _maxT(0.0)
 , _hasPremultipliedAlpha(false)
@@ -445,7 +447,6 @@ Texture2D::Texture2D()
 , _antialiasEnabled(true)
 , _ninePatchInfo(nullptr)
 , _valid(true)
-, _alphaTexture(nullptr)
 {
     _antialiasEnabled = Director::getInstance()->getOpenGLView()->isAntiAliasEnabled();
 }
@@ -474,6 +475,13 @@ void Texture2D::releaseGLTexture()
         GL::deleteTexture(_name);
     }
     _name = 0;
+    
+    //yif etc
+    if (_alphaName)
+    {
+        GL::deleteTexture(_alphaName);
+    }
+    _alphaName = 0;
 }
 
 Texture2D::PixelFormat Texture2D::getPixelFormat() const
@@ -498,7 +506,7 @@ GLuint Texture2D::getName() const
 
 GLuint Texture2D::getAlphaTextureName() const
 {
-    return _alphaTexture == nullptr ? 0 : _alphaTexture->getName();
+    return _alphaName;
 }
 
 Size Texture2D::getContentSize() const
@@ -705,7 +713,14 @@ bool Texture2D::initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, PixelFormat
     _hasMipmaps = mipmapsNum > 1;
 
     // shader
-    setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
+    if (_alphaName == 0)
+    {
+        setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
+    }
+    else
+    {
+        setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
+    }
     return true;
 }
 
@@ -781,6 +796,19 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
 
         initWithData(tempData, tempDataLen, image->getRenderFormat(), imageWidth, imageHeight, imageSize);
 
+        // yif etc
+        switch(image->getFileType())
+        {
+            case Image::Format::ETC:
+            case Image::Format::PVR:
+            {
+                initAlphaTexture(image);
+            }
+                break;
+            default:
+                break;
+        }
+        
         // set the premultiplied tag
         _hasPremultipliedAlpha = image->hasPremultipliedAlpha();
 
@@ -805,6 +833,53 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
 
         return true;
     }
+}
+
+// yif etc
+int Texture2D::initAlphaTexture(Image* image)
+{
+    int ret = 0;
+    Image* imageAlpha = nullptr;
+    Texture2D* textureAlpha = nullptr;
+    do
+    {
+        if (image->getAlphaImage()) {
+            textureAlpha = new Texture2D();
+            CC_BREAK_IF(!textureAlpha->initWithImage(image->getAlphaImage()));
+            this->_alphaName = textureAlpha->_name;
+            textureAlpha->_name = 0;
+            ret = 1;
+        }
+        else {
+            CC_BREAK_IF(0 == image->getFilePath().size());
+            std::string alphaExt = Image::Format::PVR == image->getFileType()? "_alpha.pvr": "_alpha.png";
+            
+            CC_BREAK_IF(std::string::npos != image->getFilePath().rfind(alphaExt));
+            
+            std::string alpha_filepath = image->getFilePath();
+            alpha_filepath.replace(alpha_filepath.length() - 4, 4, alphaExt);
+            if (FileUtils::getInstance()->isFileExist(alpha_filepath)) {
+                imageAlpha = new Image();
+                CC_BREAK_IF(nullptr == imageAlpha);
+                CC_BREAK_IF(!imageAlpha->initWithImageFile(alpha_filepath));
+                
+                //CCLOG("Texture2D::initWithImage.alpha(:%s begin..", alpha_filepath.c_str());
+                textureAlpha = new Texture2D();
+                
+                CC_BREAK_IF(!textureAlpha->initWithImage(imageAlpha));
+                
+                this->_alphaName = textureAlpha->_name;
+                textureAlpha->_name = 0;
+                ret = 1;
+            }
+        }
+        
+    }
+    while(0);
+    CC_SAFE_DELETE(textureAlpha);
+    CC_SAFE_DELETE(imageAlpha);
+    
+    return ret;
 }
 
 Texture2D::PixelFormat Texture2D::convertI8ToFormat(const unsigned char* data, ssize_t dataLen, PixelFormat format, unsigned char** outData, ssize_t* outDataLen)
@@ -1226,6 +1301,11 @@ void Texture2D::generateMipmap()
     CCASSERT(_pixelsWide == ccNextPOT(_pixelsWide) && _pixelsHigh == ccNextPOT(_pixelsHigh), "Mipmap texture only works in POT textures");
     GL::bindTexture2D( _name );
     glGenerateMipmap(GL_TEXTURE_2D);
+    if (_alphaName)
+    {
+        GL::bindTexture2D(_alphaName);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
     _hasMipmaps = true;
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     VolatileTextureMgr::setHasMipmaps(this, _hasMipmaps);
@@ -1248,6 +1328,16 @@ void Texture2D::setTexParameters(const TexParams &texParams)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texParams.magFilter );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParams.wrapS );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParams.wrapT );
+    
+    //yif etc
+    if (_alphaName)
+    {
+        GL::bindTexture2DN( 1, _alphaName );
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texParams.minFilter );
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texParams.magFilter );
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParams.wrapS );
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParams.wrapT );
+    }
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     VolatileTextureMgr::setTexParameters(this, texParams);
@@ -1452,13 +1542,15 @@ void Texture2D::removeSpriteFrameCapInset(SpriteFrame* spriteFrame)
     }
 }
 
+// yif no use
 /// halx99 spec, ANDROID ETC1 ALPHA supports.
 void Texture2D::setAlphaTexture(Texture2D* alphaTexture)
 {
-    if (alphaTexture != nullptr) {
-        this->_alphaTexture = alphaTexture;
-        this->_alphaTexture->retain();
-        this->_hasPremultipliedAlpha = true; // PremultipliedAlpha shoud be true.
-    }
+//    if (alphaTexture != nullptr) {
+//        this->_alphaTexture = alphaTexture;
+//        this->_alphaTexture->retain();
+//        this->_hasPremultipliedAlpha = true; // PremultipliedAlpha shoud be true.
+//    }
+    CCLOGERROR("Texture2D setAlphaTexture is no use !!!");
 }
 NS_CC_END

@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "2d/CCSprite.h"
 #include "renderer/ccGLStateCache.h"
 #include "renderer/CCRenderer.h"
+#include "renderer/CCTexture2D.h"
 
 NS_CC_BEGIN
 
@@ -81,7 +82,20 @@ bool ProgressTimer::initWithSprite(Sprite* sp)
     setSprite(sp);
 
     // shader state
+#if (CC_TARGET_PLATFORM == CCPLATFORM_ANDROID)
+    auto texture = sp ? sp->getTexture() : nullptr;
+    if (texture && texture->getAlphaTextureName())
+    {
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1));
+    }
+    else
+    {
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
+    }
+#else
     setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
+#endif
+    
     return true;
 }
 

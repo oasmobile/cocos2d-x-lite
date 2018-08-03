@@ -64,7 +64,7 @@ void QuadCommand::init(float globalOrder, GLuint textureID, GLProgramState* glPr
     triangles.vertCount = (int)quadCount * 4;
     triangles.indices = __indices;
     triangles.indexCount = (int)quadCount * 6;
-    TrianglesCommand::init(globalOrder, textureID, glProgramState, blendType, triangles, mv, flags);
+    TrianglesCommand::init(globalOrder, textureID, glProgramState, blendType, triangles, mv, flags, _alphaTextureID);
 }
 
 void QuadCommand::reIndex(int indicesCount)
@@ -104,8 +104,9 @@ void QuadCommand::reIndex(int indicesCount)
 void QuadCommand::init(float globalOrder, Texture2D* texture, GLProgramState* glProgramState, const BlendFunc& blendType, V3F_C4B_T2F_Quad* quads, ssize_t quadCount,
     const Mat4& mv, uint32_t flags)
 {
-    init(globalOrder, texture->getName(), glProgramState, blendType, quads, quadCount, mv, flags);
     _alphaTextureID = texture->getAlphaTextureName();
+
+    init(globalOrder, texture->getName(), glProgramState, blendType, quads, quadCount, mv, flags);
 }
 
 NS_CC_END

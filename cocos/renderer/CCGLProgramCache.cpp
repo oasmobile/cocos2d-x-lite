@@ -62,6 +62,11 @@ enum {
     kShaderType_LabelNormal,
     kShaderType_LabelOutline,
     kShaderType_CameraClear,
+    kShaderType_PositionTexture_Etc1,
+    kShaderType_PositionTextureColor_noMVP_Etc1,
+    kShaderType_UIGrayScale_Etc1,
+    kShaderType_SpriteDistortion_Etc1,
+    kShaderType_PositionTextureColor_Etc1,
     kShaderType_MAX,
 };
 
@@ -225,6 +230,29 @@ void GLProgramCache::loadDefaultGLPrograms()
     p = new (std::nothrow) GLProgram();
     loadDefaultGLProgram(p, kShaderType_CameraClear);
     _programs.insert(std::make_pair(GLProgram::SHADER_CAMERA_CLEAR, p));
+    
+    //
+    // yif etc1 with alpha shader
+    //
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTexture_Etc1);
+    _programs.insert( std::make_pair( GLProgram::SHADER_NAME_POSITION_TEXTURE_ETC1, p) );
+    // yif etc1
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColor_noMVP_Etc1);
+    _programs.insert( std::make_pair( GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1, p ) );
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_UIGrayScale_Etc1);
+    _programs.insert(std::make_pair(GLProgram::SHADER_NAME_POSITION_GRAYSCALE_ETC1, p));
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_SpriteDistortion_Etc1);
+    _programs.insert(std::make_pair(GLProgram::SHADER_NAME_SPRITE_DISTORTION_ETC1, p));
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColor_Etc1);
+    _programs.insert( std::make_pair( GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1, p ) );
 }
 
 void GLProgramCache::reloadDefaultGLPrograms()
@@ -330,6 +358,26 @@ void GLProgramCache::reloadDefaultGLPrograms()
     p = getGLProgram(GLProgram::SHADER_NAME_SPRITE_DISTORTION);
     p->reset();
     loadDefaultGLProgram(p, kShaderType_SpriteDistortion);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTexture_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColor_noMVP_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_GRAYSCALE_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_UIGrayScale_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_SPRITE_DISTORTION_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_SpriteDistortion_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColor_Etc1);
 }
 
 void GLProgramCache::reloadDefaultGLProgramsRelativeToLights()
@@ -397,6 +445,22 @@ void GLProgramCache::loadDefaultGLProgram(GLProgram *p, int type)
             break;
         case kShaderType_CameraClear:
             p->initWithByteArrays(ccCameraClearVert, ccCameraClearFrag);
+            break;
+        case kShaderType_PositionTexture_Etc1:
+            p->initWithByteArrays(ccPositionTexture_vert ,ccPositionTexture_etc1_frag);
+            break;
+        case kShaderType_PositionTextureColor_noMVP_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert, ccPositionTextureColor_noMVP_etc1_frag);
+            break;
+        case kShaderType_UIGrayScale_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert,
+                                  ccPositionTexture_GrayScale_etc1_frag);
+            break;
+        case kShaderType_SpriteDistortion_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert, ccSprite_Distortion_etc1_frag);
+            break;
+        case kShaderType_PositionTextureColor_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_vert, ccPositionTextureColor_etc1_frag);
             break;
         default:
             CCLOG("cocos2d: %s:%d, error shader type", __FUNCTION__, __LINE__);

@@ -134,6 +134,8 @@ bool ParticleSystemQuad::initWithTotalParticles(int numberOfParticles)
         // Need to listen the event only when not use batchnode, because it will use VBO
         auto listener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, CC_CALLBACK_1(ParticleSystemQuad::listenRendererRecreated, this));
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+        _hasEventListener = true;
+        
 #endif
 
         return true;

@@ -432,6 +432,7 @@ void Widget::setTouchEnabled(bool enable)
         _touchListener->onTouchEnded = CC_CALLBACK_2(Widget::onTouchEnded, this);
         _touchListener->onTouchCancelled = CC_CALLBACK_2(Widget::onTouchCancelled, this);
         _eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListener, this);
+        _hasEventListener = true;
     }
     else
     {

@@ -463,6 +463,7 @@ Label::Label()
         }
     });
     _eventDispatcher->addEventListenerWithFixedPriority(_purgeTextureListener, 1);
+    _hasEventListener = true;
 
     _resetTextureListener = EventListenerCustom::create(FontAtlas::CMD_RESET_FONTATLAS, [this](EventCustom* event){
         if (_fontAtlas && _currentLabelType == LabelType::TTF && event->getUserData() == _fontAtlas)
@@ -476,6 +477,7 @@ Label::Label()
         }
     });
     _eventDispatcher->addEventListenerWithFixedPriority(_resetTextureListener, 2);
+    _hasEventListener = true;
 }
 
 Label::~Label()

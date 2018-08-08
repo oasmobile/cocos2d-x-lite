@@ -167,7 +167,8 @@ bool Menu::initWithArray(const Vector<MenuItem*>& arrayOfItems)
         touchListener->onTouchCancelled = CC_CALLBACK_2(Menu::onTouchCancelled, this);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-
+        _hasEventListener = true;
+        
         return true;
     }
     return false;

@@ -452,6 +452,12 @@ void EventDispatcher::addEventListener(EventListener* listener)
     }
 #endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
     listener->retain();
+    
+    auto node = listener->getAssociatedNode();
+    if (node != nullptr)
+    {
+        node->hasEventListener();
+    }
 }
 
 void EventDispatcher::forceAddEventListener(EventListener* listener)

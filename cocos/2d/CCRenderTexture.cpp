@@ -65,9 +65,12 @@ RenderTexture::RenderTexture()
     // Then it can be restored after coming to foreground on Android.
     auto toBackgroundListener = EventListenerCustom::create(EVENT_COME_TO_BACKGROUND, CC_CALLBACK_1(RenderTexture::listenToBackground, this));
     _eventDispatcher->addEventListenerWithSceneGraphPriority(toBackgroundListener, this);
-
+    _hasEventListener = true;
+    
     auto toForegroundListener = EventListenerCustom::create(EVENT_COME_TO_FOREGROUND, CC_CALLBACK_1(RenderTexture::listenToForeground, this));
     _eventDispatcher->addEventListenerWithSceneGraphPriority(toForegroundListener, this);
+    _hasEventListener = true;
+    
 #endif
 }
 

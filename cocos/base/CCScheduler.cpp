@@ -1037,6 +1037,12 @@ void Scheduler::schedule(SEL_SCHEDULE selector, Ref *target, float interval, uns
     timer->initWithSelector(this, selector, target, interval, repeat, delay);
     ccArrayAppendObject(element->timers, timer);
     timer->release();
+    
+    auto node = dynamic_cast<Node *>(target);
+    if (node != nullptr)
+    {
+        node->hasSchedule();
+    }
 }
 
 void Scheduler::schedule(SEL_SCHEDULE selector, Ref *target, float interval, bool paused)

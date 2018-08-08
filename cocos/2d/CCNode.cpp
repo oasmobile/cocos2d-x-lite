@@ -113,6 +113,9 @@ Node::Node()
 , _cascadeColorEnabled(false)
 , _cascadeOpacityEnabled(false)
 , _cameraMask(0)
+, _hasAction(false)
+, _hasSchedule(false)
+, _hasEventListener(false)
 {
     // set default scheduler and actionManager
     _director = Director::getInstance();
@@ -1451,6 +1454,7 @@ void Node::setActionManager(ActionManager* actionManager)
 Action* Node::runAction(Action* action)
 {
     _actionManager->addAction(action, this, !_running);
+    _hasAction = true;
     return action;
 }
 
@@ -1526,6 +1530,7 @@ void Node::scheduleUpdate()
 void Node::scheduleUpdateWithPriority(int priority)
 {
     _scheduler->scheduleUpdate(this, priority, !_running);
+    _hasSchedule = true;
 }
 
 //void Node::scheduleUpdateWithPriorityLua(int nHandler, int priority)
@@ -1568,21 +1573,25 @@ void Node::schedule(SEL_SCHEDULE selector, float interval, unsigned int repeat, 
     CCASSERT( interval >=0, "Argument must be positive");
 
     _scheduler->schedule(selector, this, interval , repeat, delay, !_running);
+    _hasSchedule = true;
 }
 
 void Node::schedule(const std::function<void(float)> &callback, const std::string &key)
 {
     _scheduler->schedule(callback, this, 0, !_running, key);
+    _hasSchedule = true;
 }
 
 void Node::schedule(const std::function<void(float)> &callback, float interval, const std::string &key)
 {
     _scheduler->schedule(callback, this, interval, !_running, key);
+    _hasSchedule = true;
 }
 
 void Node::schedule(const std::function<void(float)>& callback, float interval, unsigned int repeat, float delay, const std::string &key)
 {
     _scheduler->schedule(callback, this, interval, repeat, delay, !_running, key);
+    _hasSchedule = true;
 }
 
 void Node::scheduleOnce(SEL_SCHEDULE selector, float delay)
@@ -1593,6 +1602,7 @@ void Node::scheduleOnce(SEL_SCHEDULE selector, float delay)
 void Node::scheduleOnce(const std::function<void(float)> &callback, float delay, const std::string &key)
 {
     _scheduler->schedule(callback, this, 0, 0, delay, !_running, key);
+    _hasSchedule = true;
 }
 
 void Node::unschedule(SEL_SCHEDULE selector)
@@ -1616,16 +1626,16 @@ void Node::unscheduleAllCallbacks()
 
 void Node::resume()
 {
-    _scheduler->resumeTarget(this);
-    _actionManager->resumeTarget(this);
-    _eventDispatcher->resumeEventListenersForTarget(this);
+    if (_hasSchedule) _scheduler->resumeTarget(this);
+    if (_hasAction) _actionManager->resumeTarget(this);
+    if (_hasEventListener) _eventDispatcher->resumeEventListenersForTarget(this);
 }
 
 void Node::pause()
 {
-    _scheduler->pauseTarget(this);
-    _actionManager->pauseTarget(this);
-    _eventDispatcher->pauseEventListenersForTarget(this);
+    if (_hasSchedule) _scheduler->pauseTarget(this);
+    if (_hasAction) _actionManager->pauseTarget(this);
+    if (_hasEventListener) _eventDispatcher->pauseEventListenersForTarget(this);
 }
 
 // override me
@@ -2149,6 +2159,21 @@ void Node::setCameraMask(unsigned short mask, bool applyChildren)
 void Node::markCullingDirty()
 {
     _cullingDirty = true;
+}
+
+void Node::hasEventListener()
+{
+    _hasEventListener = true;
+}
+
+void Node::hasAction()
+{
+    _hasAction = true;
+}
+
+void Node::hasSchedule()
+{
+    _hasSchedule = true;
 }
 
 NS_CC_END

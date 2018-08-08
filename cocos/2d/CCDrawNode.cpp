@@ -295,6 +295,7 @@ bool DrawNode::init()
     });
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    _hasEventListener = true;
 #endif
 
     return true;

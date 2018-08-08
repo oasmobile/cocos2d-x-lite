@@ -207,6 +207,7 @@ void ActionManager::addAction(Action *action, Node *target, bool paused)
 #endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
 
     action->startWithTarget(target);
+    target->hasAction();
 }
 
 // remove

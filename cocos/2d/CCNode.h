@@ -1795,6 +1795,10 @@ CC_CONSTRUCTOR_ACCESS:
      * @param relativeChild The relative child where will be inserted
      */
     void insertChildBefore(Node* child, Node* relativeChild);
+    
+    void hasEventListener();
+    void hasAction();
+    void hasSchedule();
 
 protected:
     /// lazy allocs
@@ -1931,7 +1935,12 @@ protected:
 
     bool _transformUpdated;         ///< Whether or not the Transform object was updated since the last frame
     bool _cullingDirty;  ///< Whether culling is dirty
-
+    
+    //标识node是否需要调用action/schedule/event resume/pause, 避免冗余调用
+    bool _hasAction;
+    bool _hasSchedule;
+    bool _hasEventListener;
+    
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Node);
 };

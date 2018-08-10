@@ -46,7 +46,7 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t _argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         unsigned short argc = (unsigned short) _argc; \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = se::internal::getUndefinedValue(); \
         void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         if (nativeThisObject != (void*)std::numeric_limits<unsigned long>::max()) \
         { \
@@ -102,7 +102,7 @@
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Value thisVal(se::Object::createObjectWithClass(cls), true); \
         se::Object* thisObject = thisVal.toObject(); \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = se::internal::getUndefinedValue(); \
         se::State state(thisObject, args); \
         ret = funcName(state); \
         if (ret) \
@@ -125,7 +125,7 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         bool ret = true; \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = se::internal::getUndefinedValue(); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::_createJSObject(cls, _thisObject); \
@@ -151,7 +151,7 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         assert(argc == 0); \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = se::internal::getUndefinedValue(); \
         void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         if (nativeThisObject != (void*)std::numeric_limits<unsigned long>::max()) \
         { \
@@ -173,7 +173,7 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         assert(argc == 1); \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = se::internal::getUndefinedValue(); \
         void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         if (nativeThisObject != (void*)std::numeric_limits<unsigned long>::max()) \
         { \

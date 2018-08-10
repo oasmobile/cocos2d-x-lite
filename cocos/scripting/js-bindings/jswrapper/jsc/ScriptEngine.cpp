@@ -60,7 +60,7 @@ namespace se {
             {
                 __instance->garbageCollect();
             }
-            return JSValueMakeUndefined(ctx);
+            return se::internal::getUndefinedValue();
         }
 
         JSValueRef __log(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
@@ -72,7 +72,7 @@ namespace se {
                 internal::forceConvertJsValueToStdString(ctx, arguments[0], &ret);
                 SE_LOGD("JS: %s\n", ret.c_str());
             }
-            return JSValueMakeUndefined(ctx);
+            return se::internal::getUndefinedValue();
         }
 
         JSObjectRef privateDataContructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)

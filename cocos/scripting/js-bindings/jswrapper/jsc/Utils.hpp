@@ -57,6 +57,8 @@ namespace se {
         void setPrivate(JSObjectRef obj, void* data, JSObjectFinalizeCallback finalizeCb);
         void* getPrivate(JSObjectRef obj);
         void clearPrivate(JSObjectRef obj);
+        
+        JSValueRef getUndefinedValue();
 
     } // namespace internal {
 } // namespace se {

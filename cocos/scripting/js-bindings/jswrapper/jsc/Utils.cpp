@@ -122,65 +122,75 @@ namespace se {
 
     void jsToSeValue(JSContextRef cx, JSValueRef jsValue, Value* data)
     {
-        if (JSValueIsNull(cx, jsValue))
-        {
-            data->setNull();
-        }
-        else if (JSValueIsUndefined(cx, jsValue))
-        {
-            data->setUndefined();
-        }
-        else if (JSValueIsNumber(cx, jsValue))
-        {
-            JSValueRef exception = nullptr;
-            double number = JSValueToNumber(cx, jsValue, &exception);
-            if (exception != nullptr)
+        auto type = JSValueGetType(cx, jsValue);
+        
+        switch (type) {
+            case kJSTypeNull:
             {
-                ScriptEngine::getInstance()->_clearException(exception);
+                data->setNull();
+                break;
             }
-            else
+            case kJSTypeUndefined:
             {
-                data->setNumber(number);
+                data->setUndefined();
+                break;
             }
-        }
-        else if (JSValueIsBoolean(cx, jsValue))
-        {
-            data->setBoolean(JSValueToBoolean(cx, jsValue));
-        }
-        else if (JSValueIsString(cx, jsValue))
-        {
-            std::string str;
-            forceConvertJsValueToStdString(cx, jsValue, &str);
-            data->setString(str);
-        }
-        else if (JSValueIsObject(cx, jsValue))
-        {
-            JSValueRef exception = nullptr;
-            JSObjectRef jsobj = JSValueToObject(cx, jsValue, &exception);
-            if (exception != nullptr)
+            case kJSTypeNumber:
             {
-                ScriptEngine::getInstance()->_clearException(exception);
-            }
-            else
-            {
-                void* nativePtr = internal::getPrivate(jsobj);
-                Object* obj = nullptr;
-                if (nativePtr != nullptr)
+                JSValueRef exception = nullptr;
+                double number = JSValueToNumber(cx, jsValue, &exception);
+                if (exception != nullptr)
                 {
-                    obj = Object::getObjectWithPtr(nativePtr);
+                    ScriptEngine::getInstance()->_clearException(exception);
                 }
-
-                if (obj == nullptr)
+                else
                 {
-                    obj = Object::_createJSObject(nullptr, jsobj);
+                    data->setNumber(number);
                 }
-                data->setObject(obj, true);
-                obj->decRef();
+                break;
             }
-        }
-        else
-        {
-            assert(false);
+            case kJSTypeBoolean:
+            {
+                data->setBoolean(JSValueToBoolean(cx, jsValue));
+                break;
+            }
+            case kJSTypeString:
+            {
+                std::string str;
+                forceConvertJsValueToStdString(cx, jsValue, &str);
+                data->setString(str);
+                break;
+            }
+            case kJSTypeObject:
+            {
+                JSValueRef exception = nullptr;
+                JSObjectRef jsobj = JSValueToObject(cx, jsValue, &exception);
+                if (exception != nullptr)
+                {
+                    ScriptEngine::getInstance()->_clearException(exception);
+                }
+                else
+                {
+                    void* nativePtr = internal::getPrivate(jsobj);
+                    Object* obj = nullptr;
+                    if (nativePtr != nullptr)
+                    {
+                        obj = Object::getObjectWithPtr(nativePtr);
+                    }
+                    
+                    if (obj == nullptr)
+                    {
+                        obj = Object::_createJSObject(nullptr, jsobj);
+                    }
+                    data->setObject(obj, true);
+                    obj->decRef();
+                }
+                break;
+            }
+                
+            default:
+                assert(false);
+                break;
         }
     }
 
@@ -212,7 +222,7 @@ namespace se {
                 break;
                 
             default: // Undefined
-                *jsval = JSValueMakeUndefined(cx);
+                *jsval = se::internal::getUndefinedValue();
                 break;
         }
     }
@@ -370,6 +380,17 @@ namespace se {
 
             JSStringRelease(key);
         }
+    }
+        
+    JSValueRef getUndefinedValue()
+    {
+        static JSValueRef s_undefined_value = nullptr;
+        if (s_undefined_value == nullptr)
+        {
+            s_undefined_value = JSValueMakeUndefined(__cx);
+            JSValueProtect(__cx, s_undefined_value);    // 永久保存该值
+        }
+        return s_undefined_value;
     }
 
 }} // namespace se { namespace internal {

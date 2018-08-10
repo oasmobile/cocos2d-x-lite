@@ -492,7 +492,7 @@ namespace se {
         }
         else
         {
-            jsValue = JSValueMakeUndefined(__cx);
+            jsValue = se::internal::getUndefinedValue();
         }
 
         JSValueRef exception = nullptr;

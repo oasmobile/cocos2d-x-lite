@@ -28,3 +28,10 @@ endif
 
 # Some Android Simulators don't support SSE instruction, so disable it for x86 arch.
 APP_CPPFLAGS += -U__SSE__
+
+
+# for CRIWARE IGP [start]
+# USE_CRI_ATOM_MONITOR := true
+# APP_CPPFLAGS += -DCRI_ATOM_MONITOR=true
+# APP_CFLAGS += -DCRI_ATOM_MONITOR=true
+# for CRIWARE IGP [end]

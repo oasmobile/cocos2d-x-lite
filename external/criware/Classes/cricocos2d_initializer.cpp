@@ -84,7 +84,11 @@ static void crijsb_SetDefaultConfig(CriJSBConfig* config)
 	config->num_hca_mx_memory_voices = 0;
 	config->num_hca_mx_streaming_voices = 0;
 	config->output_sampling_rate = CRIATOM_DEFAULT_OUTPUT_SAMPLING_RATE;
+	#if defined(CRI_ATOM_MONITOR)
+	config->uses_in_game_preview = CRI_TRUE;
+	#else
 	config->uses_in_game_preview = CRI_FALSE;
+	#endif
 	config->server_frequency = 60.0f;
 	config->max_parameter_blocks = 1024;
 	config->categories_per_playback = 4;

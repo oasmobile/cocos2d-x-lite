@@ -35,6 +35,9 @@ namespace se {
 
     namespace {
         JSContextRef __cx = nullptr;
+        Value __funcRegisterNativeRef;
+        Value __funcUnregisterNativeRef;
+        
 #if SE_DEBUG > 0
         uint32_t __id = 0;
 #endif
@@ -1142,6 +1145,9 @@ namespace se {
     void Object::cleanup()
     {
         ScriptEngine::getInstance()->addAfterCleanupHook([](){
+            __funcRegisterNativeRef.setUndefined();
+            __funcUnregisterNativeRef.setUndefined();
+            
             const auto& instance = NativePtrToObjectMap::instance();
             se::Object* obj = nullptr;
             for (const auto& e : instance)
@@ -1211,21 +1217,14 @@ namespace se {
     bool Object::attachObject(Object* obj)
     {
         assert(obj);
-
+        
         Object* global = ScriptEngine::getInstance()->getGlobalObject();
-        Value jsbVal;
-        if (!global->getProperty("jsb", &jsbVal))
+        
+        Value func = Object::getRegisterNativeRefFunc();
+        if (func.isNullOrUndefined())
             return false;
-        Object* jsbObj = jsbVal.toObject();
-
-        Value func;
-
-        if (!jsbObj->getProperty("registerNativeRef", &func))
-            return false;
-
-        ValueArray args;
-        args.push_back(Value(this));
-        args.push_back(Value(obj));
+        
+        ValueArray args {Value(this), Value(obj)};
         func.toObject()->call(args, global);
         return true;
     }
@@ -1233,22 +1232,48 @@ namespace se {
     bool Object::detachObject(Object* obj)
     {
         assert(obj);
+        
         Object* global = ScriptEngine::getInstance()->getGlobalObject();
-        Value jsbVal;
-        if (!global->getProperty("jsb", &jsbVal))
+        
+        Value func = Object::getUnregisterNativeRefFunc();
+        if (func.isNullOrUndefined())
             return false;
-        Object* jsbObj = jsbVal.toObject();
-
-        Value func;
-
-        if (!jsbObj->getProperty("unregisterNativeRef", &func))
-            return false;
-
-        ValueArray args;
-        args.push_back(Value(this));
-        args.push_back(Value(obj));
+        
+        ValueArray args {Value(this), Value(obj)};
         func.toObject()->call(args, global);
         return true;
+    }
+    
+    const Value& Object::getRegisterNativeRefFunc()
+    {
+        if (__funcRegisterNativeRef.isNullOrUndefined())
+        {
+            Object* global = ScriptEngine::getInstance()->getGlobalObject();
+            Value jsbVal;
+            if (global->getProperty("jsb", &jsbVal))
+            {
+                Object* jsbObj = jsbVal.toObject();
+                jsbObj->getProperty("registerNativeRef", &__funcRegisterNativeRef);
+            }
+        }
+        
+        return __funcRegisterNativeRef;
+    }
+    
+    const Value& Object::getUnregisterNativeRefFunc()
+    {
+        if (__funcUnregisterNativeRef.isNullOrUndefined())
+        {
+            Object* global = ScriptEngine::getInstance()->getGlobalObject();
+            Value jsbVal;
+            if (global->getProperty("jsb", &jsbVal))
+            {
+                Object* jsbObj = jsbVal.toObject();
+                jsbObj->getProperty("unregisterNativeRef", &__funcUnregisterNativeRef);
+            }
+        }
+        
+        return __funcUnregisterNativeRef;
     }
 
     std::string Object::toString() const

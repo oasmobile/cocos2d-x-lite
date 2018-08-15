@@ -366,6 +366,9 @@ namespace se {
         static void setContext(JSContextRef cx);
         static void cleanup();
 
+        static const Value& getRegisterNativeRefFunc();
+        static const Value& getUnregisterNativeRefFunc();
+        
         Object();
         virtual ~Object();
 

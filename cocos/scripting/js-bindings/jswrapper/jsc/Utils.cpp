@@ -388,7 +388,7 @@ namespace se {
         if (s_undefined_value == nullptr)
         {
             s_undefined_value = JSValueMakeUndefined(__cx);
-            JSValueProtect(__cx, s_undefined_value);    // 永久保存该值
+            JSValueProtect(__cx, s_undefined_value);    // 永久保存该值, restartvm之后也不会改变该值
         }
         return s_undefined_value;
     }

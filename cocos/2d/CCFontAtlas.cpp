@@ -94,7 +94,6 @@ FontAtlas::FontAtlas(Font &theFont)
 
         _rendererRecreatedListener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, CC_CALLBACK_1(FontAtlas::listenRendererRecreated, this));
         eventDispatcher->addEventListenerWithFixedPriority(_rendererRecreatedListener, 1);
-        _hasEventListener = true;
 #endif
     }
 }

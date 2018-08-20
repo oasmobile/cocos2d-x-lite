@@ -332,7 +332,7 @@ Texture2D::PixelFormat getDevicePixelFormat(Texture2D::PixelFormat format)
 //////////////////////////////////////////////////////////////////////////
 // Implement Image
 //////////////////////////////////////////////////////////////////////////
-bool Image::PNG_PREMULTIPLIED_ALPHA_ENABLED = true;
+bool Image::PNG_PREMULTIPLIED_ALPHA_ENABLED = false;
 
 Image::Image()
 : _data(nullptr)
@@ -343,7 +343,7 @@ Image::Image()
 , _fileType(Format::UNKNOWN)
 , _renderFormat(Texture2D::PixelFormat::NONE)
 , _numberOfMipmaps(0)
-, _hasPremultipliedAlpha(true)
+, _hasPremultipliedAlpha(false)
 , _alphaImage(0)
 {
 

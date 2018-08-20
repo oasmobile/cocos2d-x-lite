@@ -87,5 +87,7 @@ NS_CC_BEGIN
 #include "renderer/ccShader_PositionTextureColor_noMVP_Etc1.frag"
 #include "renderer/ccShader_SpriteDistortion_Etc1.frag"
 #include "renderer/ccShader_UI_Gray_Etc1.frag"
+#include "renderer/ccShader_PositionTextureColorAlphaTest_Etc1.frag"
+#include "renderer/ccShader_PositionTexture_uColor_Etc1.frag"
 
 NS_CC_END

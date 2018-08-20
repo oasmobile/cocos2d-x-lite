@@ -605,6 +605,11 @@ void TextureAtlas::drawNumberOfQuads(ssize_t numberOfQuads, ssize_t start)
         return;
 
     GL::bindTexture2D(_texture->getName());
+    //yif etc
+    if (_texture->getAlphaTextureName())
+    {
+        GL::bindTexture2DN(1, _texture->getAlphaTextureName());
+    }
 
     auto conf = Configuration::getInstance();
     if (conf->supportsShareableVAO() && conf->supportsMapBuffer())

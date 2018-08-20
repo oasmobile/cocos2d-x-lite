@@ -67,6 +67,9 @@ enum {
     kShaderType_UIGrayScale_Etc1,
     kShaderType_SpriteDistortion_Etc1,
     kShaderType_PositionTextureColor_Etc1,
+    kShaderType_PositionTextureColorAlphaTest_Etc1,
+    kShaderType_PositionTextureColorAlphaTestNoMV_Etc1,
+    kShaderType_PositionTexture_uColor_Etc1,
     kShaderType_MAX,
 };
 
@@ -253,6 +256,19 @@ void GLProgramCache::loadDefaultGLPrograms()
     p = new (std::nothrow) GLProgram();
     loadDefaultGLProgram(p, kShaderType_PositionTextureColor_Etc1);
     _programs.insert( std::make_pair( GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1, p ) );
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColorAlphaTest_Etc1);
+    _programs.insert( std::make_pair(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_ETC1, p) );
+    
+    // Position Texture Color alpha test
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColorAlphaTestNoMV_Etc1);
+    _programs.insert( std::make_pair(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_NO_MV_ETC1, p) );
+    
+    p = new (std::nothrow) GLProgram();
+    loadDefaultGLProgram(p, kShaderType_PositionTexture_uColor_Etc1);
+    _programs.insert( std::make_pair( GLProgram::SHADER_NAME_POSITION_TEXTURE_U_COLOR_ETC1, p) );
 }
 
 void GLProgramCache::reloadDefaultGLPrograms()
@@ -378,6 +394,18 @@ void GLProgramCache::reloadDefaultGLPrograms()
     p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1);
     p->reset();
     loadDefaultGLProgram(p, kShaderType_PositionTextureColor_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColorAlphaTest_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_NO_MV_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTextureColorAlphaTestNoMV_Etc1);
+    
+    p = getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_U_COLOR_ETC1);
+    p->reset();
+    loadDefaultGLProgram(p, kShaderType_PositionTexture_uColor_Etc1);
 }
 
 void GLProgramCache::reloadDefaultGLProgramsRelativeToLights()
@@ -461,6 +489,15 @@ void GLProgramCache::loadDefaultGLProgram(GLProgram *p, int type)
             break;
         case kShaderType_PositionTextureColor_Etc1:
             p->initWithByteArrays(ccPositionTextureColor_vert, ccPositionTextureColor_etc1_frag);
+            break;
+        case kShaderType_PositionTextureColorAlphaTest_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_vert, ccPositionTextureColorAlphaTest_etc1_frag);
+            break;
+        case kShaderType_PositionTextureColorAlphaTestNoMV_Etc1:
+            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert, ccPositionTextureColorAlphaTest_etc1_frag);
+            break;
+        case kShaderType_PositionTexture_uColor_Etc1:
+            p->initWithByteArrays(ccPositionTexture_uColor_vert, ccPositionTexture_uColor_etc1_frag);
             break;
         default:
             CCLOG("cocos2d: %s:%d, error shader type", __FUNCTION__, __LINE__);

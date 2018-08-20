@@ -899,7 +899,8 @@ _insideBounds(true),
 _useEtc(false)
 {
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+    
+    //this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
 }
 
 Scale9SpriteV2::~Scale9SpriteV2() {

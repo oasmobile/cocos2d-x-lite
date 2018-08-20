@@ -466,6 +466,14 @@ Texture2D::~Texture2D()
     {
         GL::deleteTexture(_name);
     }
+    
+    //yif etc
+    if (_alphaName)
+    {
+        GL::deleteTexture(_alphaName);
+        _alphaName = 0;
+    }
+    
 }
 
 void Texture2D::releaseGLTexture()
@@ -632,9 +640,21 @@ bool Texture2D::initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, PixelFormat
         GL::deleteTexture(_name);
         _name = 0;
     }
+    //yif etc
+    if (_alphaName)
+    {
+        GL::deleteTexture(_alphaName);
+        _alphaName = 0;
+    }
+    
 
     glGenTextures(1, &_name);
     GL::bindTexture2D(_name);
+    if (_alphaName)
+    {
+        glGenTextures(1, &_alphaName);
+        GL::bindTexture2DN(1, _alphaName);
+    }
 
     if (mipmapsNum == 1)
     {
@@ -719,7 +739,7 @@ bool Texture2D::initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, PixelFormat
     }
     else
     {
-        setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
+        setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ETC1));
     }
     return true;
 }
@@ -731,7 +751,13 @@ bool Texture2D::updateWithData(const void *data,int offsetX,int offsetY,int widt
         GL::bindTexture2D(_name);
         const PixelFormatInfo& info = _pixelFormatInfoTables.at(_pixelFormat);
         glTexSubImage2D(GL_TEXTURE_2D,0,offsetX,offsetY,width,height,info.format, info.type,data);
-
+        if (_alphaName)
+        {
+            GL::bindTexture2DN(1, _alphaName);
+            const PixelFormatInfo& info1 = _pixelFormatInfoTables.at(_pixelFormat);
+            glTexSubImage2D(GL_TEXTURE_2D,1,offsetX,offsetY,width,height,info1.format, info1.type,data);
+            
+        }
         return true;
     }
     return false;
@@ -791,7 +817,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
     {
         if (pixelFormat != image->getRenderFormat())
         {
-            CCLOG("cocos2d: WARNING: This image is compressed and we can't convert it for now");
+            //CCLOG("cocos2d: WARNING: yif This image is compressed and we can't convert it for now. pixelFormat : %d, getRenderFormat : %d, fileName : %s, fileType : %d", (int)pixelFormat, (int)image->getRenderFormat(), image->getFilePath().c_str(), (int)image->getFileType());
         }
 
         initWithData(tempData, tempDataLen, image->getRenderFormat(), imageWidth, imageHeight, imageSize);
@@ -802,6 +828,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
             case Image::Format::ETC:
             case Image::Format::PVR:
             {
+                CCLOG("yif ----------- initAlphaTexture : %s", image->getFilePath().c_str());
                 initAlphaTexture(image);
             }
                 break;
@@ -811,6 +838,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
         
         // set the premultiplied tag
         _hasPremultipliedAlpha = image->hasPremultipliedAlpha();
+        CCLOG("yif ----------- _hasPremultipliedAlpha : %d", (int)_hasPremultipliedAlpha);
 
         return true;
     }
@@ -1260,6 +1288,10 @@ void Texture2D::drawAtPoint(const Vec2& point)
     _shaderProgram->setUniformsForBuiltins();
 
     GL::bindTexture2D( _name );
+    if (_alphaName)
+    {
+        GL::bindTexture2DN(1, _alphaName);
+    }
 
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coordinates);
@@ -1285,6 +1317,10 @@ void Texture2D::drawInRect(const Rect& rect)
     _shaderProgram->setUniformsForBuiltins();
 
     GL::bindTexture2D( _name );
+    if (_alphaName)
+    {
+        GL::bindTexture2DN(1, _alphaName);
+    }
 
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, coordinates);
@@ -1303,7 +1339,7 @@ void Texture2D::generateMipmap()
     glGenerateMipmap(GL_TEXTURE_2D);
     if (_alphaName)
     {
-        GL::bindTexture2D(_alphaName);
+        GL::bindTexture2DN(1, _alphaName);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     _hasMipmaps = true;
@@ -1359,6 +1395,10 @@ void Texture2D::setAliasTexParameters()
     }
 
     GL::bindTexture2D( _name );
+    if (_alphaName)
+    {
+        GL::bindTexture2DN(1, _alphaName);
+    }
 
     if( ! _hasMipmaps )
     {
@@ -1391,6 +1431,10 @@ void Texture2D::setAntiAliasTexParameters()
     }
 
     GL::bindTexture2D( _name );
+    if (_alphaName)
+    {
+        GL::bindTexture2DN(1, _alphaName);
+    }
 
     if( ! _hasMipmaps )
     {

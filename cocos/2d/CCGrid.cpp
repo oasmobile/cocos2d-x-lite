@@ -253,6 +253,10 @@ void GridBase::afterDraw(cocos2d::Node *target)
 //    }
 
     GL::bindTexture2D(_texture->getName());
+    if (_texture->getAlphaTextureName())
+    {
+        GL::bindTexture2DN(1, _texture->getAlphaTextureName());
+    }
 
     // restore projection for default FBO .fixed bug #543 #544
     //TODO:         Director::getInstance()->setProjection(Director::getInstance()->getProjection());

@@ -410,6 +410,10 @@ void MotionStreak::onDraw(const Mat4 &transform, uint32_t flags)
     GL::blendFunc( _blendFunc.src, _blendFunc.dst );
 
     GL::bindTexture2D( _texture );
+    if (_texture->getAlphaTextureName())
+    {
+        GL::bindTexture2DN(1, _texture->getAlphaTextureName());
+    }
 
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, _vertices);
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, _texCoords);

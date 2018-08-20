@@ -113,7 +113,7 @@ namespace spine {
 		unsigned short* allocateIndices(uint32_t numIndices);
 		void deallocateIndices(uint32_t numIndices);
 
-		TwoColorTrianglesCommand* addCommand(cocos2d::Renderer* renderer, float globalOrder, GLuint textureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags);
+		TwoColorTrianglesCommand* addCommand(cocos2d::Renderer* renderer, float globalOrder, GLuint textureID, GLuint alphaTextureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags);
 
 		cocos2d::GLProgramState* getTwoColorTintProgramState () { return _twoColorTintShaderState; }
 		
@@ -163,6 +163,8 @@ namespace spine {
 		
 		// number of batches in the last frame
 		uint32_t _numBatches;
+        
+        bool useEtc;
 	};
 }
 

@@ -74,8 +74,8 @@ void TrianglesCommand::init(float globalOrder, GLuint textureID, GLProgramState*
 
 void TrianglesCommand::init(float globalOrder, Texture2D* texture, GLProgramState* glProgramState, const BlendFunc& blendType, const Triangles& triangles, const Mat4& mv, uint32_t flags)
 {
-    init(globalOrder, texture->getName(), glProgramState, blendType, triangles, mv, flags);
     _alphaTextureID = texture->getAlphaTextureName();
+    init(globalOrder, texture->getName(), glProgramState, blendType, triangles, mv, flags, texture->getAlphaTextureName());
 }
 
 TrianglesCommand::~TrianglesCommand()
@@ -103,7 +103,7 @@ void TrianglesCommand::useMaterial() const
     //Set texture
     GL::bindTexture2D(_textureID);
 
-    if (_alphaTextureID > 0)
+    if (_alphaTextureID)
     {
         GL::bindTexture2DN(1, _alphaTextureID);
     }

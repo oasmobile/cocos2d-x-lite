@@ -952,7 +952,7 @@ GLProgramState* Widget::getNormalGLProgramState()const
     {
         virtualTexture = scale9sp->getSprite() != nullptr ? scale9sp->getSprite()->getTexture() : nullptr;
     }
-    if (virtualTexture && virtualTexture->getAlphaTextureName() > 0)
+    if (virtualTexture && virtualTexture->getAlphaTextureName())
     {
         glState = GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1);
     }

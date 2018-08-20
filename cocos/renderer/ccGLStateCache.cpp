@@ -150,7 +150,7 @@ void bindTexture2D(Texture2D* texture)
 {
     GL::bindTexture2DN(0, texture->getName());
     auto alphaTexID = texture->getAlphaTextureName();
-    if (alphaTexID > 0) {
+    if (alphaTexID) {
         GL::bindTexture2DN(1, alphaTexID);
     }
 }

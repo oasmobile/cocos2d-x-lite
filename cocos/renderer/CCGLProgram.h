@@ -206,6 +206,9 @@ public:
     static const char* SHADER_NAME_POSITION_GRAYSCALE_ETC1;
     static const char* SHADER_NAME_SPRITE_DISTORTION_ETC1;
     static const char* SHADER_NAME_POSITION_TEXTURE_COLOR_ETC1;
+    static const char* SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_ETC1;
+    static const char* SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_NO_MV_ETC1;
+    static const char* SHADER_NAME_POSITION_TEXTURE_U_COLOR_ETC1;
 
     /**
      Built in shader for camera clear

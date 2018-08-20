@@ -102,39 +102,12 @@ void SkeletonRenderer::setupGLProgramState (bool twoColorTintEnabled) {
         CCLOGERROR("SkeletonRenderer does not support twoColorTint !");
 		return;
 	}
-	
-	Texture2D *texture = nullptr;
-	for (int i = 0, n = _skeleton->slotsCount; i < n; i++) {
-		spSlot* slot = _skeleton->drawOrder[i];
-		if (!slot->attachment) continue;
-		switch (slot->attachment->type) {
-			case SP_ATTACHMENT_REGION: {
-				spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
-				texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
-				break;
-			}
-			case SP_ATTACHMENT_MESH: {
-				spMeshAttachment* attachment = (spMeshAttachment*)slot->attachment;
-				texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
-				break;
-			}
-			default:
-				continue;
-		}
-		
-		if (texture != nullptr) {
-			break;
-		}
-	}
-//    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, texture));
-    if (texture && texture->getAlphaTextureName())
-    {
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
-    }
-    else
-    {
+#else
     setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
-    }
+#endif
 }
 
 void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsSkeletonData) {
@@ -246,7 +219,7 @@ void SkeletonRenderer::update (float deltaTime) {
 }
 
 void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t transformFlags) {
-    
+    _premultipliedAlpha = false;
     if (firstEnter)
     {
         firstEnter = false;
@@ -492,7 +465,7 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 				trianglesTwoColor.indices = twoColorBatch->allocateIndices(trianglesTwoColor.indexCount);
 				memcpy(trianglesTwoColor.indices, _clipper->clippedTriangles->items, sizeof(unsigned short) * _clipper->clippedTriangles->size);
 				
-				TwoColorTrianglesCommand* batchedTriangles = lastTwoColorTrianglesCommand = twoColorBatch->addCommand(renderer, _globalZOrder, attachmentVertices->_texture->getName(), _glProgramState, blendFunc, trianglesTwoColor, transform, transformFlags);
+				TwoColorTrianglesCommand* batchedTriangles = lastTwoColorTrianglesCommand = twoColorBatch->addCommand(renderer, _globalZOrder, attachmentVertices->_texture->getName(), attachmentVertices->_texture->getAlphaTextureName(), _glProgramState, blendFunc, trianglesTwoColor, transform, transformFlags);
 				
 				float* verts = _clipper->clippedVertices->items;
 				float* uvs = _clipper->clippedUVs->items;
@@ -544,7 +517,7 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 					}
 				}
 			} else {
-				TwoColorTrianglesCommand* batchedTriangles = lastTwoColorTrianglesCommand = twoColorBatch->addCommand(renderer, _globalZOrder, attachmentVertices->_texture->getName(), _glProgramState, blendFunc, trianglesTwoColor, transform, transformFlags);
+				TwoColorTrianglesCommand* batchedTriangles = lastTwoColorTrianglesCommand = twoColorBatch->addCommand(renderer, _globalZOrder, attachmentVertices->_texture->getName(), attachmentVertices->_texture->getAlphaTextureName(), _glProgramState, blendFunc, trianglesTwoColor, transform, transformFlags);
 				
 				if (_effect) {
 					spColor light;

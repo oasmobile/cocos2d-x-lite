@@ -64,7 +64,8 @@ void BatchCommand::execute()
     // Set material
     _shader->use();
     _shader->setUniformsForBuiltins(_mv);
-    GL::bindTexture2D(_textureID);
+    //GL::bindTexture2D(_textureID);
+    
     GL::blendFunc(_blendType.src, _blendType.dst);
 
     // Draw

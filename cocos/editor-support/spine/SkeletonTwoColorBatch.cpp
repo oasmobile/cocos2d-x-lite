@@ -93,7 +93,7 @@ void TwoColorTrianglesCommand::useMaterial() const {
 	//Set texture
 	GL::bindTexture2D(_textureID);
 	
-	if (_alphaTextureID > 0) {
+	if (_alphaTextureID) {
 		// ANDROID ETC1 ALPHA supports.
 		GL::bindTexture2DN(1, _alphaTextureID);
 	}
@@ -182,7 +182,9 @@ void SkeletonTwoColorBatch::destroyInstance () {
 	}
 }
 
-SkeletonTwoColorBatch::SkeletonTwoColorBatch () {
+SkeletonTwoColorBatch::SkeletonTwoColorBatch ():
+    useEtc(false)
+{
 	for (unsigned int i = 0; i < INITIAL_SIZE; i++) {
 		_commandsPool.push_back(new TwoColorTrianglesCommand());
 	}
@@ -197,12 +199,14 @@ SkeletonTwoColorBatch::SkeletonTwoColorBatch () {
 		this->update(0);
 	});;
     
-//    if (_alphaTextureID > 0)
-//    {
-//        _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_ETC1_FRAGMENT_SHADER);
-//    }
-//    else
+    if (useEtc)
     {
+        CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use etc.");
+        _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_ETC1_FRAGMENT_SHADER);
+    }
+    else
+    {
+        CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use rgb.");
         _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_FRAGMENT_SHADER);
     }
 	
@@ -285,14 +289,24 @@ void SkeletonTwoColorBatch::deallocateIndices(uint32_t numIndices) {
 	_indices->size -= numIndices;
 }
 
-TwoColorTrianglesCommand* SkeletonTwoColorBatch::addCommand(cocos2d::Renderer* renderer, float globalOrder, GLuint textureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags) {
+TwoColorTrianglesCommand* SkeletonTwoColorBatch::addCommand(cocos2d::Renderer* renderer, float globalOrder, GLuint textureID, GLuint alphaTextureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags) {
 	TwoColorTrianglesCommand* command = nextFreeCommand();
-	command->init(globalOrder, textureID, glProgramState, blendType, triangles, mv, flags);
+	command->init(globalOrder, textureID, glProgramState, blendType, triangles, mv, flags, alphaTextureID);
+    CCLOG("yif -------- SkeletonTwoColorBatch::addCommand alphaTextureID : %d", alphaTextureID);
+    if (alphaTextureID)
+    {
+        useEtc = true;
+    }
+    else
+    {
+        useEtc = false;
+    }
 	renderer->addCommand(command);	
 	return command;
 }
 	
 void SkeletonTwoColorBatch::batch (TwoColorTrianglesCommand* command) {
+    CCLOG("yif -------- SkeletonTwoColorBatch::batch ");
 	if (_numVerticesBuffer + command->getTriangles().vertCount >= MAX_VERTICES || _numIndicesBuffer + command->getTriangles().indexCount >= MAX_INDICES) {
 		flush(_lastCommand);
 	}

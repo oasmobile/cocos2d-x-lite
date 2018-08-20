@@ -828,7 +828,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
             case Image::Format::ETC:
             case Image::Format::PVR:
             {
-                CCLOG("yif ----------- initAlphaTexture : %s", image->getFilePath().c_str());
+                //CCLOG("yif ----------- initAlphaTexture : %s", image->getFilePath().c_str());
                 initAlphaTexture(image);
             }
                 break;
@@ -838,7 +838,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
         
         // set the premultiplied tag
         _hasPremultipliedAlpha = image->hasPremultipliedAlpha();
-        CCLOG("yif ----------- _hasPremultipliedAlpha : %d", (int)_hasPremultipliedAlpha);
+        //CCLOG("yif ----------- _hasPremultipliedAlpha : %d", (int)_hasPremultipliedAlpha);
 
         return true;
     }

@@ -201,12 +201,12 @@ SkeletonTwoColorBatch::SkeletonTwoColorBatch ():
     
     if (useEtc)
     {
-        CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use etc.");
+        //CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use etc.");
         _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_ETC1_FRAGMENT_SHADER);
     }
     else
     {
-        CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use rgb.");
+        //CCLOG("yif -------- SkeletonTwoColorBatch::SkeletonTwoColorBatch use rgb.");
         _twoColorTintShader = cocos2d::GLProgram::createWithByteArrays(TWO_COLOR_TINT_VERTEX_SHADER, TWO_COLOR_TINT_FRAGMENT_SHADER);
     }
 	
@@ -292,7 +292,7 @@ void SkeletonTwoColorBatch::deallocateIndices(uint32_t numIndices) {
 TwoColorTrianglesCommand* SkeletonTwoColorBatch::addCommand(cocos2d::Renderer* renderer, float globalOrder, GLuint textureID, GLuint alphaTextureID, cocos2d::GLProgramState* glProgramState, cocos2d::BlendFunc blendType, const TwoColorTriangles& triangles, const cocos2d::Mat4& mv, uint32_t flags) {
 	TwoColorTrianglesCommand* command = nextFreeCommand();
 	command->init(globalOrder, textureID, glProgramState, blendType, triangles, mv, flags, alphaTextureID);
-    CCLOG("yif -------- SkeletonTwoColorBatch::addCommand alphaTextureID : %d", alphaTextureID);
+    //CCLOG("yif -------- SkeletonTwoColorBatch::addCommand alphaTextureID : %d", alphaTextureID);
     if (alphaTextureID)
     {
         useEtc = true;
@@ -306,7 +306,7 @@ TwoColorTrianglesCommand* SkeletonTwoColorBatch::addCommand(cocos2d::Renderer* r
 }
 	
 void SkeletonTwoColorBatch::batch (TwoColorTrianglesCommand* command) {
-    CCLOG("yif -------- SkeletonTwoColorBatch::batch ");
+    //CCLOG("yif -------- SkeletonTwoColorBatch::batch ");
 	if (_numVerticesBuffer + command->getTriangles().vertCount >= MAX_VERTICES || _numIndicesBuffer + command->getTriangles().indexCount >= MAX_INDICES) {
 		flush(_lastCommand);
 	}

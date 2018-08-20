@@ -97,23 +97,10 @@ namespace se {
             assert(v != nullptr);
             v8::HandleScope handle_scope(isolate);
 
-            if (jsval->IsUndefined()) {
-                v->setUndefined();
-            } else if (jsval->IsNull()) {
-                v->setNull();
-            } else if (jsval->IsNumber()) {
+            if (jsval->IsNumber()) {
                 v8::MaybeLocal<v8::Number> jsNumber = jsval->ToNumber(isolate->GetCurrentContext());
                 if (!jsNumber.IsEmpty())
                     v->setNumber(jsNumber.ToLocalChecked()->Value());
-                else
-                    v->setUndefined();
-            } else if (jsval->IsString()) {
-                v8::String::Utf8Value utf8(jsval);
-                v->setString(std::string(*utf8));
-            } else if (jsval->IsBoolean()) {
-                v8::MaybeLocal<v8::Boolean> jsBoolean = jsval->ToBoolean(isolate->GetCurrentContext());
-                if (!jsBoolean.IsEmpty())
-                    v->setBoolean(jsBoolean.ToLocalChecked()->Value());
                 else
                     v->setUndefined();
             } else if (jsval->IsObject()) {
@@ -126,7 +113,7 @@ namespace se {
                     {
                         obj = Object::getObjectWithPtr(nativePtr);
                     }
-
+                    
                     if (obj == nullptr)
                     {
                         obj = Object::_createJSObject(nullptr, jsObj.ToLocalChecked());
@@ -138,6 +125,19 @@ namespace se {
                 {
                     v->setUndefined();
                 }
+            } else if (jsval->IsBoolean()) {
+                v8::MaybeLocal<v8::Boolean> jsBoolean = jsval->ToBoolean(isolate->GetCurrentContext());
+                if (!jsBoolean.IsEmpty())
+                    v->setBoolean(jsBoolean.ToLocalChecked()->Value());
+                else
+                    v->setUndefined();
+            } else if (jsval->IsString()) {
+                v8::String::Utf8Value utf8(jsval);
+                v->setString(std::string(*utf8));
+            } else if (jsval->IsUndefined()) {
+                v->setUndefined();
+            } else if (jsval->IsNull()) {
+                v->setNull();
             }
         }
 

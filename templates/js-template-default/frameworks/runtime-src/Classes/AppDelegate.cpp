@@ -10,6 +10,12 @@
 #include "external/criware/Classes/cricocos2d_initializer.h"
 #include "external/criware/Classes/crijsb_register.h"
 
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "CrashLogReporter.h"
+#endif
+
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
 #include "SDKManager.h"
 #include "jsb_anysdk_protocols_auto.hpp"
@@ -78,6 +84,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     se->setExceptionCallback([](const char* location, const char* message, const char* stack){
         // Send exception information to server like Tencent Bugly.
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        CrashLogReporter::UploadLog();
+#endif
     });
 
     jsb_register_all_modules();

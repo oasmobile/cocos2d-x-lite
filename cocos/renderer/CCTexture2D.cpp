@@ -826,7 +826,7 @@ bool Texture2D::initWithImage(Image *image, PixelFormat format)
         switch(image->getFileType())
         {
             case Image::Format::ETC:
-            case Image::Format::PVR:
+            //case Image::Format::PVR:
             {
                 //CCLOG("yif ----------- initAlphaTexture : %s", image->getFilePath().c_str());
                 initAlphaTexture(image);
@@ -880,7 +880,7 @@ int Texture2D::initAlphaTexture(Image* image)
         }
         else {
             CC_BREAK_IF(0 == image->getFilePath().size());
-            std::string alphaExt = Image::Format::PVR == image->getFileType()? "_alpha.pvr": "_alpha.png";
+            std::string alphaExt = Image::Format::PVR == image->getFileType()? "_alpha.pvr": "_alpha.pkm";
             
             CC_BREAK_IF(std::string::npos != image->getFilePath().rfind(alphaExt));
             

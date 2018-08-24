@@ -775,21 +775,44 @@ std::string FileUtils::fullPathForFilename(const std::string &filename) const
     {
         return "";
     }
-
-    if (isAbsolutePath(filename))
+    
+    // yif dirty mod
+    std::string resFileName = filename;
+    if (filename.find(".png") != std::string::npos)
     {
-        return filename;
+        if (filename.find("/texture/") != std::string::npos ||
+            filename.find("/spine/") != std::string::npos)
+        {
+            if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            {
+                resFileName.replace(resFileName.length() - 4, 4, ".pkm");
+            }
+            else if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            {
+                resFileName.replace(resFileName.length() - 4, 4, ".pvr");
+            }
+            else
+            {
+                
+            }
+        }
+    }
+    
+
+    if (isAbsolutePath(resFileName))
+    {
+        return resFileName;
     }
 
     // Already Cached ?
-    auto cacheIter = _fullPathCache.find(filename);
+    auto cacheIter = _fullPathCache.find(resFileName);
     if(cacheIter != _fullPathCache.end())
     {
         return cacheIter->second;
     }
 
     // Get the new file name.
-    const std::string newFilename( getNewFilename(filename) );
+    const std::string newFilename( getNewFilename(resFileName) );
 
     std::string fullpath;
 

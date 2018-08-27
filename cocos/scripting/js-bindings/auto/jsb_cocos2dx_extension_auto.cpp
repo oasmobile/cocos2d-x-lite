@@ -1039,76 +1039,6 @@ static bool js_cocos2dx_extension_AssetsManagerEx_isResuming(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_isResuming)
 
-static bool js_cocos2dx_extension_AssetsManagerEx_setPackageUrl(se::State& s)
-{
-    CC_UNUSED bool ok = true;
-    cocos2d::extension::AssetsManagerEx* cobj = (cocos2d::extension::AssetsManagerEx*)s.nativeThisObject();
-    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setPackageUrl : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    do {
-        if (argc == 1) {
-            std::string arg0;
-            ok &= seval_to_std_string(args[0], &arg0);
-            if (!ok) { ok = true; break; }
-            cobj->setPackageUrl(arg0);
-            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_AssetsManagerEx_setPackageUrl : Error processing arguments");
-            return true;
-        }
-    } while(false);
-    
-    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setPackageUrl)
-
-
-static bool js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl(se::State& s)
-{
-    CC_UNUSED bool ok = true;
-    cocos2d::extension::AssetsManagerEx* cobj = (cocos2d::extension::AssetsManagerEx*)s.nativeThisObject();
-    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    do {
-        if (argc == 1) {
-            std::string arg0;
-            ok &= seval_to_std_string(args[0], &arg0);
-            if (!ok) { ok = true; break; }
-            cobj->setManifestFileUrl(arg0);
-            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl : Error processing arguments");
-            return true;
-        }
-    } while(false);
-    
-    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl)
-
-static bool js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl(se::State& s)
-{
-    CC_UNUSED bool ok = true;
-    cocos2d::extension::AssetsManagerEx* cobj = (cocos2d::extension::AssetsManagerEx*)s.nativeThisObject();
-    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    do {
-        if (argc == 1) {
-            std::string arg0;
-            ok &= seval_to_std_string(args[0], &arg0);
-            if (!ok) { ok = true; break; }
-            cobj->setVersionFileUrl(arg0);
-            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl : Error processing arguments");
-            return true;
-        }
-    } while(false);
-    
-    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl)
-
 static bool js_cocos2dx_extension_AssetsManagerEx_create(se::State& s)
 {
     const auto& args = s.args();
@@ -1245,9 +1175,6 @@ bool js_register_cocos2dx_extension_AssetsManagerEx(se::Object* obj)
     cls->defineFunction("prepareUpdate", _SE(js_cocos2dx_extension_AssetsManagerEx_prepareUpdate));
     cls->defineFunction("downloadFailedAssets", _SE(js_cocos2dx_extension_AssetsManagerEx_downloadFailedAssets));
     cls->defineFunction("isResuming", _SE(js_cocos2dx_extension_AssetsManagerEx_isResuming));
-    cls->defineFunction("setPackageUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setPackageUrl));
-    cls->defineFunction("setManifestFileUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl));
-    cls->defineFunction("setVersionFileUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_extension_AssetsManagerEx_create));
     cls->defineFinalizeFunction(_SE(js_cocos2d_extension_AssetsManagerEx_finalize));
     cls->install();

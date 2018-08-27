@@ -703,7 +703,7 @@ void AssetsManagerEx::downloadVersion()
     if (_updateState > State::PREDOWNLOAD_VERSION)
         return;
 
-    std::string versionUrl = _localManifest->getVersionFileUrl();
+    std::string versionUrl = getVersionFileUrl();
 
     if (versionUrl.size() > 0)
     {
@@ -766,7 +766,7 @@ void AssetsManagerEx::downloadManifest()
     if (_updateState != State::PREDOWNLOAD_MANIFEST)
         return;
 
-    std::string manifestUrl = _localManifest->getManifestFileUrl();
+    std::string manifestUrl = getManifestFileUrl();
 
     if (manifestUrl.size() > 0)
     {
@@ -867,7 +867,7 @@ void AssetsManagerEx::prepareUpdate()
         else
         {
             // Generate download units for all assets that need to be updated or added
-            std::string packageUrl = _remoteManifest->getPackageUrl();
+//            std::string packageUrl = getPackageUrl();
             // Preprocessing local files in previous version and creating download folders
             for (auto it = diff_map.begin(); it != diff_map.end(); ++it)
             {
@@ -877,7 +877,7 @@ void AssetsManagerEx::prepareUpdate()
                     std::string path = diff.asset.path;
                     DownloadUnit unit;
                     unit.customId = it->first;
-                    unit.srcUrl = packageUrl + path;
+                    unit.srcUrl = path;
                     unit.storagePath = _tempStoragePath + path;
                     unit.size = diff.asset.size;
                     _downloadUnits.emplace(unit.customId, unit);
@@ -1335,7 +1335,8 @@ void AssetsManagerEx::queueDowload()
         this->onDownloadUnitsFinished();
         return;
     }
-        
+    
+    std::string packageUrl = getPackageUrl();
     while (_currConcurrentTask < _maxConcurrentTask && _queue.size() > 0)
     {
         std::string key = _queue.back();
@@ -1344,7 +1345,7 @@ void AssetsManagerEx::queueDowload()
         _currConcurrentTask++;
         DownloadUnit& unit = _downloadUnits[key];
         _fileUtils->createDirectory(basename(unit.storagePath));
-        _downloader->createDownloadFileTask(unit.srcUrl, unit.storagePath, unit.customId);
+        _downloader->createDownloadFileTask(packageUrl + unit.srcUrl, unit.storagePath, unit.customId);
         
         _tempManifest->setAssetDownloadState(key, Manifest::DownloadState::DOWNLOADING);
     }
@@ -1371,6 +1372,40 @@ void AssetsManagerEx::onDownloadUnitsFinished()
     {
         updateSucceed();
     }
+}
+
+const std::string& AssetsManagerEx::getPackageUrl() const
+{
+    return _packageUrl;
+}
+
+const std::string& AssetsManagerEx::getManifestFileUrl() const
+{
+    return _remoteManifestUrl;
+}
+
+const std::string& AssetsManagerEx::getVersionFileUrl() const
+{
+    return _remoteVersionUrl;
+}
+
+void AssetsManagerEx::setPackageUrl(const std::string url)
+{
+    _packageUrl = url;
+    if (_packageUrl.size() > 0 && _packageUrl[_packageUrl.size() - 1] != '/')
+    {
+        _packageUrl.append("/");
+    }
+}
+
+void AssetsManagerEx::setManifestFileUrl(const std::string url)
+{
+    _remoteManifestUrl = url;
+}
+
+void AssetsManagerEx::setVersionFileUrl(const std::string url)
+{
+    _remoteVersionUrl = url;
 }
 
 NS_CC_EXT_END

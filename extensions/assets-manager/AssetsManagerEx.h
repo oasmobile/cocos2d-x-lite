@@ -186,6 +186,30 @@ public:
      */
     void setVerifyCallback(const VerifyCallback& callback) {_verifyCallback = callback;};
     
+    /** @brief Gets remote package url.
+     */
+    const std::string& getPackageUrl() const;
+    
+    /** @brief Gets remote manifest file url.
+     */
+    const std::string& getManifestFileUrl() const;
+    
+    /** @brief gets remote version file url.
+     */
+    const std::string& getVersionFileUrl() const;
+    
+    /** @brief sets remote package url.
+     */
+    void setPackageUrl(const std::string);
+    
+    /** @brief sets remote manifest file url.
+     */
+    void setManifestFileUrl(const std::string);
+    
+    /** @brief sets remote version file url.
+     */
+    void setVersionFileUrl(const std::string);
+    
 CC_CONSTRUCTOR_ACCESS:
     
     AssetsManagerEx(const std::string& manifestUrl, const std::string& storagePath);
@@ -388,6 +412,15 @@ private:
     
     //! Marker for whether the assets manager is inited
     bool _inited;
+    
+    //! The remote package url
+    std::string _packageUrl;
+    
+    //! The remote path of manifest file
+    std::string _remoteManifestUrl;
+    
+    //! The remote path of version file [Optional]
+    std::string _remoteVersionUrl;
 };
 
 NS_CC_EXT_END

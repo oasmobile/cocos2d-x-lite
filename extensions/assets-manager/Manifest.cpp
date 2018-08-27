@@ -316,7 +316,7 @@ void Manifest::genResumeAssetsList(DownloadUnits *units) const
         {
             DownloadUnit unit;
             unit.customId = it->first;
-            unit.srcUrl = _packageUrl + asset.path;
+            unit.srcUrl = asset.path; //_packageUrl +
             unit.storagePath = _manifestRoot + asset.path;
             unit.size = asset.size;
             units->emplace(unit.customId, unit);
@@ -504,16 +504,16 @@ Manifest::Asset Manifest::parseAsset(const std::string &path, const rapidjson::V
 void Manifest::loadVersion(const rapidjson::Document &json)
 {
     // Retrieve remote manifest url
-    if ( json.HasMember(KEY_MANIFEST_URL) && json[KEY_MANIFEST_URL].IsString() )
-    {
-        _remoteManifestUrl = json[KEY_MANIFEST_URL].GetString();
-    }
+//    if ( json.HasMember(KEY_MANIFEST_URL) && json[KEY_MANIFEST_URL].IsString() )
+//    {
+//        _remoteManifestUrl = json[KEY_MANIFEST_URL].GetString();
+//    }
     
     // Retrieve remote version url
-    if ( json.HasMember(KEY_VERSION_URL) && json[KEY_VERSION_URL].IsString() )
-    {
-        _remoteVersionUrl = json[KEY_VERSION_URL].GetString();
-    }
+//    if ( json.HasMember(KEY_VERSION_URL) && json[KEY_VERSION_URL].IsString() )
+//    {
+//        _remoteVersionUrl = json[KEY_VERSION_URL].GetString();
+//    }
     
     // Retrieve local version
     if ( json.HasMember(KEY_VERSION) && json[KEY_VERSION].IsString() )
@@ -561,15 +561,15 @@ void Manifest::loadManifest(const rapidjson::Document &json)
     loadVersion(json);
     
     // Retrieve package url
-    if ( json.HasMember(KEY_PACKAGE_URL) && json[KEY_PACKAGE_URL].IsString() )
-    {
-        _packageUrl = json[KEY_PACKAGE_URL].GetString();
-        // Append automatically "/"
-        if (_packageUrl.size() > 0 && _packageUrl[_packageUrl.size() - 1] != '/')
-        {
-            _packageUrl.append("/");
-        }
-    }
+//    if ( json.HasMember(KEY_PACKAGE_URL) && json[KEY_PACKAGE_URL].IsString() )
+//    {
+//        _packageUrl = json[KEY_PACKAGE_URL].GetString();
+//        // Append automatically "/"
+//        if (_packageUrl.size() > 0 && _packageUrl[_packageUrl.size() - 1] != '/')
+//        {
+//            _packageUrl.append("/");
+//        }
+//    }
     
     // Retrieve all assets
     if ( json.HasMember(KEY_ASSETS) )

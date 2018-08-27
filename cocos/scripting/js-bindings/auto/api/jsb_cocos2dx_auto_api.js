@@ -14549,6 +14549,16 @@ getDPI : function (
     return 0;
 },
 
+/**
+ * @method setAccelerometerEnabled
+ * @param {cc.AudioCategory} arg0
+ */
+setAudioCategory : function (
+category
+)
+{
+},
+
 };
 
 /**

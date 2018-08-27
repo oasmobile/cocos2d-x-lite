@@ -268,6 +268,10 @@ cc.inputManager = {
     getDPI: cc.Device.getDPI
 };
 
+cc.audioManager = {
+    setAudioCategory: cc.Device.setAudioCategory
+};
+
 cc.EventListenerTouchOneByOne.prototype.clone = function() {
     var ret = cc.EventListenerTouchOneByOne.create();
     ret.onTouchBegan = this.onTouchBegan;

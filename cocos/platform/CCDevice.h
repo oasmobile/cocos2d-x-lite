@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "platform/CCPlatformMacros.h"
 #include "base/ccMacros.h"
 #include "base/CCData.h"
+#include "base/ccTypes.h"
 
 NS_CC_BEGIN
 
@@ -96,6 +97,10 @@ public:
      * Gets texture data for text.
      */
     static Data getTextureDataForText(const char * text, const FontDefinition& textDefinition, TextAlign align, int &width, int &height, bool& hasPremultipliedAlpha);
+
+
+    static void setAudioCategory(AudioCategory category);
+
 
 private:
     CC_DISALLOW_IMPLICIT_CONSTRUCTORS(Device);

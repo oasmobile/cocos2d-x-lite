@@ -33284,6 +33284,25 @@ static bool js_cocos2dx_Device_getDPI(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Device_getDPI)
 
 
+static bool js_cocos2dx_Device_setAudioCategory(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 1) {
+        cocos2d::AudioCategory arg0;
+        ok &= seval_to_int8(args[0], (int8_t*)&arg0);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Device_setAudioCategory : Error processing arguments");
+        cocos2d::Device::setAudioCategory(arg0);
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Device_setAudioCategory)
+
+
+
 
 
 bool js_register_cocos2dx_Device(se::Object* obj)
@@ -33295,6 +33314,7 @@ bool js_register_cocos2dx_Device(se::Object* obj)
     cls->defineStaticFunction("setKeepScreenOn", _SE(js_cocos2dx_Device_setKeepScreenOn));
     cls->defineStaticFunction("vibrate", _SE(js_cocos2dx_Device_vibrate));
     cls->defineStaticFunction("getDPI", _SE(js_cocos2dx_Device_getDPI));
+    cls->defineStaticFunction("setAudioCategory", _SE(js_cocos2dx_Device_setAudioCategory));
     cls->install();
     JSBClassType::registerClass<cocos2d::Device>(cls);
 

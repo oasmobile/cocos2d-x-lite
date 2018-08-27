@@ -448,6 +448,14 @@ enum class GlyphCollection : char {
     CUSTOM
 };
 
+
+enum class CC_DLL AudioCategory : char
+{
+    AMBIENT,
+    SOLO_AMBIENT,
+};
+
+
 // Types for animation in particle systems
 
 /** @struct T2F_Quad

@@ -181,6 +181,11 @@ void Device::vibrate(float duration)
     JniHelper::callStaticVoidMethod(helperClassName, "vibrate", duration);
 }
 
+void Device::setAudioCategory(AudioCategory category)
+{
+    // TODO W AUDIO
+}
+
 NS_CC_END
 
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID

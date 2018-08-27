@@ -2171,6 +2171,7 @@ SE_DECLARE_FUNC(js_cocos2dx_Device_setAccelerometerInterval);
 SE_DECLARE_FUNC(js_cocos2dx_Device_setKeepScreenOn);
 SE_DECLARE_FUNC(js_cocos2dx_Device_vibrate);
 SE_DECLARE_FUNC(js_cocos2dx_Device_getDPI);
+SE_DECLARE_FUNC(js_cocos2dx_Device_setAudioCategory);
 
 extern se::Object* __jsb_cocos2d_SAXParser_proto;
 extern se::Class* __jsb_cocos2d_SAXParser_class;

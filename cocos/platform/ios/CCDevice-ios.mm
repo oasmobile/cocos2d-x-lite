@@ -44,6 +44,8 @@
 // Vibrate
 #import <AudioToolbox/AudioToolbox.h>
 
+#import <AVFoundation/AVFoundation.h>
+
 using FontUtils::tImageInfo;
 const float MAX_MEASURE_HEIGHT = 10000;
 
@@ -605,6 +607,21 @@ void Device::vibrate(float duration)
     // automatically vibrates for approximately 0.4 seconds
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 }
+
+
+void Device::setAudioCategory(AudioCategory category)
+{
+    if (AudioCategory::SOLO_AMBIENT == category)
+    {
+        [[AVAudioSession sharedInstance]setCategory: AVAudioSessionCategorySoloAmbient error:nil];
+    }
+    else
+    {
+        [[AVAudioSession sharedInstance]setCategory: AVAudioSessionCategoryAmbient error:nil];
+    }
+    [[AVAudioSession sharedInstance]setActive: YES error:nil];
+}
+
 
 NS_CC_END
 

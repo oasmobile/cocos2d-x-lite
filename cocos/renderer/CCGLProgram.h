@@ -467,6 +467,8 @@ protected:
     bool compileShader(GLuint * shader, GLenum type, const GLchar* source, const std::string& convertedDefines);
     bool compileShader(GLuint * shader, GLenum type, const GLchar* source);
     void clearShader();
+    
+    void clearHashUniforms();
 
     /**OpenGL handle for program.*/
     GLuint            _program;

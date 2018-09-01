@@ -210,11 +210,7 @@ GLProgram::~GLProgram()
         GL::deleteProgram(_program);
     }
 
-    for (auto e : _hashForUniforms)
-    {
-        free(e.second.first);
-    }
-    _hashForUniforms.clear();
+    clearHashUniforms();
 }
 
 bool GLProgram::initWithByteArrays(const GLchar* vShaderByteArray, const GLchar* fShaderByteArray)
@@ -264,7 +260,7 @@ bool GLProgram::initWithByteArrays(const GLchar* vShaderByteArray, const GLchar*
         glAttachShader(_program, _fragShader);
     }
 
-    _hashForUniforms.clear();
+    clearHashUniforms();
 
     CHECK_GL_ERROR_DEBUG();
 
@@ -925,12 +921,7 @@ void GLProgram::reset()
     //GL::deleteProgram(_program);
     _program = 0;
 
-    for (auto e: _hashForUniforms)
-    {
-        free(e.second.first);
-    }
-
-    _hashForUniforms.clear();
+    clearHashUniforms();
 }
 
 inline void GLProgram::clearShader()
@@ -947,6 +938,16 @@ inline void GLProgram::clearShader()
 
     _vertShader = _fragShader = 0;
 }
+
+inline void GLProgram::clearHashUniforms()
+{
+    for (auto e: _hashForUniforms)
+    {
+        free(e.second.first);
+    }
+    _hashForUniforms.clear();
+}
+
 
 NS_CC_END
 

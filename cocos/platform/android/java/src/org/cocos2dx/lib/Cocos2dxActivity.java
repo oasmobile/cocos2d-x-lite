@@ -385,6 +385,11 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onLowMemory() {
+        super.onLowMemory();
+        this.mGLSurfaceView.handleLowMemory();
+    }
 
     protected ResizeLayout mFrameLayout = null;
     // ===========================================================

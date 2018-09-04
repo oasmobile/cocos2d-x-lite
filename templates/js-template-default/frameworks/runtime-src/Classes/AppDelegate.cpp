@@ -62,9 +62,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
         director->setOpenGLView(glview);
     }
-    
+
     CRICOCOS2D::criWare_EnableAssetsAccess();
-    
+
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
@@ -122,4 +122,10 @@ void AppDelegate::applicationWillEnterForeground()
     director->getEventDispatcher()->dispatchCustomEvent("game_on_show");
 
     CRICOCOS2D::criWare_Resume();
+}
+
+void AppDelegate::onLowMemoryWarnning()
+{
+    auto director = Director::getInstance();
+    director->getEventDispatcher()->dispatchCustomEvent("low_memory");
 }

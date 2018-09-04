@@ -386,7 +386,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     }
 
     @Override
-    protected void onLowMemory() {
+    public void onLowMemory() {
         super.onLowMemory();
         this.mGLSurfaceView.handleLowMemory();
     }

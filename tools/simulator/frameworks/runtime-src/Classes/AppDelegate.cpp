@@ -85,3 +85,9 @@ void AppDelegate::applicationWillEnterForeground()
 
     CRICOCOS2D::criWare_Resume();
 }
+
+void AppDelegate::onLowMemoryWarnning()
+{
+    auto director = Director::getInstance();
+    director->getEventDispatcher()->dispatchCustomEvent("low_memory");
+}

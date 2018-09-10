@@ -102,12 +102,51 @@ void SkeletonRenderer::setupGLProgramState (bool twoColorTintEnabled) {
         CCLOGERROR("SkeletonRenderer does not support twoColorTint !");
 		return;
 	}
+    
+    Texture2D *texture = nullptr;
+    for (int i = 0, n = _skeleton->slotsCount; i < n; i++)
+    {
+        spSlot* slot = _skeleton->drawOrder[i];
+        if (!slot->attachment) continue;
+        switch (slot->attachment->type) {
+                case SP_ATTACHMENT_REGION: {
+                        spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
+                        texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
+                        break;
+                    }
+                case SP_ATTACHMENT_MESH: {
+                        spMeshAttachment* attachment = (spMeshAttachment*)slot->attachment;
+                        texture = static_cast<AttachmentVertices*>(attachment->rendererObject)->_texture;
+                        break;
+                   }
+                default:
+                    continue;
+        }
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
-#else
-    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
-#endif
+        if (texture != nullptr) {
+            break;
+        }
+    }
+    //    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, texture));
+    if (texture && texture->getAlphaTextureName())
+    {
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+    }
+    else if (texture)
+    {
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+    }
+    else
+    {
+        // 下一帧继续检测是否使用etc
+        firstEnter = true;
+    }
+
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+//    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP_ETC1));
+//#else
+//    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
+//#endif
 }
 
 void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsSkeletonData) {

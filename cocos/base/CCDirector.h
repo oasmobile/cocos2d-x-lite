@@ -511,7 +511,8 @@ public:
     
     bool isValid() const { return !_invalid; }
     
-    void setCullingEnabled (bool enable) { _isCullingEnabled = enable; }
+    // yif 关闭裁剪 史上最慢
+    void setCullingEnabled (bool enable) { _isCullingEnabled = false; }
     bool isCullingEnabled () const { return _isCullingEnabled; }
 
 protected:

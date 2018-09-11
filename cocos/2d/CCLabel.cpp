@@ -1891,7 +1891,7 @@ void Label::setLineHeight(float height)
 
 float Label::getLineHeight() const
 {
-    CCASSERT(_currentLabelType != LabelType::STRING_TEXTURE, "Not supported system font!");
+    //CCASSERT(_currentLabelType != LabelType::STRING_TEXTURE, "Not supported system font!");
     return _textSprite ? 0.0f : _lineHeight * _bmfontScale;
 }
 

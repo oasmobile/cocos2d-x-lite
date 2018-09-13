@@ -780,8 +780,8 @@ std::string FileUtils::fullPathForFilename(const std::string &filename) const
     std::string resFileName = filename;
     if (filename.find(".png") != std::string::npos)
     {
-        if (filename.find("/texture/") != std::string::npos ||
-            filename.find("/spine/") != std::string::npos)
+        if (filename.find("resources/texture/") != std::string::npos ||
+            filename.find("resources/spine/") != std::string::npos)
         {
             if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
             {

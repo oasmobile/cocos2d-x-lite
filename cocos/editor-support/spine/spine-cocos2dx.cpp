@@ -67,7 +67,7 @@ GLuint filter (spAtlasFilter filter) {
 }
 
 void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
-    CCLOGWARN("yif -------------- _spAtlasPage_createTexture path : %s", path);
+    log("yif -------------- _spAtlasPage_createTexture path : %s", path);
 	Texture2D* texture = nullptr;
 	if (spine::_customTextureLoader) {
 		texture = spine::_customTextureLoader(path);
@@ -75,7 +75,7 @@ void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
 	if (!texture) {
 		texture = Director::getInstance()->getTextureCache()->addImage(path);
 	}
-	//CCASSERT(texture != nullptr, "Invalid image");
+	CCASSERT(texture != nullptr, "Invalid image");
 	texture->retain();
 
 	Texture2D::TexParams textureParams = {filter(self->minFilter), filter(self->magFilter), wrap(self->uWrap), wrap(self->vWrap)};

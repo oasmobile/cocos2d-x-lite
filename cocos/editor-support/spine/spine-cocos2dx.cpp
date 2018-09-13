@@ -67,7 +67,7 @@ GLuint filter (spAtlasFilter filter) {
 }
 
 void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
-    CCLOG("yif -------------- _spAtlasPage_createTexture path : %s", path);
+    CCLOGWARN("yif -------------- _spAtlasPage_createTexture path : %s", path);
 	Texture2D* texture = nullptr;
 	if (spine::_customTextureLoader) {
 		texture = spine::_customTextureLoader(path);

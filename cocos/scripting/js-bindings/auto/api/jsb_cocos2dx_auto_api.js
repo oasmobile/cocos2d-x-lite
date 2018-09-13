@@ -14550,11 +14550,25 @@ getDPI : function (
 },
 
 /**
- * @method setAccelerometerEnabled
+ * @method setAudioCategory
  * @param {cc.AudioCategory} arg0
  */
 setAudioCategory : function (
 category
+)
+{
+},
+
+/**
+ * @method setGameUserBaseInfo
+ * @param {int} arg0
+ * @param {int} arg1
+ * @param {int} arg2
+ */
+setGameUserBaseInfo : function (
+account_id,
+server_id,
+user_id
 )
 {
 },

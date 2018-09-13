@@ -272,6 +272,10 @@ cc.audioManager = {
     setAudioCategory: cc.Device.setAudioCategory
 };
 
+cc.gameDataManager = {
+    setGameUserBaseInfo: cc.Device.setGameUserBaseInfo
+};
+
 cc.EventListenerTouchOneByOne.prototype.clone = function() {
     var ret = cc.EventListenerTouchOneByOne.create();
     ret.onTouchBegan = this.onTouchBegan;

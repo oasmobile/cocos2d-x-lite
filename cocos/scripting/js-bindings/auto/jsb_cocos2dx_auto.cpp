@@ -33302,6 +33302,31 @@ static bool js_cocos2dx_Device_setAudioCategory(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Device_setAudioCategory)
 
 
+static bool js_cocos2dx_Device_setGameUserBaseInfo(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 3) {
+        unsigned int arg0_account_id = 0;
+        ok &= seval_to_uint32(args[0], (uint32_t*)&arg0_account_id);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Device_setGameUserBaseInfo : Error processing arguments 0");
+
+        unsigned int arg1_server_id = 0;
+        ok &= seval_to_uint32(args[1], (uint32_t*)&arg1_server_id);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Device_setGameUserBaseInfo : Error processing arguments 1");
+
+        unsigned int arg2_user_id = 0;
+        ok &= seval_to_uint32(args[2], (uint32_t*)&arg2_user_id);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Device_setGameUserBaseInfo : Error processing arguments 2");
+
+        cocos2d::Device::setGameUserBaseInfo(arg0_account_id, arg1_server_id, arg2_user_id);
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 3);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Device_setGameUserBaseInfo)
 
 
 
@@ -33315,6 +33340,7 @@ bool js_register_cocos2dx_Device(se::Object* obj)
     cls->defineStaticFunction("vibrate", _SE(js_cocos2dx_Device_vibrate));
     cls->defineStaticFunction("getDPI", _SE(js_cocos2dx_Device_getDPI));
     cls->defineStaticFunction("setAudioCategory", _SE(js_cocos2dx_Device_setAudioCategory));
+    cls->defineStaticFunction("setGameUserBaseInfo", _SE(js_cocos2dx_Device_setGameUserBaseInfo));
     cls->install();
     JSBClassType::registerClass<cocos2d::Device>(cls);
 

@@ -447,6 +447,13 @@ void Device::setAudioCategory(AudioCategory category)
     CC_UNUSED_PARAM(category);
 }
 
+void Device::setGameUserBaseInfo(unsigned int account_id, unsigned int server_id, unsigned int user_id)
+{
+    CC_UNUSED_PARAM(account_id);
+    CC_UNUSED_PARAM(server_id);
+    CC_UNUSED_PARAM(user_id);
+}
+
 NS_CC_END
 
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_MAC

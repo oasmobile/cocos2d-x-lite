@@ -186,6 +186,18 @@ void Device::setAudioCategory(AudioCategory category)
     // TODO W AUDIO
 }
 
+void Device::setGameUserBaseInfo(unsigned int account_id, unsigned int server_id, unsigned int user_id)
+{
+    JniMethodInfo minfo;
+    bool isHave = JniHelper::getStaticMethodInfo(minfo, "org/cocos2dx/javascript/CrashLogReporter", "SetGameUserBaseInfo", "(III)V");
+    if (isHave)
+    {
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, account_id, server_id, user_id);
+    }
+
+    minfo.env->DeleteLocalRef(minfo.classID);
+}
+
 NS_CC_END
 
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID

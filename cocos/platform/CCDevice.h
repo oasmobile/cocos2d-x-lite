@@ -100,7 +100,6 @@ public:
 
 
     static void setAudioCategory(AudioCategory category);
-    static void setGameUserBaseInfo(unsigned int account_id, unsigned int server_id, unsigned int user_id);
 
 
 private:

@@ -90,6 +90,7 @@ static void DoUploadLog()
     [request setValue:@"multipart/form-data" forHTTPHeaderField:@"ENCTYPE"];
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     
     [request setValue:log_file_name forHTTPHeaderField:@"uploaded_file"];
     

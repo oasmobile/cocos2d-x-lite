@@ -26,7 +26,7 @@ public class CrashLogReporter
     private static String log_file_name = null;
 
     public static String server_url = "http://117.50.0.65/crash_log/index.php";
-    private static String log_file_prefix = "dol_android";
+    private static String log_file_prefix = "android";
 
 
     public static void setCrashLogReporterUrl(String url)

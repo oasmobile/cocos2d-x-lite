@@ -415,6 +415,7 @@ public class Cocos2dxEditBoxHelper {
             return;
         }
 
+        Log.i(TAG, "yif ----------- openKeyboardOnUiThread start");
         final InputMethodManager imm = (InputMethodManager) mCocos2dxActivity.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         Cocos2dxEditBox editBox = mEditBoxArray.get(index);
         if (null != editBox) {
@@ -423,6 +424,7 @@ public class Cocos2dxEditBoxHelper {
             imm.showSoftInput(editBox, 0);
             mCocos2dxActivity.getGLSurfaceView().setSoftKeyboardShown(true);
         }
+        Log.i(TAG, "yif ----------- openKeyboardOnUiThread end");
     }
 
     private static void closeKeyboardOnUiThread(int index) {

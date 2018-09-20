@@ -1958,6 +1958,7 @@ public:
 
     virtual void editBoxEditingDidBegin(ui::EditBox* editBox) override
     {
+        CCLOGINFO("yif ------------- editBoxEditingDidBegin start");
         se::ScriptEngine::getInstance()->clearException();
         se::AutoHandleScope hs;
         if (!_JSDelegate.isObject())
@@ -1978,6 +1979,7 @@ public:
         _JSDelegate.toObject()->getProperty("editBoxEditingDidBegin", &func);
         assert(func.isObject() && func.toObject()->isFunction());
         func.toObject()->call(args, _JSDelegate.toObject());
+        CCLOGINFO("yif ------------- editBoxEditingDidBegin end");
     }
 
     virtual void editBoxEditingDidEnd(ui::EditBox* editBox) override

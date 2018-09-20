@@ -78,3 +78,18 @@ SE_DECLARE_FUNC(js_cocos2dx_extension_EventListenerAssetsManagerEx_init);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventListenerAssetsManagerEx_create);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventListenerAssetsManagerEx_EventListenerAssetsManagerEx);
 
+
+/************************i18nEx*************************************/
+extern se::Object* __jsb_cocos2d_extension_I18nEx_proto;
+extern se::Class* __jsb_cocos2d_extension_I18nEx_class;
+
+bool js_register_cocos2d_extension_I18nEx(se::Object* obj);
+bool register_all_cocos2dx_extension(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_t);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_getLanguageFile);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_getLanguage);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_setLanguageFile);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_setLanguage);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_create);
+SE_DECLARE_FUNC(js_cocos2dx_extension_I18nEx_I18nEx);
+

@@ -1410,6 +1410,213 @@ bool js_register_cocos2dx_extension_EventListenerAssetsManagerEx(se::Object* obj
     return true;
 }
 
+/******************************* i18n BEGIN***************************************/
+
+se::Object* __jsb_cocos2d_extension_I18nEx_proto = nullptr;
+se::Class* __jsb_cocos2d_extension_I18nEx_class = nullptr;
+
+static bool js_cocos2dx_extension_I18nEx_t(se::State& s)
+{
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_extension_I18nEx_t : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    do {
+        if (argc == 1) {
+            int arg0 = 0;
+            ok &= seval_to_int32(args[0], (int32_t*)&arg0);
+            if (!ok) { ok = true; break; }
+            const std::string& result = cobj->t(arg0);
+            ok &= std_string_to_seval(result, &s.rval());
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_t : Error processing arguments");
+            return true;
+        }
+    } while(false);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_t)
+
+static bool js_cocos2dx_extension_I18nEx_getLanguageFile(se::State& s)
+{
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_extension_I18nEx_getLanguageFile : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 0) {
+        const std::string& result = cobj->getLanguageFile();
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_getLanguageFile : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_getLanguageFile)
+
+static bool js_cocos2dx_extension_I18nEx_getLanguage(se::State& s)
+{
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    SE_PRECONDITION2(cobj, false, "js_cocos2dx_extension_I18nEx_getLanguage : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 0) {
+        const std::string& result = cobj->getLanguage();
+        ok &= std_string_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_getLanguage : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_getLanguage)
+
+static bool js_cocos2dx_extension_I18nEx_setLanguageFile(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_I18nEx_setLanguageFile : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 1) {
+            std::string arg0;
+            ok &= seval_to_std_string(args[0], &arg0);
+            if (!ok) { ok = true; break; }
+            cobj->setLanguageFile(arg0);
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_setLanguageFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+    
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_setLanguageFile)
+
+static bool js_cocos2dx_extension_I18nEx_setLanguage(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_I18nEx_setLanguage : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 1) {
+            std::string arg0;
+            ok &= seval_to_std_string(args[0], &arg0);
+            if (!ok) { ok = true; break; }
+            cobj->setLanguage(arg0);
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_setLanguage : Error processing arguments");
+            return true;
+        }
+    } while(false);
+    
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_setLanguage)
+
+static bool js_cocos2dx_extension_I18nEx_create(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 2) {
+        std::string arg0;
+        std::string arg1;
+        ok &= seval_to_std_string(args[0], &arg0);
+        ok &= seval_to_std_string(args[1], &arg1);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_I18nEx_create : Error processing arguments");
+        auto result = cocos2d::extension::I18nEx::create(arg0, arg1);
+        result->retain();
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_extension_I18nEx_class);
+        obj->setPrivateData(result);
+        s.rval().setObject(obj);
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_I18nEx_create)
+
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_extension_I18nEx_finalize)
+
+static bool js_cocos2dx_extension_I18nEx_constructor(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 2) {
+            std::string arg0;
+            ok &= seval_to_std_string(args[0], &arg0);
+            if (!ok) { ok = true; break; }
+            std::string arg1;
+            ok &= seval_to_std_string(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::extension::I18nEx* cobj = new (std::nothrow) cocos2d::extension::I18nEx(arg0, arg1);
+            s.thisObject()->setPrivateData(cobj);
+            return true;
+        }
+    } while(false);
+    do {
+        if (argc == 2) {
+            std::string arg0;
+            ok &= seval_to_std_string(args[0], &arg0);
+            if (!ok) { ok = true; break; }
+            std::string arg1;
+            ok &= seval_to_std_string(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::extension::I18nEx* cobj = new (std::nothrow) cocos2d::extension::I18nEx(arg0, arg1);
+            s.thisObject()->setPrivateData(cobj);
+            return true;
+        }
+    } while(false);
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_CTOR(js_cocos2dx_extension_I18nEx_constructor, __jsb_cocos2d_extension_I18nEx_class, js_cocos2d_extension_I18nEx_finalize)
+
+
+static bool js_cocos2d_extension_I18nEx_finalize(se::State& s)
+{
+    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::extension::I18nEx)", s.nativeThisObject());
+    cocos2d::extension::I18nEx* cobj = (cocos2d::extension::I18nEx*)s.nativeThisObject();
+    if (cobj->getReferenceCount() == 1)
+        cobj->autorelease();
+    else
+        cobj->release();
+    return true;
+}
+SE_BIND_FINALIZE_FUNC(js_cocos2d_extension_I18nEx_finalize)
+
+bool js_register_cocos2dx_extension_I18nEx(se::Object* obj)
+{
+    auto cls = se::Class::create("I18nEx", obj, nullptr, _SE(js_cocos2dx_extension_I18nEx_constructor));
+    
+    cls->defineFunction("t", _SE(js_cocos2dx_extension_I18nEx_t));
+    cls->defineFunction("getLanguageFile", _SE(js_cocos2dx_extension_I18nEx_getLanguageFile));
+    cls->defineFunction("getLanguage", _SE(js_cocos2dx_extension_I18nEx_getLanguage));
+    cls->defineFunction("setLanguageFile", _SE(js_cocos2dx_extension_I18nEx_setLanguageFile));
+    cls->defineFunction("setLanguage", _SE(js_cocos2dx_extension_I18nEx_setLanguage));
+    cls->defineStaticFunction("create", _SE(js_cocos2dx_extension_I18nEx_create));
+    cls->defineFinalizeFunction(_SE(js_cocos2d_extension_I18nEx_finalize));
+    cls->install();
+    JSBClassType::registerClass<cocos2d::extension::I18nEx>(cls);
+    
+    __jsb_cocos2d_extension_I18nEx_proto = cls->getProto();
+    __jsb_cocos2d_extension_I18nEx_class = cls;
+    
+    se::ScriptEngine::getInstance()->clearException();
+    return true;
+}
+
+/******************************* i18n END***************************************/
+
 bool register_all_cocos2dx_extension(se::Object* obj)
 {
     // Get the ns
@@ -1426,6 +1633,10 @@ bool register_all_cocos2dx_extension(se::Object* obj)
     js_register_cocos2dx_extension_EventListenerAssetsManagerEx(ns);
     js_register_cocos2dx_extension_Manifest(ns);
     js_register_cocos2dx_extension_EventAssetsManagerEx(ns);
+    
+    // i18n
+    js_register_cocos2dx_extension_I18nEx(ns);
+    
     return true;
 }
 

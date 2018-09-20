@@ -14,6 +14,7 @@ assets-manager/Manifest.cpp \
 assets-manager/AssetsManagerEx.cpp \
 assets-manager/CCEventAssetsManagerEx.cpp \
 assets-manager/CCEventListenerAssetsManagerEx.cpp \
+i18n/I18nEx.cpp \
 
 LOCAL_STATIC_LIBRARIES := cis
 LOCAL_STATIC_LIBRARIES += cocos_chipmunk_static

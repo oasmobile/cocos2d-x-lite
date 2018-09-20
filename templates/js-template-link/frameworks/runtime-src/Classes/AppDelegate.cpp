@@ -11,7 +11,7 @@
 #include "external/criware/Classes/crijsb_register.h"
 
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "CrashLogReporter.h"
 #endif
 
@@ -84,7 +84,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     se->setExceptionCallback([](const char* location, const char* message, const char* stack){
         // Send exception information to server like Tencent Bugly.
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         CrashLogReporter::UploadLog();
 #endif
     });

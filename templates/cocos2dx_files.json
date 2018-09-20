@@ -926,6 +926,8 @@
         "extensions/assets-manager/CCEventListenerAssetsManagerEx.h", 
         "extensions/assets-manager/Manifest.cpp", 
         "extensions/assets-manager/Manifest.h", 
+        "extensions/i18n/I18nEx.cpp", 
+        "extensions/i18n/I18nEx.h", 
         "extensions/cocos-ext.h", 
         "external/android/Android.mk", 
         "external/android/arm64-v8a/include/anysdk/AgentManager.h", 

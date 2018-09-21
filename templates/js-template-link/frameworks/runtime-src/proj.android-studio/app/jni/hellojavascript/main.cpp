@@ -1,6 +1,8 @@
 #include "AppDelegate.h"
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
+#include "platform/android/CCFileUtils-android.h"
+#include "platform/android/jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h"
 #include <jni.h>
 #include <android/log.h>
 #if PACKAGE_AS
@@ -34,4 +36,16 @@ extern "C"
     	SDKManager::getInstance()->loadAllPlugins();
 #endif
 	}
+
+    bool Java_org_cocos2dx_javascript_AppActivity_isObbfileExist(JNIEnv*  env, jobject thiz)
+    {
+        CCLOG("get apk path (%s)", getApkPath());
+        return (nullptr != FileUtilsAndroid::getObbFile());
+    }
+
+    bool Java_org_cocos2dx_javascript_AppActivity_initFileUtils(JNIEnv*  env, jobject thiz)
+    {
+        LOGD("----------------------  init file utils");
+        FileUtils::getInstance();
+    }
 }

@@ -288,6 +288,7 @@ typedef struct unz_file_info_s unz_file_info;
 
         /** Internal data like zip file pointer / file list array and so on */
         ZipFilePrivate *_data;
+        pthread_mutex_t m_zipFileMutex;
     };
 } // end of namespace cocos2d
 

@@ -91,6 +91,7 @@ bool FileUtilsAndroid::init()
     _defaultResRootPath = ASSETS_FOLDER_NAME;
     
     std::string assetsPath(getApkPath());
+//    CCLOG("--------------------file utils android init %s", getApkPath());
     if (assetsPath.find("/obb/") != std::string::npos)
     {
         obbfile = new ZipFile(assetsPath);
@@ -270,9 +271,10 @@ FileUtils::Status FileUtilsAndroid::getContents(const std::string& filename, Res
     } else {
         relativePath = fullPath;
     }
-    
+
     if (obbfile)
     {
+//        CCLOG("---------------------- file utils android obbfile %s, %s, %s", filename.c_str(), fullPath.c_str(), relativePath.c_str());
         if (obbfile->getFileData(relativePath, buffer))
             return FileUtils::Status::OK;
     }

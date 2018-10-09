@@ -1109,6 +1109,52 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl(se::State& s
 }
 SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl)
 
+static bool js_cocos2dx_extension_AssetsManagerEx_setProjectCompress(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocos2d::extension::AssetsManagerEx* cobj = (cocos2d::extension::AssetsManagerEx*)s.nativeThisObject();
+    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setProjectCompress : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 1) {
+            bool arg0;
+            ok &= seval_to_boolean(args[0], &arg0);
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_Manifest_setProjectCompress : Error processing arguments");
+            if (!ok) { ok = true; break; }
+            cobj->setProjectCompress(arg0);
+            return true;
+        }
+    } while(false);
+    
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setProjectCompress)
+
+static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompress(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocos2d::extension::AssetsManagerEx* cobj = (cocos2d::extension::AssetsManagerEx*)s.nativeThisObject();
+    SE_PRECONDITION2( cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setVersionCompress : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 1) {
+            bool arg0;
+            ok &= seval_to_boolean(args[0], &arg0);
+            SE_PRECONDITION2(ok, false, "js_cocos2dx_extension_Manifest_setVersionCompress : Error processing arguments");
+            if (!ok) { ok = true; break; }
+            cobj->setVersionCompress(arg0);
+            return true;
+        }
+    } while(false);
+    
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_AssetsManagerEx_setVersionCompress)
+
 static bool js_cocos2dx_extension_AssetsManagerEx_create(se::State& s)
 {
     const auto& args = s.args();
@@ -1248,6 +1294,8 @@ bool js_register_cocos2dx_extension_AssetsManagerEx(se::Object* obj)
     cls->defineFunction("setPackageUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setPackageUrl));
     cls->defineFunction("setManifestFileUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setManifestFileUrl));
     cls->defineFunction("setVersionFileUrl", _SE(js_cocos2dx_extension_AssetsManagerEx_setVersionFileUrl));
+    cls->defineFunction("setProjectCompress", _SE(js_cocos2dx_extension_AssetsManagerEx_setProjectCompress));
+    cls->defineFunction("setVersionCompress", _SE(js_cocos2dx_extension_AssetsManagerEx_setVersionCompress));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_extension_AssetsManagerEx_create));
     cls->defineFinalizeFunction(_SE(js_cocos2d_extension_AssetsManagerEx_finalize));
     cls->install();

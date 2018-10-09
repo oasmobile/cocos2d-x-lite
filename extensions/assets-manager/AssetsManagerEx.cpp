@@ -41,6 +41,10 @@ NS_CC_EXT_BEGIN
 #define TEMP_MANIFEST_FILENAME  "project.manifest.temp"
 #define TEMP_PACKAGE_SUFFIX     "_temp"
 #define MANIFEST_FILENAME       "project.manifest"
+#define MANIFEST_FILENAME_ZIP   "project.manifest.zip"
+#define VERSION_FILENAME_ZIP    "version.manifest.zip"
+#define ZIP_SUFFIX              ".zip"
+#define TEMP_SUFFIX             ".temp"
 
 #define BUFFER_SIZE    8192
 #define MAX_FILENAME   512
@@ -77,6 +81,8 @@ AssetsManagerEx::AssetsManagerEx(const std::string& manifestUrl, const std::stri
 , _maxConcurrentTask(32)
 , _currConcurrentTask(0)
 , _verifyCallback(nullptr)
+,_project_compress(false)
+,_version_compress(false)
 , _inited(false)
 {
     init(manifestUrl, storagePath);
@@ -106,6 +112,8 @@ AssetsManagerEx::AssetsManagerEx(const std::string& manifestUrl, const std::stri
 , _currConcurrentTask(0)
 , _versionCompareHandle(handle)
 , _verifyCallback(nullptr)
+,_project_compress(false)
+,_version_compress(false)
 , _inited(false)
 {
     init(manifestUrl, storagePath);
@@ -482,7 +490,7 @@ void AssetsManagerEx::adjustPath(std::string &path)
     }
 }
 
-bool AssetsManagerEx::decompress(const std::string &zip)
+bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
 {
     // Find root path for zip file
     size_t pos = zip.find_last_of("/\\");
@@ -492,7 +500,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
         return false;
     }
     const std::string rootPath = zip.substr(0, pos+1);
-    
     // Open the zip file
     unzFile zipfile = unzOpen(FileUtils::getInstance()->getSuitableFOpen(zip).c_str());
     if (! zipfile)
@@ -500,7 +507,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
         CCLOG("AssetsManagerEx : can not open downloaded zip file %s\n", zip.c_str());
         return false;
     }
-    
     // Get info about the zip file
     unz_global_info global_info;
     if (unzGetGlobalInfo(zipfile, &global_info) != UNZ_OK)
@@ -509,7 +515,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
         unzClose(zipfile);
         return false;
     }
-    
     // Buffer to hold data read from the zip file
     char readBuffer[BUFFER_SIZE];
     // Loop to extract all files.
@@ -532,7 +537,12 @@ bool AssetsManagerEx::decompress(const std::string &zip)
             unzClose(zipfile);
             return false;
         }
-        const std::string fullPath = rootPath + fileName;
+        std::string fullPath = rootPath + fileName;
+        
+        if (isTemp)
+        {
+            fullPath = fullPath + TEMP_SUFFIX;
+        }
         
         // Check if this entry is a directory or a file.
         const size_t filenameLength = strlen(fileName);
@@ -578,7 +588,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
                 unzClose(zipfile);
                 return false;
             }
-            
             // Write current file content to destinate file.
             int error = UNZ_OK;
             do
@@ -592,7 +601,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
                     unzClose(zipfile);
                     return false;
                 }
-                
                 if (error > 0)
                 {
                     fwrite(readBuffer, error, 1, out);
@@ -603,7 +611,6 @@ bool AssetsManagerEx::decompress(const std::string &zip)
         }
         
         unzCloseCurrentFile(zipfile);
-        
         // Goto next entry listed in the zip file.
         if ((i+1) < global_info.number_entry)
         {
@@ -709,7 +716,13 @@ void AssetsManagerEx::downloadVersion()
     {
         _updateState = State::DOWNLOADING_VERSION;
         // Download version file asynchronously
-        _downloader->createDownloadFileTask(versionUrl, _tempVersionPath, VERSION_ID);
+        auto path = _tempVersionPath;
+        if (_version_compress)
+        {
+            path = path + ZIP_SUFFIX;
+        }
+    
+        _downloader->createDownloadFileTask(versionUrl, path, VERSION_ID);
     }
     // No version file found
     else
@@ -772,7 +785,12 @@ void AssetsManagerEx::downloadManifest()
     {
         _updateState = State::DOWNLOADING_MANIFEST;
         // Download version file asynchronously
-        _downloader->createDownloadFileTask(manifestUrl, _tempManifestPath, MANIFEST_ID);
+        auto path = _tempManifestPath;
+        if (_project_compress)
+        {
+            path = path + ZIP_SUFFIX;
+        }
+        _downloader->createDownloadFileTask(manifestUrl, path, MANIFEST_ID);
     }
     // No manifest file found
     else
@@ -831,7 +849,6 @@ void AssetsManagerEx::prepareUpdate()
     _downloadResumed = false;
     _downloadedSize.clear();
     _totalEnabled = false;
-    
     // Temporary manifest exists, previously updating and equals to the remote version, resuming previous download
     if (_tempManifest && _tempManifest->isLoaded() && _tempManifest->isUpdating() && _tempManifest->versionEquals(_remoteManifest))
     {
@@ -1259,11 +1276,21 @@ void AssetsManagerEx::onSuccess(const std::string &/*srcUrl*/, const std::string
     if (customId == VERSION_ID)
     {
         _updateState = State::VERSION_LOADED;
+        if (_version_compress)
+        {
+            decompress(storagePath);
+        }
+        
         parseVersion();
     }
     else if (customId == MANIFEST_ID)
     {
         _updateState = State::MANIFEST_LOADED;
+        if (_project_compress)
+        {
+            decompress(storagePath, true);
+        }
+        
         parseManifest();
     }
     else
@@ -1406,6 +1433,15 @@ void AssetsManagerEx::setManifestFileUrl(const std::string url)
 void AssetsManagerEx::setVersionFileUrl(const std::string url)
 {
     _remoteVersionUrl = url;
+}
+
+void AssetsManagerEx::setProjectCompress(bool flag)
+{
+    _project_compress = flag;
+}
+void AssetsManagerEx::setVersionCompress(bool flag)
+{
+    _version_compress = flag;
 }
 
 NS_CC_EXT_END

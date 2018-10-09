@@ -210,6 +210,13 @@ public:
      */
     void setVersionFileUrl(const std::string);
     
+    /** @brief sets the projectmanifest is compress or not.
+     */
+    void setProjectCompress(bool flag);
+    /** @brief sets the versionmanifest is compress or not.
+     */
+    void setVersionCompress(bool flag);
+    
 CC_CONSTRUCTOR_ACCESS:
     
     AssetsManagerEx(const std::string& manifestUrl, const std::string& storagePath);
@@ -242,7 +249,7 @@ protected:
     void parseManifest();
     void startUpdate();
     void updateSucceed();
-    bool decompress(const std::string &filename);
+    bool decompress(const std::string &filename, bool isTemp = false);
     void decompressDownloadedZip(const std::string &customId, const std::string &storagePath);
     
     /** @brief Update a list of assets under the current AssetsManagerEx context
@@ -412,6 +419,9 @@ private:
     
     //! Marker for whether the assets manager is inited
     bool _inited;
+    
+    bool _project_compress;
+    bool _version_compress;
     
     //! The remote package url
     std::string _packageUrl;

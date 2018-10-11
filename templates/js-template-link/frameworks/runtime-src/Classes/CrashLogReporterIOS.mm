@@ -7,7 +7,7 @@
 using namespace cocos2d;
 
 
-static NSString *server_url = @"http://en-us.dol.oasmobile.com:60000/crash_log/index.php";
+static NSString *server_url = @"http://en.dol.oasmobile.com:60000/crash_log/index.php";
 static NSString *log_file_prefix = @"ios";
 static NSString *log_file = @"dol.log";
 

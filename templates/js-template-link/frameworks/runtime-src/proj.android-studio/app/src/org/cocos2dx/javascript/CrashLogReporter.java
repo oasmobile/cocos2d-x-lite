@@ -25,7 +25,7 @@ public class CrashLogReporter
     private static String log_file = null;
     private static String log_file_name = null;
 
-    public static String server_url = "http://log_en_dol.oasmobile.com/crash_log/index.php";
+    public static String server_url = "http://log-en-dol.oasmobile.com/crash_log/index.php";
     private static String log_file_prefix = "android";
 
 

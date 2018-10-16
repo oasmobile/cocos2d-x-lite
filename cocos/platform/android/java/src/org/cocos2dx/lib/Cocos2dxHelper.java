@@ -172,28 +172,6 @@ public class Cocos2dxHelper {
             }
         }
     }
-
-    public static void reLoadObb()
-    {
-
-        if (null == Cocos2dxHelper.sOBBFile)
-        {
-            int versionCode = 1;
-            try {
-                versionCode = Cocos2dxActivity.getContext().getPackageManager().getPackageInfo(Cocos2dxHelper.getCocos2dxPackageName(), 0).versionCode;
-            } catch (NameNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                Cocos2dxHelper.sOBBFile = APKExpansionSupport.getAPKExpansionZipFile(Cocos2dxActivity.getContext(), versionCode, 0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Cocos2dxHelper.sAssetsPath = "";
-            Cocos2dxHelper.nativeSetApkPath(Cocos2dxHelper.getAssetsPath());
-        }
-    }
     
     // This function returns the absolute path to the OBB if it exists,
     // else it returns the absolute path to the APK.

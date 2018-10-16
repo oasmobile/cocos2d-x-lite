@@ -151,6 +151,14 @@ public class Cocos2dxHelper {
             Cocos2dxHelper.sCocos2dMusic = new Cocos2dxMusic(activity);
             Cocos2dxHelper.sCocos2dSound = new Cocos2dxSound(activity);
             Cocos2dxHelper.sAssetManager = activity.getAssets();
+
+            Method addAssetPath;
+            try {
+                addAssetPath = Cocos2dxHelper.sAssetManager.getClass().getMethod("addAssetPath", String.class);
+                addAssetPath.invoke(Cocos2dxHelper.sAssetManager, Cocos2dxActivity.obbPath);  //obbPath为第一步获取的，如果你知道这里的正确值也可以直接填写不用第一步
+            } catch (Exception  e) {
+                e.printStackTrace();
+            }
             Cocos2dxHelper.nativeSetContext((Context)activity, Cocos2dxHelper.sAssetManager);
     
             Cocos2dxBitmap.setContext(activity);

@@ -73,6 +73,8 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     protected Cocos2dxEditBoxHelper mEditBoxHelper = null;
     protected boolean hasFocus = false;
 
+    protected boolean hasInit = false;
+
     public Cocos2dxGLSurfaceView getGLSurfaceView(){
         return  mGLSurfaceView;
     }
@@ -254,10 +256,6 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         }
     }
 
-    public void checkPermission()
-    {
-
-    }
 
     // ===========================================================
     // Constructors
@@ -277,10 +275,6 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
             Log.w(TAG, "[Workaround] Ignore the activity started from icon!");
             return;
         }
-
-        this.checkPermission();
-
-
     }
 
     //native method,call GLViewImpl::getGLContextAttrs() to get the OpenGL ES context attributions
@@ -298,9 +292,13 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     protected void onResume() {
     	Log.d(TAG, "onResume()");
         super.onResume();
-        Cocos2dxAudioFocusManager.registerAudioFocusListener(this);
-        this.hideVirtualButton();
-       	resumeIfHasFocus();
+
+        if (hasInit)
+        {
+            Cocos2dxAudioFocusManager.registerAudioFocusListener(this);
+            this.hideVirtualButton();
+            resumeIfHasFocus();
+        }
     }
 
     @Override
@@ -315,28 +313,45 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     private void resumeIfHasFocus() {
         if(hasFocus) {
             this.hideVirtualButton();
-            Cocos2dxHelper.onResume();
-            mGLSurfaceView.onResume();
+            if (hasInit)
+            {
+                Cocos2dxHelper.onResume();
+                mGLSurfaceView.onResume();
+            }
         }
+    }
+
+    protected void setHasInit(boolean hasInit)
+    {
+        this.hasInit = hasInit;
     }
 
     @Override
     protected void onPause() {
         Log.d(TAG, "onPause()");
         super.onPause();
-        Cocos2dxAudioFocusManager.unregisterAudioFocusListener(this);
-        Cocos2dxHelper.onPause();
-        mGLSurfaceView.onPause();
+
+        if (hasInit)
+        {
+            Cocos2dxAudioFocusManager.unregisterAudioFocusListener(this);
+            Cocos2dxHelper.onPause();
+            mGLSurfaceView.onPause();
+        }
     }
 
     @Override
     protected void onDestroy() {
-        Cocos2dxAudioFocusManager.unregisterAudioFocusListener(this);
-        CAAgent.onDestroy();
+
+        if (hasInit)
+        {
+            Cocos2dxAudioFocusManager.unregisterAudioFocusListener(this);
+            CAAgent.onDestroy();
+        }
+
         super.onDestroy();
 
         Log.d(TAG, "Cocos2dxActivity onDestroy: " + this + ", mGLSurfaceView" + mGLSurfaceView);
-        if (mGLSurfaceView != null) {
+        if (hasInit && mGLSurfaceView != null) {
             Cocos2dxHelper.terminateProcess();
         }
     }

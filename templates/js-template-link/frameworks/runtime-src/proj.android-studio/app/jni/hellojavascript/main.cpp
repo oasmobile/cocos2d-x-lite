@@ -48,4 +48,16 @@ extern "C"
         LOGD("----------------------  init file utils");
         FileUtils::getInstance();
     }
+
+    void Java_org_cocos2dx_javascript_AppActivity_update_status(JNIEnv*  env, jobject thiz)
+    {
+    }
+
+    bool Java_org_cocos2dx_javascript_AppActivity_update_progress(JNIEnv*  env, jobject thiz)
+    {
+    }
+
+    bool Java_org_cocos2dx_javascript_AppActivity_start_game(JNIEnv*  env, jobject thiz)
+    {
+    }
 }

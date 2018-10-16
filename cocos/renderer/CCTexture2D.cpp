@@ -571,7 +571,6 @@ bool Texture2D::hasPremultipliedAlpha() const
 bool Texture2D::initWithData(const void *data, ssize_t dataLen, Texture2D::PixelFormat pixelFormat, int pixelsWide, int pixelsHigh, const Size& contentSize)
 {
     CCASSERT(dataLen>0 && pixelsWide>0 && pixelsHigh>0, "Invalid size");
-    CCLOG("cocos2d: Texture2D: initWithData: dataLen = %zd, pixelsWide = %d, pixelsHigh = %d", dataLen, pixelsWide, pixelsHigh);
 
     //if data has no mipmaps, we will consider it has only one mipmap
     MipmapInfo mipmap;
@@ -716,7 +715,6 @@ bool Texture2D::initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, PixelFormat
         if (err != GL_NO_ERROR)
         {
             CCLOG("cocos2d: Texture2D: Error uploading compressed texture level: %u . glError: 0x%04X", i, err);
-            CCLOG("cocos2d: Texture2D: glCompressedTexImage2D: width = %d, height = %d, datalen = %d", width, height, datalen);
             return false;
         }
 

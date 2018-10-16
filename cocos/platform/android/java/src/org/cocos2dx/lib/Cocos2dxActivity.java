@@ -63,15 +63,15 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     // ===========================================================
     // Fields
     // ===========================================================
-    
-    private Cocos2dxGLSurfaceView mGLSurfaceView = null;
-    private int[] mGLContextAttrs = null;
-    private Cocos2dxHandler mHandler = null;   
-    private static Cocos2dxActivity sContext = null;
-    private Cocos2dxVideoHelper mVideoHelper = null;
-    private Cocos2dxWebViewHelper mWebViewHelper = null;
-    private Cocos2dxEditBoxHelper mEditBoxHelper = null;
-    private boolean hasFocus = false;
+
+    protected Cocos2dxGLSurfaceView mGLSurfaceView = null;
+    protected int[] mGLContextAttrs = null;
+    protected Cocos2dxHandler mHandler = null;
+    protected static Cocos2dxActivity sContext = null;
+    protected Cocos2dxVideoHelper mVideoHelper = null;
+    protected Cocos2dxWebViewHelper mWebViewHelper = null;
+    protected Cocos2dxEditBoxHelper mEditBoxHelper = null;
+    protected boolean hasFocus = false;
 
     public Cocos2dxGLSurfaceView getGLSurfaceView(){
         return  mGLSurfaceView;
@@ -254,6 +254,11 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         }
     }
 
+    public void checkPermission()
+    {
+
+    }
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -273,39 +278,13 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
             return;
         }
 
-        this.hideVirtualButton();
+        this.checkPermission();
 
-        CAAgent.enableDebug(false);
 
-        onLoadNativeLibraries();
-
-        sContext = this;
-        this.mHandler = new Cocos2dxHandler(this);
-        
-        Cocos2dxHelper.init(this);
-        
-        this.mGLContextAttrs = getGLContextAttrs();
-        this.init();
-
-        if (mVideoHelper == null) {
-            mVideoHelper = new Cocos2dxVideoHelper(this, mFrameLayout);
-        }
-        
-        if(mWebViewHelper == null){
-            mWebViewHelper = new Cocos2dxWebViewHelper(mFrameLayout);
-        }
-
-        if(mEditBoxHelper == null){
-            mEditBoxHelper = new Cocos2dxEditBoxHelper(mFrameLayout);
-        }
-
-        Window window = this.getWindow();
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
     //native method,call GLViewImpl::getGLContextAttrs() to get the OpenGL ES context attributions
-    private static native int[] getGLContextAttrs();
+    protected static native int[] getGLContextAttrs();
     
     // ===========================================================
     // Getter & Setter

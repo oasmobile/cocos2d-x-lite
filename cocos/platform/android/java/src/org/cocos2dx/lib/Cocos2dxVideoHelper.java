@@ -48,7 +48,7 @@ public class Cocos2dxVideoHelper {
     static VideoHandler mVideoHandler = null;
     private static Handler sHandler = null;
     
-    public Cocos2dxVideoHelper(Cocos2dxActivity activity,FrameLayout layout)
+    Cocos2dxVideoHelper(Cocos2dxActivity activity,FrameLayout layout)
     {
         mActivity = activity;
         mLayout = layout;

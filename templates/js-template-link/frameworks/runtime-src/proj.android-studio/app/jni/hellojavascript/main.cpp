@@ -49,15 +49,15 @@ extern "C"
         FileUtils::getInstance();
     }
 
-    void Java_org_cocos2dx_javascript_AppActivity_update_status(JNIEnv * env, jobject thiz, jint type, jint text_id)
+    void Java_org_cocos2dx_javascript_DownloadHelper_update_status(JNIEnv * env, jobject thiz, jint type, jint text_id)
     {
     }
 
-    bool Java_org_cocos2dx_javascript_AppActivity_update_progress(JNIEnv * env, jobject thiz, jfloat percent)
+    bool Java_org_cocos2dx_javascript_DownloadHelper_update_progress(JNIEnv *env, jobject thiz, jfloat percent)
     {
     }
 
-    bool Java_org_cocos2dx_javascript_AppActivity_start_game()
+    bool Java_org_cocos2dx_javascript_DownloadHelper_start_game()
     {
     }
 }

@@ -42,6 +42,7 @@
 #include "base/CCEventCustom.h"
 #include "2d/CCFontFNT.h"
 #include "2d/CCSpriteFrame.h"
+#include "platform/CCDevice.h" /* previewContentSize */
 
 NS_CC_BEGIN
 
@@ -2285,6 +2286,39 @@ void Label::updateLetterSpriteScale(Sprite* sprite)
             sprite->setScale(1.0);
         }
     }
+}
+
+Size Label::previewContentSize(const std::string& text, const FontDefinition &textDef) {
+    Size contentSize = Size(0.f, 0.f);
+    if (text.empty()) {
+        return contentSize;
+    }
+
+    Device::TextAlign align;
+    if (TextVAlignment::TOP == textDef._vertAlignment) {
+        align = (TextHAlignment::CENTER == textDef._alignment) ? Device::TextAlign::TOP
+        : (TextHAlignment::LEFT == textDef._alignment) ? Device::TextAlign::TOP_LEFT : Device::TextAlign::TOP_RIGHT;
+    } else if (TextVAlignment::CENTER == textDef._vertAlignment) {
+        align = (TextHAlignment::CENTER == textDef._alignment) ? Device::TextAlign::CENTER
+        : (TextHAlignment::LEFT == textDef._alignment) ? Device::TextAlign::LEFT : Device::TextAlign::RIGHT;
+    } else if (TextVAlignment::BOTTOM == textDef._vertAlignment) {
+        align = (TextHAlignment::CENTER == textDef._alignment) ? Device::TextAlign::BOTTOM
+        : (TextHAlignment::LEFT == textDef._alignment) ? Device::TextAlign::BOTTOM_LEFT : Device::TextAlign::BOTTOM_RIGHT;
+    } else {
+        CCASSERT(false, "Not supported alignment format!");
+        return contentSize;
+    }
+
+    int width, height;
+    bool hasPremultipliedAlpha;
+    Data data = Device::getTextureDataForText(text.c_str(), textDef, align, width, height, hasPremultipliedAlpha);
+    if (data.isNull()) {
+        return contentSize;
+    }
+
+    contentSize.width = (float)width;
+    contentSize.height = (float)height;
+    return contentSize;
 }
 
 NS_CC_END

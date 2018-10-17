@@ -798,6 +798,9 @@ protected:
     bool _shadowEnabled;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
+public:
+    /** 在不创建CCLabel对象的情况下预览文本大小 */
+    static Size previewContentSize(const std::string& text, const FontDefinition& textDef);
 };
 
 // end group

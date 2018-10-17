@@ -22368,6 +22368,27 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Label_createWithBMFont)
 
+static bool js_cocos2dx_Label_previewContentSize(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 2) {
+        std::string arg0;
+        cocos2d::FontDefinition arg1;
+        ok &= seval_to_std_string(args[0], &arg0);
+        ok &= seval_to_FontDefinition(args[1], &arg1);
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Label_previewContentSize : Error processing arguments");
+        cocos2d::Size result = cocos2d::Label::previewContentSize(arg0, arg1);
+        ok &= Size_to_seval(result, &s.rval());
+        SE_PRECONDITION2(ok, false, "js_cocos2dx_Label_previewContentSize : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Label_previewContentSize)
+
 static bool js_cocos2dx_Label_create(se::State& s)
 {
     const auto& args = s.args();
@@ -22785,6 +22806,7 @@ bool js_register_cocos2dx_Label(se::Object* obj)
     cls->defineFunction("setBMFontSize", _SE(js_cocos2dx_Label_setBMFontSize));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Label_ctor));
     cls->defineStaticFunction("createWithBMFont", _SE(js_cocos2dx_Label_createWithBMFont));
+    cls->defineStaticFunction("previewContentSize", _SE(js_cocos2dx_Label_previewContentSize));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Label_create));
     cls->defineStaticFunction("createWithCharMap", _SE(js_cocos2dx_Label_createWithCharMap));
     cls->defineStaticFunction("createWithSystemFont", _SE(js_cocos2dx_Label_createWithSystemFont));

@@ -187,20 +187,20 @@ void AssetsManagerEx::initManifests()
 {
     _inited = true;
     // Init and load temporary manifest
-     CCLOG("AssetsManagerEx : initManifests---------------00000\n");
+     CCLOGINFO("AssetsManagerEx : initManifests---------------00000\n");
     _tempManifest = new (std::nothrow) Manifest();
     if (_tempManifest)
     {
-        CCLOG("AssetsManagerEx : initManifests---------------11111\n");
+        CCLOGINFO("AssetsManagerEx : initManifests---------------11111\n");
         _tempManifest->parseFile(_tempManifestPath);
         // Previous update is interrupted
         if (_fileUtils->isFileExist(_tempManifestPath))
         {
-            CCLOG("AssetsManagerEx : initManifests---------------22222\n");
+            CCLOGINFO("AssetsManagerEx : initManifests---------------22222\n");
             // Manifest parse failed, remove all temp files
             if (!_tempManifest->isLoaded())
             {
-                CCLOG("AssetsManagerEx : initManifests---------------33333\n");
+                CCLOGINFO("AssetsManagerEx : initManifests---------------33333\n");
                 _fileUtils->removeDirectory(_tempStoragePath);
                 CC_SAFE_RELEASE(_tempManifest);
                 _tempManifest = nullptr;
@@ -209,7 +209,7 @@ void AssetsManagerEx::initManifests()
     }
     else
     {
-        CCLOG("AssetsManagerEx : initManifests---------------44444\n");
+        CCLOGINFO("AssetsManagerEx : initManifests---------------44444\n");
         _inited = false;
     }
     
@@ -242,7 +242,7 @@ void AssetsManagerEx::prepareLocalManifest()
 
 bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::string& storagePath)
 {
-    CCLOG("AssetsManagerEx : loadLocalManifest---------------\n");
+    CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------\n");
     if (_updateState > State::UNINITED)
     {
         return false;
@@ -266,15 +266,15 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
         CC_SAFE_RELEASE(_localManifest);
     }
     
-    CCLOG("AssetsManagerEx : loadLocalManifest---------------00000\n");
+    CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------00000\n");
     _localManifest = localManifest;
     _localManifest->retain();
     // Find the cached manifest file
     Manifest *cachedManifest = nullptr;
-    CCLOG("AssetsManagerEx : loadLocalManifest---------------11111\n");
+    CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------11111\n");
     if (_fileUtils->isFileExist(_cacheManifestPath))
     {
-         CCLOG("AssetsManagerEx : loadLocalManifest---------------2222\n");
+         CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------2222\n");
         cachedManifest = new (std::nothrow) Manifest();
         if (cachedManifest)
         {
@@ -290,11 +290,11 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
     // Compare with cached manifest to determine which one to use
     if (cachedManifest)
     {
-         CCLOG("AssetsManagerEx : loadLocalManifest---------------33333\n");
+         CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------33333\n");
         bool localNewer = _localManifest->versionGreater(cachedManifest, _versionCompareHandle);
         if (localNewer)
         {
-             CCLOG("AssetsManagerEx : loadLocalManifest---------------44444\n");
+             CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------44444\n");
             // Recreate storage, to empty the content
             _fileUtils->removeDirectory(_storagePath);
             _fileUtils->createDirectory(_storagePath);
@@ -302,7 +302,7 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
         }
         else
         {
-             CCLOG("AssetsManagerEx : loadLocalManifest---------------5555\n");
+             CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------5555\n");
             CC_SAFE_RELEASE(_localManifest);
             _localManifest = cachedManifest;
         }
@@ -341,20 +341,20 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
         return false;
     }
     
-    CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------\n");
+    CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------\n");
     Manifest *cachedManifest = nullptr;
     // Find the cached manifest file
     if (_fileUtils->isFileExist(_cacheManifestPath))
     {
-        CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------00000\n");
+        CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------00000\n");
         cachedManifest = new (std::nothrow) Manifest();
         if (cachedManifest)
         {
-            CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------11111\n");
+            CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------11111\n");
             cachedManifest->parseFile(_cacheManifestPath);
             if (!cachedManifest->isLoaded())
             {
-                CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------22222\n");
+                CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------22222\n");
                 _fileUtils->removeFile(_cacheManifestPath);
                 CC_SAFE_RELEASE(cachedManifest);
                 cachedManifest = nullptr;
@@ -362,7 +362,7 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
         }
     }
     
-    CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------33333\n");
+    CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------33333\n");
     // Ensure no search path of cached manifest is used to load this manifest
     std::vector<std::string> searchPaths = _fileUtils->getSearchPaths();
     if (cachedManifest)
@@ -388,15 +388,15 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
     }
     if (_localManifest->isLoaded())
     {
-        CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------44444\n");
+        CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------44444\n");
         // Compare with cached manifest to determine which one to use
         if (cachedManifest)
         {
-            CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------555555\n");
+            CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------555555\n");
             bool localNewer = _localManifest->versionGreater(cachedManifest, _versionCompareHandle);
             if (localNewer)
             {
-                CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------66666\n");
+                CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------66666\n");
                 // Recreate storage, to empty the content
                 _fileUtils->removeDirectory(_storagePath);
                 _fileUtils->createDirectory(_storagePath);
@@ -404,7 +404,7 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
             }
             else
             {
-                CCLOG("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------77777\n");
+                CCLOGINFO("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------77777\n");
                 CC_SAFE_RELEASE(_localManifest);
                 _localManifest = cachedManifest;
             }
@@ -415,7 +415,7 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
     // Fail to load local manifest
     if (!_localManifest->isLoaded())
     {
-        CCLOG("AssetsManagerEx : No local manifest file found error.\n");
+        CCLOGINFO("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return false;
     }
@@ -435,7 +435,7 @@ bool AssetsManagerEx::loadRemoteManifest(Manifest* remoteManifest)
         return false;
     }
     
-    CCLOG("AssetsManagerEx : loadRemoteManifest------------------00000\n");
+    CCLOGINFO("AssetsManagerEx : loadRemoteManifest------------------00000\n");
     // Release existing remote manifest
     if (_remoteManifest)
     {
@@ -448,16 +448,16 @@ bool AssetsManagerEx::loadRemoteManifest(Manifest* remoteManifest)
     {
         _updateState = State::UP_TO_DATE;
         _fileUtils->removeDirectory(_tempStoragePath);
-        CCLOG("AssetsManagerEx : loadRemoteManifest------------------1111\n");
+        CCLOGINFO("AssetsManagerEx : loadRemoteManifest------------------1111\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
     }
     else
     {
-        CCLOG("AssetsManagerEx : loadRemoteManifest------------------22222\n");
+        CCLOGINFO("AssetsManagerEx : loadRemoteManifest------------------22222\n");
         _updateState = State::NEED_UPDATE;
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::NEW_VERSION_FOUND);
     }
-    CCLOG("AssetsManagerEx : loadRemoteManifest------------------33333\n");
+    CCLOGINFO("AssetsManagerEx : loadRemoteManifest------------------33333\n");
     return true;
 }
 
@@ -524,7 +524,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
     size_t pos = zip.find_last_of("/\\");
     if (pos == std::string::npos)
     {
-        CCLOG("AssetsManagerEx : no root path specified for zip file %s\n", zip.c_str());
+        CCLOGINFO("AssetsManagerEx : no root path specified for zip file %s\n", zip.c_str());
         return false;
     }
     const std::string rootPath = zip.substr(0, pos+1);
@@ -532,14 +532,14 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
     unzFile zipfile = unzOpen(FileUtils::getInstance()->getSuitableFOpen(zip).c_str());
     if (! zipfile)
     {
-        CCLOG("AssetsManagerEx : can not open downloaded zip file %s\n", zip.c_str());
+        CCLOGINFO("AssetsManagerEx : can not open downloaded zip file %s\n", zip.c_str());
         return false;
     }
     // Get info about the zip file
     unz_global_info global_info;
     if (unzGetGlobalInfo(zipfile, &global_info) != UNZ_OK)
     {
-        CCLOG("AssetsManagerEx : can not read file global info of %s\n", zip.c_str());
+        CCLOGINFO("AssetsManagerEx : can not read file global info of %s\n", zip.c_str());
         unzClose(zipfile);
         return false;
     }
@@ -561,7 +561,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
                                   NULL,
                                   0) != UNZ_OK)
         {
-            CCLOG("AssetsManagerEx : can not read compressed file info\n");
+            CCLOGINFO("AssetsManagerEx : can not read compressed file info\n");
             unzClose(zipfile);
             return false;
         }
@@ -581,7 +581,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             if ( !_fileUtils->createDirectory(basename(fullPath)) )
             {
                 // Failed to create directory
-                CCLOG("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
+                CCLOGINFO("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
                 unzClose(zipfile);
                 return false;
             }
@@ -593,7 +593,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             if (!_fileUtils->isDirectoryExist(dir)) {
                 if (!_fileUtils->createDirectory(dir)) {
                     // Failed to create directory
-                    CCLOG("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
+                    CCLOGINFO("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
                     unzClose(zipfile);
                     return false;
                 }
@@ -602,7 +602,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             // Open current file.
             if (unzOpenCurrentFile(zipfile) != UNZ_OK)
             {
-                CCLOG("AssetsManagerEx : can not extract file %s\n", fileName);
+                CCLOGINFO("AssetsManagerEx : can not extract file %s\n", fileName);
                 unzClose(zipfile);
                 return false;
             }
@@ -611,7 +611,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             FILE *out = fopen(FileUtils::getInstance()->getSuitableFOpen(fullPath).c_str(), "wb");
             if (!out)
             {
-                CCLOG("AssetsManagerEx : can not create decompress destination file %s (errno: %d)\n", fullPath.c_str(), errno);
+                CCLOGINFO("AssetsManagerEx : can not create decompress destination file %s (errno: %d)\n", fullPath.c_str(), errno);
                 unzCloseCurrentFile(zipfile);
                 unzClose(zipfile);
                 return false;
@@ -623,7 +623,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
                 error = unzReadCurrentFile(zipfile, readBuffer, BUFFER_SIZE);
                 if (error < 0)
                 {
-                    CCLOG("AssetsManagerEx : can not read zip file %s, error code is %d\n", fileName, error);
+                    CCLOGINFO("AssetsManagerEx : can not read zip file %s, error code is %d\n", fileName, error);
                     fclose(out);
                     unzCloseCurrentFile(zipfile);
                     unzClose(zipfile);
@@ -644,7 +644,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
         {
             if (unzGoToNextFile(zipfile) != UNZ_OK)
             {
-                CCLOG("AssetsManagerEx : can not read next file for decompressing\n");
+                CCLOGINFO("AssetsManagerEx : can not read next file for decompressing\n");
                 unzClose(zipfile);
                 return false;
             }
@@ -707,7 +707,7 @@ void AssetsManagerEx::dispatchUpdateEvent(EventAssetsManagerEx::EventCode code, 
         case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
         case EventAssetsManagerEx::EventCode::UPDATE_FINISHED:
         case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
-            CCLOG("AssetsManagerEx : dispatchUpdateEvent------------------0000\n");
+            CCLOGINFO("AssetsManagerEx : dispatchUpdateEvent------------------0000\n");
             _updateEntry = UpdateEntry::NONE;
             break;
         case EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION:
@@ -756,7 +756,7 @@ void AssetsManagerEx::downloadVersion()
     // No version file found
     else
     {
-        CCLOG("AssetsManagerEx : No version file found, step skipped\n");
+        CCLOGINFO("AssetsManagerEx : No version file found, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -769,10 +769,10 @@ void AssetsManagerEx::parseVersion()
 
     _remoteManifest->parseVersion(_tempVersionPath);
 
-    CCLOG("AssetsManagerEx : parseVersion------------------0000\n");
+    CCLOGINFO("AssetsManagerEx : parseVersion------------------0000\n");
     if (!_remoteManifest->isVersionLoaded())
     {
-        CCLOG("AssetsManagerEx : Fail to parse version file, step skipped\n");
+        CCLOGINFO("AssetsManagerEx : Fail to parse version file, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -782,7 +782,7 @@ void AssetsManagerEx::parseVersion()
         {
             _updateState = State::UP_TO_DATE;
             _fileUtils->removeDirectory(_tempStoragePath);
-            CCLOG("AssetsManagerEx : parseVersion------------------11111\n");
+            CCLOGINFO("AssetsManagerEx : parseVersion------------------11111\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
         else
@@ -826,7 +826,7 @@ void AssetsManagerEx::downloadManifest()
     // No manifest file found
     else
     {
-        CCLOG("AssetsManagerEx : No manifest file found, check update failed\n");
+        CCLOGINFO("AssetsManagerEx : No manifest file found, check update failed\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_DOWNLOAD_MANIFEST);
         _updateState = State::UNCHECKED;
     }
@@ -838,22 +838,22 @@ void AssetsManagerEx::parseManifest()
         return;
 
     _remoteManifest->parseFile(_tempManifestPath);
-    CCLOG("AssetsManagerEx : parseManifest------------------00000\n");
+    CCLOGINFO("AssetsManagerEx : parseManifest------------------00000\n");
     if (!_remoteManifest->isLoaded())
     {
-        CCLOG("AssetsManagerEx : Error parsing manifest file, %s", _tempManifestPath.c_str());
+        CCLOGINFO("AssetsManagerEx : Error parsing manifest file, %s", _tempManifestPath.c_str());
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_PARSE_MANIFEST);
         _updateState = State::UNCHECKED;
     }
     else
     {
-        CCLOG("AssetsManagerEx : parseManifest------------------1111\n");
+        CCLOGINFO("AssetsManagerEx : parseManifest------------------1111\n");
         if (_localManifest->versionGreater(_remoteManifest, _versionCompareHandle))
         {
             _updateState = State::UP_TO_DATE;
             _fileUtils->removeDirectory(_tempStoragePath);
             
-            CCLOG("AssetsManagerEx : parseManifest------------------2222\n");
+            CCLOGINFO("AssetsManagerEx : parseManifest------------------2222\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
         else
@@ -896,7 +896,7 @@ void AssetsManagerEx::prepareUpdate()
         // Temporary manifest exists, but can't be parsed or version doesn't equals remote manifest (out of date)
         if (_tempManifest)
         {
-            CCLOG("AssetsManagerEx : prepareUpdate---------------------00000.\n");
+            CCLOGINFO("AssetsManagerEx : prepareUpdate---------------------00000.\n");
             // Remove all temp files
             _fileUtils->removeDirectory(_tempStoragePath);
             CC_SAFE_RELEASE(_tempManifest);
@@ -913,13 +913,13 @@ void AssetsManagerEx::prepareUpdate()
         std::unordered_map<std::string, Manifest::AssetDiff> diff_map = _localManifest->genDiff(_remoteManifest);
         if (diff_map.size() == 0)
         {
-            CCLOG("AssetsManagerEx : prepareUpdate---------------------111111.\n");
+            CCLOGINFO("AssetsManagerEx : prepareUpdate---------------------111111.\n");
             updateSucceed();
             return;
         }
         else
         {
-            CCLOG("AssetsManagerEx : prepareUpdate---------------222222\n");
+            CCLOGINFO("AssetsManagerEx : prepareUpdate---------------222222\n");
             // Generate download units for all assets that need to be updated or added
 //            std::string packageUrl = getPackageUrl();
             // Preprocessing local files in previous version and creating download folders
@@ -942,7 +942,7 @@ void AssetsManagerEx::prepareUpdate()
             _tempManifest->setUpdating(true);
             // Save current download manifest information for resuming
             _tempManifest->saveToFile(_tempManifestPath);
-            CCLOG("AssetsManagerEx : prepareUpdate---------------------33333.\n");
+            CCLOGINFO("AssetsManagerEx : prepareUpdate---------------------33333.\n");
             _totalWaitToDownload = _totalToDownload = (int)_downloadUnits.size();
         }
     }
@@ -1019,7 +1019,7 @@ void AssetsManagerEx::updateSucceed()
     prepareLocalManifest();
     // 5. Set update state
     _updateState = State::UP_TO_DATE;
-    CCLOG("AssetsManagerEx : updateSucceed-------------\n");
+    CCLOGINFO("AssetsManagerEx : updateSucceed-------------\n");
     // 6. Notify finished event
     dispatchUpdateEvent(EventAssetsManagerEx::EventCode::UPDATE_FINISHED);
 }
@@ -1033,18 +1033,18 @@ void AssetsManagerEx::checkUpdate()
     }
 
     if (!_inited){
-        CCLOG("AssetsManagerEx : Manifests uninited.\n");
+        CCLOGINFO("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
     if (!_localManifest->isLoaded())
     {
-        CCLOG("AssetsManagerEx : No local manifest file found error.\n");
+        CCLOGINFO("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
 
-    CCLOG("AssetsManagerEx : checkUpdate------------------00000\n");
+    CCLOGINFO("AssetsManagerEx : checkUpdate------------------00000\n");
     _updateEntry = UpdateEntry::CHECK_UPDATE;
 
     switch (_updateState) {
@@ -1058,7 +1058,7 @@ void AssetsManagerEx::checkUpdate()
             break;
         case State::UP_TO_DATE:
         {
-            CCLOG("AssetsManagerEx : checkUpdate---------------------1111\n");
+            CCLOGINFO("AssetsManagerEx : checkUpdate---------------------1111\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
             break;
@@ -1081,13 +1081,13 @@ void AssetsManagerEx::update()
     }
 
     if (!_inited){
-        CCLOG("AssetsManagerEx : Manifests uninited.\n");
+        CCLOGINFO("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
     if (!_localManifest->isLoaded())
     {
-        CCLOG("AssetsManagerEx : No local manifest file found error.\n");
+        CCLOGINFO("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
@@ -1147,7 +1147,7 @@ void AssetsManagerEx::update()
 void AssetsManagerEx::updateAssets(const DownloadUnits& assets)
 {
     if (!_inited){
-        CCLOG("AssetsManagerEx : Manifests uninited.\n");
+        CCLOGINFO("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
@@ -1168,7 +1168,7 @@ void AssetsManagerEx::updateAssets(const DownloadUnits& assets)
         }
         else if (_totalToDownload == 0)
         {
-            CCLOG("AssetsManagerEx : updateAssets---------------------.\n");
+            CCLOGINFO("AssetsManagerEx : updateAssets---------------------.\n");
             onDownloadUnitsFinished();
         }
     }
@@ -1181,7 +1181,7 @@ const DownloadUnits& AssetsManagerEx::getFailedAssets() const
 
 void AssetsManagerEx::downloadFailedAssets()
 {
-    CCLOG("AssetsManagerEx : Start update %lu failed assets.\n", static_cast<unsigned long>(_failedUnits.size()));
+    CCLOGINFO("AssetsManagerEx : Start update %lu failed assets.\n", static_cast<unsigned long>(_failedUnits.size()));
     updateAssets(_failedUnits);
 }
 
@@ -1241,7 +1241,7 @@ void AssetsManagerEx::onError(const network::DownloadTask& task,
     // Skip version error occurred
     if (task.identifier == VERSION_ID)
     {
-        CCLOG("AssetsManagerEx : Fail to download version file, step skipped\n");
+        CCLOGINFO("AssetsManagerEx : Fail to download version file, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -1400,7 +1400,7 @@ void AssetsManagerEx::queueDowload()
 {
     if (_totalWaitToDownload == 0)
     {
-        CCLOG("AssetsManagerEx : queueDowload---------------------.\n");
+        CCLOGINFO("AssetsManagerEx : queueDowload---------------------.\n");
         this->onDownloadUnitsFinished();
         return;
     }
@@ -1439,7 +1439,7 @@ void AssetsManagerEx::onDownloadUnitsFinished()
     }
     else if (_updateState == State::UPDATING)
     {
-        CCLOG("AssetsManagerEx : queueDowload---------------------.\n");
+        CCLOGINFO("AssetsManagerEx : queueDowload---------------------.\n");
         updateSucceed();
     }
 }

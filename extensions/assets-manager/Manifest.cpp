@@ -242,6 +242,8 @@ bool Manifest::versionGreater(const Manifest *b, const std::function<int(const s
     std::string localVersion = getVersion();
     std::string bVersion = b->getVersion();
     bool greater;
+    
+    CCLOGINFO("versionGreater: localVersion=s%, bVersion=s%", localVersion, bVersion);
     if (handle)
     {
         greater = handle(localVersion, bVersion) >= 0;

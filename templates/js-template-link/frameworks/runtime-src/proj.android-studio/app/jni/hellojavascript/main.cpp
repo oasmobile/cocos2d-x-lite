@@ -51,10 +51,12 @@ extern "C"
 
     void Java_org_cocos2dx_javascript_DownloadHelper_update_1status(JNIEnv * env, jobject thiz, jint type, jint text_id)
     {
+        LOGD("----------------------  obb: update status type %d, text id %d", (int32_t)type, (int32_t)text_id);
     }
 
     bool Java_org_cocos2dx_javascript_DownloadHelper_update_1progress(JNIEnv *env, jobject thiz, jfloat percent)
     {
+        LOGD("----------------------  obb: update progress percent %d", (uint32_t)(percent * 100));
     }
 
     bool Java_org_cocos2dx_javascript_DownloadHelper_1start_game()

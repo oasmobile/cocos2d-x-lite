@@ -243,7 +243,7 @@ bool Manifest::versionGreater(const Manifest *b, const std::function<int(const s
     std::string bVersion = b->getVersion();
     bool greater;
     
-    cocos2d::log("versionGreater: localVersion=s%, bVersion=s%", localVersion.c_str(), bVersion.c_str());
+    cocos2d::log("versionGreater: localVersion=%s, bVersion=%s", localVersion.c_str(), bVersion.c_str());
     if (handle)
     {
         greater = handle(localVersion, bVersion) >= 0;

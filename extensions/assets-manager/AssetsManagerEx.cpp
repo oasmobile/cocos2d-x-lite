@@ -187,20 +187,20 @@ void AssetsManagerEx::initManifests()
 {
     _inited = true;
     // Init and load temporary manifest
-     CCLOGERROR("AssetsManagerEx : initManifests---------------00000\n");
+     cocos2d::log("AssetsManagerEx : initManifests---------------00000\n");
     _tempManifest = new (std::nothrow) Manifest();
     if (_tempManifest)
     {
-        CCLOGERROR("AssetsManagerEx : initManifests---------------11111\n");
+        cocos2d::log("AssetsManagerEx : initManifests---------------11111\n");
         _tempManifest->parseFile(_tempManifestPath);
         // Previous update is interrupted
         if (_fileUtils->isFileExist(_tempManifestPath))
         {
-            CCLOGERROR("AssetsManagerEx : initManifests---------------22222\n");
+            cocos2d::log("AssetsManagerEx : initManifests---------------22222\n");
             // Manifest parse failed, remove all temp files
             if (!_tempManifest->isLoaded())
             {
-                CCLOGERROR("AssetsManagerEx : initManifests---------------33333\n");
+                cocos2d::log("AssetsManagerEx : initManifests---------------33333\n");
                 _fileUtils->removeDirectory(_tempStoragePath);
                 CC_SAFE_RELEASE(_tempManifest);
                 _tempManifest = nullptr;
@@ -209,7 +209,7 @@ void AssetsManagerEx::initManifests()
     }
     else
     {
-        CCLOGERROR("AssetsManagerEx : initManifests---------------44444\n");
+        cocos2d::log("AssetsManagerEx : initManifests---------------44444\n");
         _inited = false;
     }
     
@@ -233,7 +233,7 @@ void AssetsManagerEx::initManifests()
 
 void AssetsManagerEx::prepareLocalManifest()
 {
-    CCLOGERROR("AssetsManagerEx : prepareLocalManifest---------------------\n");
+    cocos2d::log("AssetsManagerEx : prepareLocalManifest---------------------\n");
     // An alias to assets
     _assets = &(_localManifest->getAssets());
 
@@ -243,7 +243,7 @@ void AssetsManagerEx::prepareLocalManifest()
 
 bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::string& storagePath)
 {
-    CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------\n");
+    cocos2d::log("AssetsManagerEx : loadLocalManifest---------------\n");
     if (_updateState > State::UNINITED)
     {
         return false;
@@ -267,15 +267,15 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
         CC_SAFE_RELEASE(_localManifest);
     }
     
-    CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------00000\n");
+    cocos2d::log("AssetsManagerEx : loadLocalManifest---------------00000\n");
     _localManifest = localManifest;
     _localManifest->retain();
     // Find the cached manifest file
     Manifest *cachedManifest = nullptr;
-    CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------11111\n");
+    cocos2d::log("AssetsManagerEx : loadLocalManifest---------------11111\n");
     if (_fileUtils->isFileExist(_cacheManifestPath))
     {
-         CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------2222\n");
+         cocos2d::log("AssetsManagerEx : loadLocalManifest---------------2222\n");
         cachedManifest = new (std::nothrow) Manifest();
         if (cachedManifest)
         {
@@ -291,11 +291,11 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
     // Compare with cached manifest to determine which one to use
     if (cachedManifest)
     {
-         CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------33333\n");
+         cocos2d::log("AssetsManagerEx : loadLocalManifest---------------33333\n");
         bool localNewer = _localManifest->versionGreater(cachedManifest, _versionCompareHandle);
         if (localNewer)
         {
-             CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------44444\n");
+             cocos2d::log("AssetsManagerEx : loadLocalManifest---------------44444\n");
             // Recreate storage, to empty the content
             _fileUtils->removeDirectory(_storagePath);
             _fileUtils->createDirectory(_storagePath);
@@ -303,7 +303,7 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
         }
         else
         {
-             CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------5555\n");
+             cocos2d::log("AssetsManagerEx : loadLocalManifest---------------5555\n");
             CC_SAFE_RELEASE(_localManifest);
             _localManifest = cachedManifest;
         }
@@ -326,7 +326,7 @@ bool AssetsManagerEx::loadLocalManifest(Manifest* localManifest, const std::stri
 
 bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
 {
-     CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------------manifestUrl----------a\n");
+     cocos2d::log("AssetsManagerEx : loadLocalManifest---------------------manifestUrl----------a\n");
     if (manifestUrl.size() == 0)
     {
         return false;
@@ -343,20 +343,20 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
         return false;
     }
     
-    CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------b\n");
+    cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------b\n");
     Manifest *cachedManifest = nullptr;
     // Find the cached manifest file
     if (_fileUtils->isFileExist(_cacheManifestPath))
     {
-        CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------00000\n");
+        cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------00000\n");
         cachedManifest = new (std::nothrow) Manifest();
         if (cachedManifest)
         {
-            CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------11111\n");
+            cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------11111\n");
             cachedManifest->parseFile(_cacheManifestPath);
             if (!cachedManifest->isLoaded())
             {
-                CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------22222\n");
+                cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------22222\n");
                 _fileUtils->removeFile(_cacheManifestPath);
                 CC_SAFE_RELEASE(cachedManifest);
                 cachedManifest = nullptr;
@@ -364,7 +364,7 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
         }
     }
     
-    CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------33333\n");
+    cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------33333\n");
     // Ensure no search path of cached manifest is used to load this manifest
     std::vector<std::string> searchPaths = _fileUtils->getSearchPaths();
     if (cachedManifest)
@@ -390,15 +390,15 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
     }
     if (_localManifest->isLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------44444\n");
+        cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------44444\n");
         // Compare with cached manifest to determine which one to use
         if (cachedManifest)
         {
-            CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------555555\n");
+            cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------555555\n");
             bool localNewer = _localManifest->versionGreater(cachedManifest, _versionCompareHandle);
             if (localNewer)
             {
-                CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------66666\n");
+                cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------66666\n");
                 // Recreate storage, to empty the content
                 _fileUtils->removeDirectory(_storagePath);
                 _fileUtils->createDirectory(_storagePath);
@@ -406,19 +406,19 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
             }
             else
             {
-                CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------77777\n");
+                cocos2d::log("AssetsManagerEx : loadLocalManifest---------------manifestUrl----------77777\n");
                 CC_SAFE_RELEASE(_localManifest);
                 _localManifest = cachedManifest;
             }
         }
-        CCLOGERROR("AssetsManagerEx : loadLocalManifest---------------------manifestUrl----------88888\n");
+        cocos2d::log("AssetsManagerEx : loadLocalManifest---------------------manifestUrl----------88888\n");
         prepareLocalManifest();
     }
 
     // Fail to load local manifest
     if (!_localManifest->isLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : No local manifest file found error.\n");
+        cocos2d::log("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return false;
     }
@@ -429,7 +429,7 @@ bool AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
 
 bool AssetsManagerEx::loadRemoteManifest(Manifest* remoteManifest)
 {
-    CCLOGERROR("AssetsManagerEx : loadRemoteManifest--------------------\n");
+    cocos2d::log("AssetsManagerEx : loadRemoteManifest--------------------\n");
     if (!_inited || _updateState > State::UNCHECKED)
     {
         return false;
@@ -439,7 +439,7 @@ bool AssetsManagerEx::loadRemoteManifest(Manifest* remoteManifest)
         return false;
     }
     
-    CCLOGERROR("AssetsManagerEx : loadRemoteManifest------------------00000\n");
+    cocos2d::log("AssetsManagerEx : loadRemoteManifest------------------00000\n");
     // Release existing remote manifest
     if (_remoteManifest)
     {
@@ -452,16 +452,16 @@ bool AssetsManagerEx::loadRemoteManifest(Manifest* remoteManifest)
     {
         _updateState = State::UP_TO_DATE;
         _fileUtils->removeDirectory(_tempStoragePath);
-        CCLOGERROR("AssetsManagerEx : loadRemoteManifest------------------1111\n");
+        cocos2d::log("AssetsManagerEx : loadRemoteManifest------------------1111\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
     }
     else
     {
-        CCLOGERROR("AssetsManagerEx : loadRemoteManifest------------------22222\n");
+        cocos2d::log("AssetsManagerEx : loadRemoteManifest------------------22222\n");
         _updateState = State::NEED_UPDATE;
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::NEW_VERSION_FOUND);
     }
-    CCLOGERROR("AssetsManagerEx : loadRemoteManifest------------------33333\n");
+    cocos2d::log("AssetsManagerEx : loadRemoteManifest------------------33333\n");
     return true;
 }
 
@@ -525,29 +525,29 @@ void AssetsManagerEx::adjustPath(std::string &path)
 bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
 {
     
-    CCLOGERROR("AssetsManagerEx : decompress--------------------%s\n", zip.c_str());
+    cocos2d::log("AssetsManagerEx : decompress--------------------%s\n", zip.c_str());
     // Find root path for zip file
     size_t pos = zip.find_last_of("/\\");
     if (pos == std::string::npos)
     {
-        CCLOGERROR("AssetsManagerEx : no root path specified for zip file %s\n", zip.c_str());
+        cocos2d::log("AssetsManagerEx : no root path specified for zip file %s\n", zip.c_str());
         return false;
     }
     const std::string rootPath = zip.substr(0, pos+1);
     
-    CCLOGERROR("AssetsManagerEx : decompress---------------rootPath-----%s\n", rootPath.c_str());
+    cocos2d::log("AssetsManagerEx : decompress---------------rootPath-----%s\n", rootPath.c_str());
     // Open the zip file
     unzFile zipfile = unzOpen(FileUtils::getInstance()->getSuitableFOpen(zip).c_str());
     if (! zipfile)
     {
-        CCLOGERROR("AssetsManagerEx : can not open downloaded zip file %s\n", zip.c_str());
+        cocos2d::log("AssetsManagerEx : can not open downloaded zip file %s\n", zip.c_str());
         return false;
     }
     // Get info about the zip file
     unz_global_info global_info;
     if (unzGetGlobalInfo(zipfile, &global_info) != UNZ_OK)
     {
-        CCLOGERROR("AssetsManagerEx : can not read file global info of %s\n", zip.c_str());
+        cocos2d::log("AssetsManagerEx : can not read file global info of %s\n", zip.c_str());
         unzClose(zipfile);
         return false;
     }
@@ -569,18 +569,18 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
                                   NULL,
                                   0) != UNZ_OK)
         {
-            CCLOGERROR("AssetsManagerEx : can not read compressed file info\n");
+            cocos2d::log("AssetsManagerEx : can not read compressed file info\n");
             unzClose(zipfile);
             return false;
         }
         std::string fullPath = rootPath + fileName;
         
-        CCLOGERROR("AssetsManagerEx : decompress---------------fullPath-----%s\n", fullPath.c_str());
+        cocos2d::log("AssetsManagerEx : decompress---------------fullPath-----%s\n", fullPath.c_str());
         if (isTemp)
         {
             fullPath = fullPath + TEMP_SUFFIX;
         }
-        CCLOGERROR("AssetsManagerEx : decompress---------------fullPath-----%s\n", fullPath.c_str());
+        cocos2d::log("AssetsManagerEx : decompress---------------fullPath-----%s\n", fullPath.c_str());
         // Check if this entry is a directory or a file.
         const size_t filenameLength = strlen(fileName);
         if (fileName[filenameLength-1] == '/')
@@ -590,7 +590,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             if ( !_fileUtils->createDirectory(basename(fullPath)) )
             {
                 // Failed to create directory
-                CCLOGERROR("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
+                cocos2d::log("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
                 unzClose(zipfile);
                 return false;
             }
@@ -602,7 +602,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             if (!_fileUtils->isDirectoryExist(dir)) {
                 if (!_fileUtils->createDirectory(dir)) {
                     // Failed to create directory
-                    CCLOGERROR("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
+                    cocos2d::log("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
                     unzClose(zipfile);
                     return false;
                 }
@@ -611,7 +611,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             // Open current file.
             if (unzOpenCurrentFile(zipfile) != UNZ_OK)
             {
-                CCLOGERROR("AssetsManagerEx : can not extract file %s\n", fileName);
+                cocos2d::log("AssetsManagerEx : can not extract file %s\n", fileName);
                 unzClose(zipfile);
                 return false;
             }
@@ -620,7 +620,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
             FILE *out = fopen(FileUtils::getInstance()->getSuitableFOpen(fullPath).c_str(), "wb");
             if (!out)
             {
-                CCLOGERROR("AssetsManagerEx : can not create decompress destination file %s (errno: %d)\n", fullPath.c_str(), errno);
+                cocos2d::log("AssetsManagerEx : can not create decompress destination file %s (errno: %d)\n", fullPath.c_str(), errno);
                 unzCloseCurrentFile(zipfile);
                 unzClose(zipfile);
                 return false;
@@ -632,7 +632,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
                 error = unzReadCurrentFile(zipfile, readBuffer, BUFFER_SIZE);
                 if (error < 0)
                 {
-                    CCLOGERROR("AssetsManagerEx : can not read zip file %s, error code is %d\n", fileName, error);
+                    cocos2d::log("AssetsManagerEx : can not read zip file %s, error code is %d\n", fileName, error);
                     fclose(out);
                     unzCloseCurrentFile(zipfile);
                     unzClose(zipfile);
@@ -653,7 +653,7 @@ bool AssetsManagerEx::decompress(const std::string &zip, bool isTemp)
         {
             if (unzGoToNextFile(zipfile) != UNZ_OK)
             {
-                CCLOGERROR("AssetsManagerEx : can not read next file for decompressing\n");
+                cocos2d::log("AssetsManagerEx : can not read next file for decompressing\n");
                 unzClose(zipfile);
                 return false;
             }
@@ -716,7 +716,7 @@ void AssetsManagerEx::dispatchUpdateEvent(EventAssetsManagerEx::EventCode code, 
         case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
         case EventAssetsManagerEx::EventCode::UPDATE_FINISHED:
         case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
-            CCLOGERROR("AssetsManagerEx : dispatchUpdateEvent------------------0000\n");
+            cocos2d::log("AssetsManagerEx : dispatchUpdateEvent------------------0000\n");
             _updateEntry = UpdateEntry::NONE;
             break;
         case EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION:
@@ -765,7 +765,7 @@ void AssetsManagerEx::downloadVersion()
     // No version file found
     else
     {
-        CCLOGERROR("AssetsManagerEx : No version file found, step skipped\n");
+        cocos2d::log("AssetsManagerEx : No version file found, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -773,16 +773,16 @@ void AssetsManagerEx::downloadVersion()
 
 void AssetsManagerEx::parseVersion()
 {
-    CCLOGERROR("AssetsManagerEx : parseVersion--------_tempVersionPath----------%s\n", _tempVersionPath.c_str());
+    cocos2d::log("AssetsManagerEx : parseVersion--------_tempVersionPath----------%s\n", _tempVersionPath.c_str());
     if (_updateState != State::VERSION_LOADED)
         return;
 
     _remoteManifest->parseVersion(_tempVersionPath);
 
-    CCLOGERROR("AssetsManagerEx : parseVersion------------------0000\n");
+    cocos2d::log("AssetsManagerEx : parseVersion------------------0000\n");
     if (!_remoteManifest->isVersionLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : Fail to parse version file, step skipped\n");
+        cocos2d::log("AssetsManagerEx : Fail to parse version file, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -792,7 +792,7 @@ void AssetsManagerEx::parseVersion()
         {
             _updateState = State::UP_TO_DATE;
             _fileUtils->removeDirectory(_tempStoragePath);
-            CCLOGERROR("AssetsManagerEx : parseVersion------------------11111\n");
+            cocos2d::log("AssetsManagerEx : parseVersion------------------11111\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
         else
@@ -836,7 +836,7 @@ void AssetsManagerEx::downloadManifest()
     // No manifest file found
     else
     {
-        CCLOGERROR("AssetsManagerEx : No manifest file found, check update failed\n");
+        cocos2d::log("AssetsManagerEx : No manifest file found, check update failed\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_DOWNLOAD_MANIFEST);
         _updateState = State::UNCHECKED;
     }
@@ -848,23 +848,23 @@ void AssetsManagerEx::parseManifest()
         return;
 
     _remoteManifest->parseFile(_tempManifestPath);
-    CCLOGERROR("AssetsManagerEx : parseManifest------------------00000\n");
-    CCLOGERROR("AssetsManagerEx : parseManifest---------_tempManifestPath---------%s\n", _tempManifestPath.c_str());
+    cocos2d::log("AssetsManagerEx : parseManifest------------------00000\n");
+    cocos2d::log("AssetsManagerEx : parseManifest---------_tempManifestPath---------%s\n", _tempManifestPath.c_str());
     if (!_remoteManifest->isLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : Error parsing manifest file, %s", _tempManifestPath.c_str());
+        cocos2d::log("AssetsManagerEx : Error parsing manifest file, %s", _tempManifestPath.c_str());
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_PARSE_MANIFEST);
         _updateState = State::UNCHECKED;
     }
     else
     {
-        CCLOGERROR("AssetsManagerEx : parseManifest------------------1111\n");
+        cocos2d::log("AssetsManagerEx : parseManifest------------------1111\n");
         if (_localManifest->versionGreater(_remoteManifest, _versionCompareHandle))
         {
             _updateState = State::UP_TO_DATE;
             _fileUtils->removeDirectory(_tempStoragePath);
             
-            CCLOGERROR("AssetsManagerEx : parseManifest------------------2222\n");
+            cocos2d::log("AssetsManagerEx : parseManifest------------------2222\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
         else
@@ -882,7 +882,7 @@ void AssetsManagerEx::parseManifest()
 
 void AssetsManagerEx::prepareUpdate()
 {
-    CCLOGERROR("AssetsManagerEx : prepareUpdate---------------------.\n");
+    cocos2d::log("AssetsManagerEx : prepareUpdate---------------------.\n");
     if (_updateState != State::NEED_UPDATE)
         return;
 
@@ -908,7 +908,7 @@ void AssetsManagerEx::prepareUpdate()
         // Temporary manifest exists, but can't be parsed or version doesn't equals remote manifest (out of date)
         if (_tempManifest)
         {
-            CCLOGERROR("AssetsManagerEx : prepareUpdate---------------------00000.\n");
+            cocos2d::log("AssetsManagerEx : prepareUpdate---------------------00000.\n");
             // Remove all temp files
             _fileUtils->removeDirectory(_tempStoragePath);
             CC_SAFE_RELEASE(_tempManifest);
@@ -925,13 +925,13 @@ void AssetsManagerEx::prepareUpdate()
         std::unordered_map<std::string, Manifest::AssetDiff> diff_map = _localManifest->genDiff(_remoteManifest);
         if (diff_map.size() == 0)
         {
-            CCLOGERROR("AssetsManagerEx : prepareUpdate---------------------111111.\n");
+            cocos2d::log("AssetsManagerEx : prepareUpdate---------------------111111.\n");
             updateSucceed();
             return;
         }
         else
         {
-            CCLOGERROR("AssetsManagerEx : prepareUpdate---------------222222\n");
+            cocos2d::log("AssetsManagerEx : prepareUpdate---------------222222\n");
             // Generate download units for all assets that need to be updated or added
 //            std::string packageUrl = getPackageUrl();
             // Preprocessing local files in previous version and creating download folders
@@ -954,7 +954,7 @@ void AssetsManagerEx::prepareUpdate()
             _tempManifest->setUpdating(true);
             // Save current download manifest information for resuming
             _tempManifest->saveToFile(_tempManifestPath);
-            CCLOGERROR("AssetsManagerEx : prepareUpdate---------------------33333.\n");
+            cocos2d::log("AssetsManagerEx : prepareUpdate---------------------33333.\n");
             _totalWaitToDownload = _totalToDownload = (int)_downloadUnits.size();
         }
     }
@@ -963,25 +963,25 @@ void AssetsManagerEx::prepareUpdate()
 
 void AssetsManagerEx::startUpdate()
 {
-    CCLOGERROR("AssetsManagerEx : startUpdate---------------------.\n");
+    cocos2d::log("AssetsManagerEx : startUpdate---------------------.\n");
     if (_updateState == State::NEED_UPDATE)
     {
-        CCLOGERROR("AssetsManagerEx : startUpdate---------------------00000.\n");
+        cocos2d::log("AssetsManagerEx : startUpdate---------------------00000.\n");
         prepareUpdate();
     }
     if (_updateState == State::READY_TO_UPDATE)
     {
-        CCLOGERROR("AssetsManagerEx : startUpdate---------------------11111.\n");
+        cocos2d::log("AssetsManagerEx : startUpdate---------------------11111.\n");
         _updateState = State::UPDATING;
         std::string msg;
         if (_downloadResumed)
         {
-            CCLOGERROR("AssetsManagerEx : startUpdate---------------------22222.\n");
+            cocos2d::log("AssetsManagerEx : startUpdate---------------------22222.\n");
             msg = StringUtils::format("Resuming from previous unfinished update, %d files remains to be finished.", _totalToDownload);
         }
         else
         {
-            CCLOGERROR("AssetsManagerEx : startUpdate---------------------33333.\n");
+            cocos2d::log("AssetsManagerEx : startUpdate---------------------33333.\n");
             msg = StringUtils::format("Start to update %d files from remote package.", _totalToDownload);
         }
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION, "", msg);
@@ -991,7 +991,7 @@ void AssetsManagerEx::startUpdate()
 
 void AssetsManagerEx::updateSucceed()
 {
-    CCLOGERROR("AssetsManagerEx : updateSucceed---------------------.\n");
+    cocos2d::log("AssetsManagerEx : updateSucceed---------------------.\n");
     // Set temp manifest's updating
     _tempManifest->setUpdating(false);
     
@@ -1028,18 +1028,18 @@ void AssetsManagerEx::updateSucceed()
         // Remove temp storage path
         _fileUtils->removeDirectory(_tempStoragePath);
     }
-    CCLOGERROR("AssetsManagerEx : updateSucceed---------------------00000.\n");
+    cocos2d::log("AssetsManagerEx : updateSucceed---------------------00000.\n");
     // 3. swap the localManifest
     CC_SAFE_RELEASE(_localManifest);
     _localManifest = _remoteManifest;
-    CCLOGERROR("AssetsManagerEx : updateSucceed---------------------%s.\n", _storagePath.c_str());
+    cocos2d::log("AssetsManagerEx : updateSucceed---------------------%s.\n", _storagePath.c_str());
     _localManifest->setManifestRoot(_storagePath);
     _remoteManifest = nullptr;
     // 4. make local manifest take effect
     prepareLocalManifest();
     // 5. Set update state
     _updateState = State::UP_TO_DATE;
-    CCLOGERROR("AssetsManagerEx : updateSucceed-------------11111\n");
+    cocos2d::log("AssetsManagerEx : updateSucceed-------------11111\n");
     // 6. Notify finished event
     dispatchUpdateEvent(EventAssetsManagerEx::EventCode::UPDATE_FINISHED);
 }
@@ -1048,23 +1048,23 @@ void AssetsManagerEx::checkUpdate()
 {
     if (_updateEntry != UpdateEntry::NONE)
     {
-        CCLOGERROR("AssetsManagerEx::checkUpdate, updateEntry isn't NONE");
+        cocos2d::log("AssetsManagerEx::checkUpdate, updateEntry isn't NONE");
         return;
     }
 
     if (!_inited){
-        CCLOGERROR("AssetsManagerEx : Manifests uninited.\n");
+        cocos2d::log("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
     if (!_localManifest->isLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : No local manifest file found error.\n");
+        cocos2d::log("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
 
-    CCLOGERROR("AssetsManagerEx : checkUpdate------------------00000\n");
+    cocos2d::log("AssetsManagerEx : checkUpdate------------------00000\n");
     _updateEntry = UpdateEntry::CHECK_UPDATE;
 
     switch (_updateState) {
@@ -1078,7 +1078,7 @@ void AssetsManagerEx::checkUpdate()
             break;
         case State::UP_TO_DATE:
         {
-            CCLOGERROR("AssetsManagerEx : checkUpdate---------------------1111\n");
+            cocos2d::log("AssetsManagerEx : checkUpdate---------------------1111\n");
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE);
         }
             break;
@@ -1094,21 +1094,21 @@ void AssetsManagerEx::checkUpdate()
 
 void AssetsManagerEx::update()
 {
-    CCLOGERROR("AssetsManagerEx : update---------------------\n");
+    cocos2d::log("AssetsManagerEx : update---------------------\n");
     if (_updateEntry != UpdateEntry::NONE)
     {
-        CCLOGERROR("AssetsManagerEx::update, updateEntry isn't NONE");
+        cocos2d::log("AssetsManagerEx::update, updateEntry isn't NONE");
         return;
     }
 
     if (!_inited){
-        CCLOGERROR("AssetsManagerEx : Manifests uninited.\n");
+        cocos2d::log("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
     if (!_localManifest->isLoaded())
     {
-        CCLOGERROR("AssetsManagerEx : No local manifest file found error.\n");
+        cocos2d::log("AssetsManagerEx : No local manifest file found error.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
@@ -1118,47 +1118,47 @@ void AssetsManagerEx::update()
     switch (_updateState) {
         case State::UNCHECKED:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------0000\n");
+             cocos2d::log("AssetsManagerEx : update---------------------0000\n");
             _updateState = State::PREDOWNLOAD_VERSION;
         }
         case State::PREDOWNLOAD_VERSION:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------1111\n");
+             cocos2d::log("AssetsManagerEx : update---------------------1111\n");
             downloadVersion();
         }
             break;
         case State::VERSION_LOADED:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------2222\n");
+             cocos2d::log("AssetsManagerEx : update---------------------2222\n");
             parseVersion();
         }
             break;
         case State::PREDOWNLOAD_MANIFEST:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------3333\n");
+             cocos2d::log("AssetsManagerEx : update---------------------3333\n");
             downloadManifest();
         }
             break;
         case State::MANIFEST_LOADED:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------4444\n");
+             cocos2d::log("AssetsManagerEx : update---------------------4444\n");
             parseManifest();
         }
             break;
         case State::FAIL_TO_UPDATE:
         case State::NEED_UPDATE:
         {
-             CCLOGERROR("AssetsManagerEx : update---------------------5555\n");
+             cocos2d::log("AssetsManagerEx : update---------------------5555\n");
             // Manifest not loaded yet
             if (!_remoteManifest->isLoaded())
             {
-                 CCLOGERROR("AssetsManagerEx : update---------------------66666\n");
+                 cocos2d::log("AssetsManagerEx : update---------------------66666\n");
                 _updateState = State::PREDOWNLOAD_MANIFEST;
                 downloadManifest();
             }
             else
             {
-                 CCLOGERROR("AssetsManagerEx : update---------------------7777\n");
+                 cocos2d::log("AssetsManagerEx : update---------------------7777\n");
                 startUpdate();
             }
         }
@@ -1166,7 +1166,7 @@ void AssetsManagerEx::update()
         case State::UP_TO_DATE:
         case State::UPDATING:
         case State::UNZIPPING:
-             CCLOGERROR("AssetsManagerEx : update---------------------88888\n");
+             cocos2d::log("AssetsManagerEx : update---------------------88888\n");
             _updateEntry = UpdateEntry::NONE;
             break;
         default:
@@ -1177,11 +1177,11 @@ void AssetsManagerEx::update()
 void AssetsManagerEx::updateAssets(const DownloadUnits& assets)
 {
     if (!_inited){
-        CCLOGERROR("AssetsManagerEx : Manifests uninited.\n");
+        cocos2d::log("AssetsManagerEx : Manifests uninited.\n");
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST);
         return;
     }
-     CCLOGERROR("AssetsManagerEx : updateAssets---------------------\n");
+     cocos2d::log("AssetsManagerEx : updateAssets---------------------\n");
     if (_updateState != State::UPDATING && _localManifest->isLoaded() && _remoteManifest->isLoaded())
     {
         _updateState = State::UPDATING;
@@ -1193,13 +1193,13 @@ void AssetsManagerEx::updateAssets(const DownloadUnits& assets)
         _totalEnabled = false;
         if (_totalToDownload > 0)
         {
-            CCLOGERROR("AssetsManagerEx : updateAssets---------------------0000\n");
+            cocos2d::log("AssetsManagerEx : updateAssets---------------------0000\n");
             _downloadUnits = assets;
             this->batchDownload();
         }
         else if (_totalToDownload == 0)
         {
-            CCLOGERROR("AssetsManagerEx : updateAssets---------------------11111.\n");
+            cocos2d::log("AssetsManagerEx : updateAssets---------------------11111.\n");
             onDownloadUnitsFinished();
         }
     }
@@ -1212,7 +1212,7 @@ const DownloadUnits& AssetsManagerEx::getFailedAssets() const
 
 void AssetsManagerEx::downloadFailedAssets()
 {
-    CCLOGERROR("AssetsManagerEx : Start update %lu failed assets.\n", static_cast<unsigned long>(_failedUnits.size()));
+    cocos2d::log("AssetsManagerEx : Start update %lu failed assets.\n", static_cast<unsigned long>(_failedUnits.size()));
     updateAssets(_failedUnits);
 }
 
@@ -1272,7 +1272,7 @@ void AssetsManagerEx::onError(const network::DownloadTask& task,
     // Skip version error occurred
     if (task.identifier == VERSION_ID)
     {
-        CCLOGERROR("AssetsManagerEx : Fail to download version file, step skipped\n");
+        cocos2d::log("AssetsManagerEx : Fail to download version file, step skipped\n");
         _updateState = State::PREDOWNLOAD_MANIFEST;
         downloadManifest();
     }
@@ -1350,7 +1350,7 @@ void AssetsManagerEx::onSuccess(const std::string &/*srcUrl*/, const std::string
         _updateState = State::VERSION_LOADED;
         if (_version_compress)
         {
-            CCLOGERROR("AssetsManagerEx : onSuccess-------VERSION_ID storagePath-------%s\n",storagePath.c_str());
+            cocos2d::log("AssetsManagerEx : onSuccess-------VERSION_ID storagePath-------%s\n",storagePath.c_str());
             decompress(storagePath);
         }
         
@@ -1361,7 +1361,7 @@ void AssetsManagerEx::onSuccess(const std::string &/*srcUrl*/, const std::string
         _updateState = State::MANIFEST_LOADED;
         if (_project_compress)
         {
-            CCLOGERROR("AssetsManagerEx : onSuccess-------MANIFEST_ID storagePath-------%s\n",storagePath.c_str());
+            cocos2d::log("AssetsManagerEx : onSuccess-------MANIFEST_ID storagePath-------%s\n",storagePath.c_str());
             decompress(storagePath, true);
         }
         
@@ -1433,7 +1433,7 @@ void AssetsManagerEx::queueDowload()
 {
     if (_totalWaitToDownload == 0)
     {
-        CCLOGERROR("AssetsManagerEx : queueDowload---------------------.\n");
+        cocos2d::log("AssetsManagerEx : queueDowload---------------------.\n");
         this->onDownloadUnitsFinished();
         return;
     }
@@ -1472,7 +1472,7 @@ void AssetsManagerEx::onDownloadUnitsFinished()
     }
     else if (_updateState == State::UPDATING)
     {
-        CCLOGERROR("AssetsManagerEx : queueDowload---------------------.\n");
+        cocos2d::log("AssetsManagerEx : queueDowload---------------------.\n");
         updateSucceed();
     }
 }

@@ -1022,6 +1022,7 @@ void AssetsManagerEx::updateSucceed()
                 {
                     _fileUtils->removeFile(dstPath);
                 }
+                cocos2d::log("AssetsManagerEx : updateSucceed---------------------%s.\n", dstPath.c_str());
                 _fileUtils->renameFile(*it, dstPath);
             }
         }

@@ -124,6 +124,9 @@ public class CrashLogUploadTask extends AsyncTask<String, Integer, Integer>
         {
             Log.i("CRASH_LOG_REPORTER", "Upload Success");
 
+            // delete log file
+            sourceFile.delete();
+
             // clear log
             Runtime.getRuntime().exec("logcat -c");
         }

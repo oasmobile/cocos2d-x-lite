@@ -11,7 +11,7 @@
 #include "external/criware/Classes/crijsb_register.h"
 
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "CrashLogReporter.h"
 #endif
 
@@ -68,10 +68,38 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-#else
-    this.initScriptEngine();
+    ScriptingCore* sc = ScriptingCore::getInstance();
+    ScriptEngineManager::getInstance()->setScriptEngine(sc);
+
+    se::ScriptEngine* se = se::ScriptEngine::getInstance();
+
+    jsb_set_xxtea_key("");
+    jsb_init_file_operation_delegate();
+
+#if defined(COCOS2D_DEBUG) && (COCOS2D_DEBUG > 0)
+    // Enable debugger here
+    jsb_enable_debugger("0.0.0.0", 5086);
 #endif
+
+    se->setExceptionCallback([](const char* location, const char* message, const char* stack){
+        // Send exception information to server like Tencent Bugly.
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        CrashLogReporter::UploadLog();
+#endif
+    });
+
+    jsb_register_all_modules();
+    se->addRegisterCallback(criJsb_Register);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
+    se->addRegisterCallback(register_all_anysdk_framework);
+    se->addRegisterCallback(register_all_anysdk_manual);
+#endif
+
+    se->start();
+
+    jsb_run_script("main.js");
 
     return true;
 }
@@ -100,40 +128,4 @@ void AppDelegate::onLowMemoryWarnning()
 {
     auto director = Director::getInstance();
     director->getEventDispatcher()->dispatchCustomEvent("low_memory");
-}
-
-void AppDelegate::initScriptEngine()
-{
-    ScriptingCore* sc = ScriptingCore::getInstance();
-    ScriptEngineManager::getInstance()->setScriptEngine(sc);
-
-    se::ScriptEngine* se = se::ScriptEngine::getInstance();
-
-    jsb_set_xxtea_key("");
-    jsb_init_file_operation_delegate();
-
-#if defined(COCOS2D_DEBUG) && (COCOS2D_DEBUG > 0)
-    // Enable debugger here
-    jsb_enable_debugger("0.0.0.0", 5086);
-#endif
-
-    se->setExceptionCallback([](const char* location, const char* message, const char* stack){
-        // Send exception information to server like Tencent Bugly.
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        CrashLogReporter::UploadLog();
-#endif
-    });
-
-    jsb_register_all_modules();
-    se->addRegisterCallback(criJsb_Register);
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && PACKAGE_AS
-    se->addRegisterCallback(register_all_anysdk_framework);
-    se->addRegisterCallback(register_all_anysdk_manual);
-#endif
-
-    se->start();
-
-    jsb_run_script("main.js");
 }

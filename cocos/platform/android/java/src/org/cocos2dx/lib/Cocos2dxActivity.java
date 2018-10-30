@@ -431,7 +431,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         if (isAndroidEmulator())
            this.mGLSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
-        this.mGLSurfaceView.setCocos2dxRenderer((new Cocos2dxRenderer()), this);
+        this.mGLSurfaceView.setCocos2dxRenderer(new Cocos2dxRenderer());
         this.mGLSurfaceView.setCocos2dxEditText(edittext);
 
         // Set framelayout as the content view
@@ -447,15 +447,6 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
         glSurfaceView.setEGLConfigChooser(chooser);
 
         return glSurfaceView;
-    }
-
-    public void requestR() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mGLSurfaceView.requestR();
-            }
-        });
     }
 
     protected void hideVirtualButton() {

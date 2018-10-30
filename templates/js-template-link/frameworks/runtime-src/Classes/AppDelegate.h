@@ -43,8 +43,6 @@ public:
     virtual void applicationWillEnterForeground() override;
     
     virtual void onLowMemoryWarnning() override;
-
-    virtual void initScriptEngine() override;
 };
 
 #endif // _APP_DELEGATE_H_

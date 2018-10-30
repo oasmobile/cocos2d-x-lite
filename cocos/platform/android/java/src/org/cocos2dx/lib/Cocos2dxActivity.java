@@ -492,4 +492,23 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
+
+
+    // ===========================================================
+    // CUSTOM
+    // ===========================================================
+    public static int GetNotchHeight()
+    {
+        if (null == sContext) return -1;
+
+        int resourceId = sContext.getResources().getIdentifier("notch_height", "dimen", "android");
+        if (resourceId > 0)
+        {
+            int notch_height = sContext.getResources().getDimensionPixelSize(resourceId);
+            Log.i(TAG, "NOTCH_HEIGHT " + notch_height);
+            return notch_height;
+        }
+
+        return -1;
+    }
 }

@@ -126,6 +126,28 @@ void GLViewImpl::setIMEKeyboardState(bool bOpen)
     }
 }
 
+
+Rect GLViewImpl::getSafeAreaRect() const
+{
+    static int notch_height = -1;
+
+    Rect safe_area_rect = getVisibleRect();
+
+    if (-1 == notch_height)
+    {
+        notch_height = JniHelper::callStaticIntMethod("org/cocos2dx/lib/Cocos2dxActivity", "GetNotchHeight");
+    }
+
+    if (notch_height > 0)
+    {
+        safe_area_rect.origin.x = notch_height;
+        safe_area_rect.size.width -= notch_height * 2;
+    }
+
+    return safe_area_rect;
+}
+
+
 NS_CC_END
 
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID

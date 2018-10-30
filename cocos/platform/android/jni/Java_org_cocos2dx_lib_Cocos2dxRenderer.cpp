@@ -70,4 +70,8 @@ extern "C" {
             Application::getInstance()->onLowMemoryWarnning();
         }
     }
+
+    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInitScriptEngine() {
+        Application::getInstance()->initScriptEngine();
+    }
 }

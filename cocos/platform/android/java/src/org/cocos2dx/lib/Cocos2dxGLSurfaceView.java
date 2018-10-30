@@ -146,8 +146,9 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         });
     }
 
-    public void setCocos2dxRenderer(final Cocos2dxRenderer renderer) {
+    public void setCocos2dxRenderer(final Cocos2dxRenderer renderer, Context context) {
         this.mCocos2dxRenderer = renderer;
+        renderer.mContext = context;
         this.setRenderer(this.mCocos2dxRenderer);
     }
 
@@ -415,6 +416,10 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                 Cocos2dxGLSurfaceView.this.mCocos2dxRenderer.handleOnLowMemory();
             }
         });
+    }
+
+    public void requestR() {
+        this.mCocos2dxRenderer.handleOnLowMemory();
     }
 
     private static void dumpMotionEvent(final MotionEvent event) {

@@ -68,6 +68,42 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#else
+    this.initScriptEngine();
+#endif
+
+    return true;
+}
+
+// This function will be called when the app is inactive. When comes a phone call,it's be invoked too
+void AppDelegate::applicationDidEnterBackground()
+{
+    auto director = Director::getInstance();
+    director->stopAnimation();
+    director->getEventDispatcher()->dispatchCustomEvent("game_on_hide");
+
+    CRICOCOS2D::criWare_Suspend();
+}
+
+// this function will be called when the app is active again
+void AppDelegate::applicationWillEnterForeground()
+{
+    auto director = Director::getInstance();
+    director->startAnimation();
+    director->getEventDispatcher()->dispatchCustomEvent("game_on_show");
+
+    CRICOCOS2D::criWare_Resume();
+}
+
+void AppDelegate::onLowMemoryWarnning()
+{
+    auto director = Director::getInstance();
+    director->getEventDispatcher()->dispatchCustomEvent("low_memory");
+}
+
+void AppDelegate::initScriptEngine()
+{
     ScriptingCore* sc = ScriptingCore::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(sc);
 
@@ -100,32 +136,4 @@ bool AppDelegate::applicationDidFinishLaunching()
     se->start();
 
     jsb_run_script("main.js");
-
-    return true;
-}
-
-// This function will be called when the app is inactive. When comes a phone call,it's be invoked too
-void AppDelegate::applicationDidEnterBackground()
-{
-    auto director = Director::getInstance();
-    director->stopAnimation();
-    director->getEventDispatcher()->dispatchCustomEvent("game_on_hide");
-
-    CRICOCOS2D::criWare_Suspend();
-}
-
-// this function will be called when the app is active again
-void AppDelegate::applicationWillEnterForeground()
-{
-    auto director = Director::getInstance();
-    director->startAnimation();
-    director->getEventDispatcher()->dispatchCustomEvent("game_on_show");
-
-    CRICOCOS2D::criWare_Resume();
-}
-
-void AppDelegate::onLowMemoryWarnning()
-{
-    auto director = Director::getInstance();
-    director->getEventDispatcher()->dispatchCustomEvent("low_memory");
 }

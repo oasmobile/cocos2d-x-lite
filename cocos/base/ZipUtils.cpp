@@ -531,6 +531,7 @@ ZipFile::ZipFile()
 : _data(new ZipFilePrivate)
 {
     _data->zipFile = nullptr;
+    pthread_mutex_init(&m_zipFileMutex, nullptr);
 }
 
 ZipFile::ZipFile(const std::string &zipFile, const std::string &filter)

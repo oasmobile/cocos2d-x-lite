@@ -283,4 +283,5 @@ void ScriptingCore::restartVM()
 {
     se::ScriptEngine::getInstance()->cleanup();
     Application::getInstance()->applicationDidFinishLaunching();
+    Application::getInstance()->initScriptEngine();
 }

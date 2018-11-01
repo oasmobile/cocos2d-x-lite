@@ -59,6 +59,7 @@ THE SOFTWARE.
 #include "base/CCAsyncTaskPool.h"
 #include "platform/CCApplication.h"
 #include "editor-support/spine/SkeletonBatch.h"
+#include "CCDirector.h"
 
 #if CC_ENABLE_SCRIPT_BINDING
 #include "base/CCScriptSupport.h"
@@ -293,6 +294,12 @@ void Director::setGLDefaultValues()
 // Draw the Scene
 void Director::drawScene()
 {
+    bool delayRender = false;
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    delayRender = (_totalFrames < 4);
+#endif
+
     // calculate "global" dt
     calculateDeltaTime();
 
@@ -309,44 +316,49 @@ void Director::drawScene()
         _eventDispatcher->dispatchEvent(_eventAfterUpdate);
     }
 
-    _renderer->clear();
-
-    /* to avoid flickr, nextScene MUST be here: after tick and before draw.
-     * FIXME: Which bug is this one. It seems that it can't be reproduced with v0.9
-     */
-    if (_nextScene)
+    if(!delayRender)
     {
-        setNextScene();
+        _renderer->clear();
+        /* to avoid flickr, nextScene MUST be here: after tick and before draw.
+         * FIXME: Which bug is this one. It seems that it can't be reproduced with v0.9
+         */
+        if (_nextScene)
+        {
+            setNextScene();
+        }
+
+        pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+
+        if (_runningScene)
+        {
+            //clear draw stats
+            _renderer->clearDrawStats();
+
+            //render the scene
+            _openGLView->renderScene(_runningScene, _renderer);
+
+            _eventDispatcher->dispatchEvent(_eventAfterVisit);
+        }
+
+        //draw the notifications node
+        if (_notificationNode)
+        {
+            _notificationNode->visit(_renderer, Mat4::IDENTITY, 0);
+        }
+
+        if (_displayStats)
+        {
+            showStats();
+        }
+        _renderer->render();
     }
-
-    pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-
-    if (_runningScene)
-    {
-        //clear draw stats
-        _renderer->clearDrawStats();
-
-        //render the scene
-        _openGLView->renderScene(_runningScene, _renderer);
-
-        _eventDispatcher->dispatchEvent(_eventAfterVisit);
-    }
-
-    // draw the notifications node
-    if (_notificationNode)
-    {
-        _notificationNode->visit(_renderer, Mat4::IDENTITY, 0);
-    }
-
-    if (_displayStats)
-    {
-        showStats();
-    }
-    _renderer->render();
 
     _eventDispatcher->dispatchEvent(_eventAfterDraw);
 
-    popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    if(!delayRender)
+    {
+        popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    }
 
     _totalFrames++;
 

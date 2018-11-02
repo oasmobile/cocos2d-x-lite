@@ -24,19 +24,13 @@ THE SOFTWARE.
 package org.cocos2dx.lib;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.nfc.Tag;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.GLU;
 import android.opengl.GLUtils;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -78,8 +72,8 @@ public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     }
 
     public void setScreenWidthAndHeight(final int surfaceWidth, final int surfaceHeight) {
-        this.mScreenWidth = surfaceWidth;
-        this.mScreenHeight = surfaceHeight;
+        this.mScreenWidth = surfaceWidth > surfaceHeight ? surfaceWidth : surfaceHeight;
+        this.mScreenHeight = surfaceHeight < surfaceWidth ? surfaceHeight : surfaceWidth;
     }
 
     // ===========================================================

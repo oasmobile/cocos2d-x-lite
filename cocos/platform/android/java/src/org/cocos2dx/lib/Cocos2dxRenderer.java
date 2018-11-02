@@ -408,7 +408,7 @@ public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     private void loadVertex(int width, int height) {
 
         float qw = 1.0f, qh = 1.0f;
-        if(width / height < mScreenWidth / mScreenHeight)
+        if(width * 1.0f / height < mScreenWidth * 1.0f / mScreenHeight)
         {
             qh = ((float)(mScreenWidth * height)) / (width * mScreenHeight);
         }

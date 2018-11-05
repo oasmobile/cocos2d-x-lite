@@ -91,3 +91,7 @@ void AppDelegate::onLowMemoryWarnning()
     auto director = Director::getInstance();
     director->getEventDispatcher()->dispatchCustomEvent("low_memory");
 }
+
+void AppDelegate::initScriptEngine()
+{
+}

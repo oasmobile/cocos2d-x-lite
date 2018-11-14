@@ -132,7 +132,7 @@ class FileTaskHandler extends FileAsyncHttpResponseHandler {
 
     @Override
     public void onProgress(long bytesWritten, long totalSize) {
-        //LogD("onProgress(bytesWritten:" + bytesWritten + " totalSize:" + totalSize);
+//        LogD("onProgress(bytesWritten:" + bytesWritten + " totalSize:" + totalSize);
         long dlBytes = bytesWritten - _lastBytesWritten;
         long dlNow = bytesWritten + _initFileLen;
         long dlTotal = totalSize + _initFileLen;
@@ -325,7 +325,6 @@ public class Cocos2dxDownloader {
 
                     File finalFile = new File(path);
                     if (tempFile.isDirectory()) break;
-
                     task.handler = new FileTaskHandler(downloader, id, tempFile, finalFile);
                     Header[] headers = null;
                     long fileLen = tempFile.length();
@@ -334,6 +333,9 @@ public class Cocos2dxDownloader {
                         List<Header> list = new ArrayList<Header>();
                         list.add(new BasicHeader("Range", "bytes=" + fileLen + "-"));
                         headers = list.toArray(new Header[list.size()]);
+                        android.util.Log.d("Cocos2dxDownloader", "Run Task url:"+url+" id:"+id);
+                        android.util.Log.d("Cocos2dxDownloader", "task tempFile:"+path+downloader._tempFileNameSufix+"|len:"+tempFile.length());
+                        android.util.Log.d("Cocos2dxDownloader", "Run Task with header:"+"Range:bytes="+fileLen+"-");
                     }
                     else if (fileLen > 0) {
                         // Remove previous downloaded context

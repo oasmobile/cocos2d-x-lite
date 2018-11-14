@@ -1455,6 +1455,7 @@ void AssetsManagerEx::queueDowload()
     if (_percentByFile / 100 > _nextSavePoint)
     {
         // Save current download manifest information for resuming
+        cocos2d::log("AssetsManagerEx : DoSavePointInterval---------------------.\n");
         _tempManifest->saveToFile(_tempManifestPath);
         _nextSavePoint += SAVE_POINT_INTERVAL;
     }

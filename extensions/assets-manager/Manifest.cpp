@@ -316,6 +316,9 @@ void Manifest::genResumeAssetsList(DownloadUnits *units) const
         
         if (asset.downloadState != DownloadState::SUCCESSED && asset.downloadState != DownloadState::UNMARKED)
         {
+            if(asset.downloadState != DownloadState::UNSTARTED) {
+                cocos2d::log("task manifest url:%s, state:%d\n", asset.path.c_str(), (int32_t)asset.downloadState);
+            }
             DownloadUnit unit;
             unit.customId = it->first;
             unit.srcUrl = asset.path; //_packageUrl +
